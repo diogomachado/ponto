@@ -129,7 +129,7 @@ h1 {
     border-bottom: 4px #666666 solid;
 }
 #header > nav > ul > li > a.active{
-    border-bottom: 4px orange solid;
+    border-bottom: 4px #03A9F4 solid;
     background: #666666;
 }
 
@@ -152,7 +152,28 @@ h1 {
 #footer{
     position: fixed;
     bottom: 0;
-    padding: 2px 0;
+    padding: 10px;
     background: #4D4D4D;
     width: 100%;
+    color: #FFFFFF;
+    font-size: 1.1em;
+}
+#footer > .row{
+    margin-bottom: 25px;
+}
+
+.fx-button{
+    position: fixed;
+    z-index: 50;
+    bottom: 85px;
+    right: 25px;
+    border:0;
+    background: yellow;
+    font-size: 60px;
+    line-height: 0.75em;
+    border-radius: 50%;
+    box-shadow: 0 4px 5px black;
+}
+.fx-button:active{
+    box-shadow: 0 4px 3px black inset;
 }

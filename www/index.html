@@ -14,7 +14,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<html>
+<html ng-app="appponto">
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -28,49 +28,49 @@
         <header id="header">
             <nav>
                 <ul>
-                    <li><a class="active" href="#">hoje</a></li>
-                    <li><a href="#">semana</a></li>
-                    <li><a href="#">mês</a></li>
-                    <li><a href="#">todos</a></li>
+                    <li><a href="#/hoje">hoje</a></li>
+                    <li><a href="#/semana">semana</a></li>
+                    <li><a href="#/mes">mês</a></li>
+                    <li><a href="#/todos">todos</a></li>
                 </ul>
             </nav>
         </header>
 
         <main>
-            <ul id="checkpoints">
-                <li>07:00</li>
-                <li>11:30</li>
-                <li>12:33</li>
-                <li>18:33</li>
-            </ul>
+            <div ng-view></div>
+
+            <button class="fx-button">&#43</button>
         </main>
 
-        <footer id="footer">
-            <table>
-                <tbody>
-                    <tr>
-                        <td>Horas trabalhadas</td>
-                        <td>22hrs</td>
-                    </tr>
-                    <tr>
-                        <td>Saldo</td>
-                        <td>33min</td>
-                    </tr>
-                </tbody>
-            </table>
+        <footer id="footer"> 
+            <div class="row">
+                <div style="position:relative; width: 80%; float: left;">
+                    Horas trabalhadas
+                </div>
+                <div style="position:relative; width: 20%; float: left; text-align: center;">
+                    22hrs
+                </div>
+            </div>
+
+            <div class="row">
+                <div style="position:relative; width: 80%; float: left;">
+                    Saldo
+                </div>
+                <div style="position:relative; width: 20%; float: left; text-align: center;">
+                    33min
+                </div>
+            </div>
         </footer>
 
-        <!-- <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div> -->
         <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+        <script type="text/javascript" src="js/angular/1.2.28/angular.min.js"></script>
+        <script type="text/javascript" src="js/angular/1.2.28/angular-route.min.js"></script>
+        <script type="text/javascript" src="js/angular/1.2.28/angular-touch.min.js"></script>
+        <script type="text/javascript" src="app/bootstrap.js"></script>
+        <script type="text/javascript" src="app/controllers/hoje.js"></script>
+        <script type="text/javascript" src="app/controllers/mes.js"></script>
+        <script type="text/javascript" src="app/controllers/semana.js"></script>
+        <script type="text/javascript" src="app/controllers/todos.js"></script>
+        
     </body>
 </html>
