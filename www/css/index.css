@@ -18,13 +18,20 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
+@font-face {
+    font-family: 'Roboto-regular';
+    src:url('../fonts/Roboto-regular.ttf?-hgk9u8') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     background-color:#333333;
     background-attachment:fixed;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-family: 'Roboto-regular', 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
     height:100%;
     margin:0px;
@@ -33,78 +40,42 @@ body {
     width:100%;
 }
 
-/* Portrait layout (default) */
-.app {
-    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
-    left:50%;
-    top:50%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot?-hgk9u5');
+    src:url('../fonts/icomoon.eot?#iefix-hgk9u5') format('embedded-opentype'),
+        url('../fonts/icomoon.woff?-hgk9u5') format('woff'),
+        url('../fonts/icomoon.ttf?-hgk9u5') format('truetype'),
+        url('../fonts/icomoon.svg?-hgk9u5#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-        background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
-    }
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
+.icon-out:before {
+    content: "\e967";
 }
 
-.event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
+.icon-in:before {
+    content: "\e968";
 }
-
-.event.listening {
-    background-color:#333333;
-    display:block;
-}
-
-.event.received {
-    background-color:#4B946A;
-    display:none;
-}
-
-@keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
- 
-@-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
- 
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
-}   
 
 #header{
     overflow: hidden;
-    background: #808080;
+    background: #2196F3;
 }
 
 #header > nav > ul{
@@ -126,16 +97,17 @@ h1 {
     display: inline-block;
     text-decoration: none;
     color: #F2F2F2;
-    border-bottom: 4px #666666 solid;
+    border-bottom: 2px #1565C0 solid;
 }
 #header > nav > ul > li > a.active{
-    border-bottom: 4px #03A9F4 solid;
-    background: #666666;
+    border-bottom: 2px #03A9F4 solid;
+    background: #0D47A1;
 }
 
 #header > nav > ul > li > a:active{
-    background: #666666;
-    border-bottom: 4px black solid;
+    border-bottom: 2px #03A9F4 solid;
+    background: #0D47A1;
+    box-shadow: 0 5px 12px #1565C0 inset;
 }
 
 #checkpoints{
@@ -148,15 +120,38 @@ h1 {
     border-bottom: 1px #4d4d4d solid;
     color: #F2F2F2;
 }
+#checkpoints li:after{
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    float: right;
+}
+
+#checkpoints li.out:after{
+    content: "\e967";
+    color: #d90a01;
+}
+
+#checkpoints li.in:after{
+    content: "\e968";
+    color: #19bd40;
+}
 
 #footer{
     position: fixed;
     bottom: 0;
     padding: 10px;
-    background: #4D4D4D;
+    background: #414141;
     width: 100%;
-    color: #FFFFFF;
-    font-size: 1.1em;
+    color: #C9C9C9;
 }
 #footer > .row{
     margin-bottom: 25px;
@@ -173,7 +168,37 @@ h1 {
     line-height: 0.75em;
     border-radius: 50%;
     box-shadow: 0 4px 5px black;
+    margin: 0;
 }
 .fx-button:active{
     box-shadow: 0 4px 3px black inset;
+}
+
+.float-button {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: 30px;
+  padding: 30px;
+  font-size: 40px;
+  background: $warning;
+  position: fixed;
+  bottom: 20px; /* Adjust to where you want it */
+  right: 20px; /* Adjust to where you want it */
+  z-index: 9999;
+}
+
+.float-button .height_fix {
+  margin-top: 100%;
+}
+
+.float-button .content {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: -20px; /* Note, this must be half the font size */
+  color: $light;
 }
