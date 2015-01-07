@@ -21,6 +21,10 @@
   .config(function($routeProvider)
   {
 
+    function openMenu(){
+      navigator.notification.beep(4);
+    }
+
     // Rotas
     $routeProvider
     .when('/', {
@@ -44,6 +48,12 @@
       controllerAs: 'todos'
     })
     .otherwise ({ redirectTo: '/' });
+
+    // Registrar evento de menubutton
+    document.addEventListener("menubutton", this.openMenu, false);
+
+
+
   });
 
 })();
