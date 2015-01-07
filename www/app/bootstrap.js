@@ -44,6 +44,14 @@
       controllerAs: 'todos'
     })
     .otherwise ({ redirectTo: '/' });
+  })
+  .run(function(){
+
+    function test(){
+      navigator.notification.beep(4);
+    }
+
+    document.addEventListener('menubutton', test, false);    
   });
 
 })();
