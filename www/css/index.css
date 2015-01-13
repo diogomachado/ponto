@@ -73,6 +73,10 @@ body {
     content: "\e600";
 }
 
+.icon-conf:before {
+    content: "\e994";
+}
+
 #header{
     overflow: hidden;
     background: #2196F3;
@@ -112,8 +116,12 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 #header > nav > ul > li{
     float: left;
     text-align: center;
-    width: 25%;
+    width: 23%;
 }
+#header > nav > ul > li.conf{
+    width: 8%;
+}
+
 #header > nav > ul > li > a{
     position: relative;
     width: 100%;
@@ -189,11 +197,24 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
     border:0;
     background: #2196F3;
     font-size: 30px;
-    line-height: 0.75em;
+    line-height: 0.65em;
     border-radius: 50%;
     color: white;
     padding: 15px;
+    outline: none;
+    display: inline-block;
+    font-family: monospace;
 }
+.fx-button.out{
+    background: #d90a01;
+}
+
+.fx-button.in{
+    background: #19bd40;
+}
+
 .fx-button:active{
-    box-shadow: 0 4px 3px black inset;
+    border-top: 1px #0a69b5 solid;
+    box-shadow: 0 4px 3px #0a69b5 inset;
+    color: #c2e2fc;
 }
