@@ -1,6 +1,8 @@
+<p ng-hide="checkpoints" style="color: white; padding: 35px;">Você não começou a trabalhar ainda</p>
 <ul id="checkpoints">
-    <li class="in">07:00</li>
-    <li class="out">11:30</li>
-    <li class="in">12:33</li>
-    <li class="out">18:33</li>
+    <li ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">{{checkpoint}}</li>
 </ul>
+
+<button class="fx-button" type="button" ng-click="hoje.salvarData()">
+    <span style="margin-top: 100%;">&#43</span>
+</button>
