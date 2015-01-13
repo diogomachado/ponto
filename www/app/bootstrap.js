@@ -47,11 +47,13 @@
   })
   .run(function(){
 
-    function test(){
+    function menu(){
       navigator.notification.beep(4);
+
+      // Abre o menu
     }
 
-    document.addEventListener('menubutton', test, false);    
+    document.addEventListener('menubutton', menu, false);    
   });
 
 })();

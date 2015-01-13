@@ -29,10 +29,10 @@
         <header id="header">
             <nav>
                 <ul>
-                    <li><a class="active" href="#/hoje">hoje</a></li>
-                    <li><a href="#/semana">semana</a></li>
-                    <li><a href="#/mes">mês</a></li>
-                    <li><a href="#/todos">todos</a></li>
+                    <li><a ng-class="{'active': page == '/'}" href="#/hoje"><span class="bar"></span> hoje</a></li>
+                    <li><a ng-class="{'active': page == '/semana'}" href="#/semana">semana</a></li>
+                    <li><a ng-class="{'active': page == '/mes'}" href="#/mes">mês</a></li>
+                    <li><a ng-class="{'active': page == '/todos'}" href="#/todos">todos</a></li>
                 </ul>
             </nav>
         </header>
