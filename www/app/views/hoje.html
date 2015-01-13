@@ -1,4 +1,8 @@
-<p ng-hide="checkpoints" style="color: white; padding: 35px;">Você não começou a trabalhar ainda</p>
+<div ng-hide="checkpoints" class="alert alert-job">
+    <span class="icon-job"></span>
+    <p>Você não começou a trabalhar ainda</p>
+</div>
+
 <ul id="checkpoints">
     <li ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">{{checkpoint}}</li>
 </ul>
@@ -6,3 +10,32 @@
 <button class="fx-button" type="button" ng-click="hoje.salvarData()">
     <span style="margin-top: 100%;">&#43</span>
 </button>
+
+<footer id="footer"> 
+    <div class="row">
+        <div style="position:relative; width: 80%; float: left;">
+            Horas trabalhadas
+        </div>
+        <div style="position:relative; width: 20%; float: left; text-align: center;">
+            00:00
+        </div>
+    </div>
+
+    <div class="row">
+        <div style="position:relative; width: 80%; float: left;">
+            Saldo
+        </div>
+        <div style="position:relative; width: 20%; float: left; text-align: center;">
+            08:48
+        </div>
+    </div>
+
+    <div class="row">
+        <div style="position:relative; width: 80%; float: left;">
+            Hora de ir
+        </div>
+        <div style="position:relative; width: 20%; float: left; text-align: center;">
+            18:37
+        </div>
+    </div>
+</footer>

@@ -112,7 +112,7 @@
 			}
 
 			// Salvo as alterações no localStorage
-			localStorage.setItem("dblocal", angular.toJson($rootScope.itensLocal));
+			localStorage.setItem("ponto-horarios", angular.toJson($rootScope.itensLocal));
 	      
 	    }
 
