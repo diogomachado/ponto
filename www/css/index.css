@@ -155,7 +155,7 @@ body {
 }
 
 /* active state */
-a:active ~ .bar:before, a:active ~ .bar:after {
+a.active ~ .bar:before, a.active ~ .bar:after {
   width:50%;
 }
 
