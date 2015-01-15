@@ -92,8 +92,6 @@
 			// Verifica se existe essa data dentro do objeto
 			if (today in $rootScope.itensLocal){
 
-				console.log(time);
-				console.log($rootScope.itensLocal[today].indexOf(time));
 				// Beleza, adiciona a hora (antes verifico se existe)
 				if ($rootScope.itensLocal[today].indexOf(time) == -1){
 					$rootScope.itensLocal[today].push(time);
@@ -114,6 +112,28 @@
 			// Salvo as alterações no localStorage
 			localStorage.setItem("ponto-horarios", angular.toJson($rootScope.itensLocal));
 	      
+	    }
+
+	    this.deletar = function(checkpoint){
+
+	    	// Remove do array
+	    	$rootScope.itensLocal[today].splice(checkpoint, 1);
+
+	    	var itens = $rootScope.itensLocal;
+
+	    	// Re-salvo no local
+	    	localStorage.setItem("ponto-horarios", JSON.stringify(itens));
+
+	    	// Experimento
+	    	var my_media = new Media("/android_asset/www/ping.mp3",
+			function() {
+			  console.log('Beleza, deu certo ping');
+			},
+			function(err) {
+				console.log('Opa, deu erro');
+			});
+
+			my_media.play();
 	    }
 
 	});

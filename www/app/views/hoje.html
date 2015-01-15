@@ -4,7 +4,7 @@
 </div>
 
 <ul id="checkpoints">
-    <li ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">{{checkpoint}}</li>
+    <li ng-click="hoje.deletar()" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">{{checkpoint}}</li>
 </ul>
 
 <button class="fx-button" type="button" ng-click="hoje.salvarData()">

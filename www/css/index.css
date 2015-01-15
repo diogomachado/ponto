@@ -207,9 +207,12 @@ a.active ~ .bar:before, a.active ~ .bar:after {
     background: #414141;
     width: 100%;
     color: #C9C9C9;
+    font-size: 1.4em;
 }
 #footer > .row{
-    margin-bottom: 25px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
 }
 
 .conf-body{
@@ -332,7 +335,7 @@ input[type=checkbox] {
 .fx-button{
     position: fixed;
     z-index: 50;
-    bottom: 95px;
+    bottom: 150px;
     right: 20px;
     border:0;
     background: #2196F3;
