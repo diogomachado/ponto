@@ -159,6 +159,11 @@ a:active ~ .bar:before, a:active ~ .bar:after {
   width:50%;
 }
 
+.checkpoint-day{
+    color: #636363;
+    margin-right: 10px;
+}
+
 #checkpoints{
     margin:0;
     padding: 0;

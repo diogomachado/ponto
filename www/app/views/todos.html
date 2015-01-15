@@ -1,21 +1,7 @@
 <ul id="checkpoints">
-    <li>30/12/2014 &nbsp; 07:00</li>
-    <li>30/12/2014 &nbsp; 11:30</li>
-    <li>30/12/2014 &nbsp; 12:33</li>
-    <li>30/12/2014 &nbsp; 18:33</li>
-
-    <li>29/12/2014 &nbsp; 07:00</li>
-    <li>29/12/2014 &nbsp; 11:30</li>
-    <li>29/12/2014 &nbsp; 12:33</li>
-    <li>29/12/2014 &nbsp; 18:33</li>
-
-    <li>28/12/2014 &nbsp; 07:00</li>
-    <li>28/12/2014 &nbsp; 11:30</li>
-    <li>28/12/2014 &nbsp; 12:33</li>
-    <li>28/12/2014 &nbsp; 18:33</li>
-
-    <li>27/12/2014 &nbsp; 07:00</li>
-    <li>27/12/2014 &nbsp; 11:30</li>
-    <li>27/12/2014 &nbsp; 12:33</li>
-    <li>27/12/2014 &nbsp; 18:33</li>
+    <span ng-repeat="(key, day) in checkpoints">
+        <li ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="hour in day">
+            <span class="checkpoint-day">{{key}}</span> {{hour}}
+        </li>
+    </span>
 </ul>
