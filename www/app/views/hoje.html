@@ -1,10 +1,10 @@
-<div ng-hide="checkpoints" class="alert alert-job">
+<div ng-hide="checkpoints.length !== 0" class="alert alert-job">
     <span class="icon-job"></span>
     <p>Você não começou a trabalhar ainda</p>
 </div>
 
 <ul id="checkpoints">
-    <li ng-click="hoje.deletar()" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">{{checkpoint}}</li>
+    <li ng-click="hoje.deletar($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">{{checkpoint}}</li>
 </ul>
 
 <button class="fx-button" type="button" ng-click="hoje.salvarData()">
@@ -17,20 +17,22 @@
             Horas trabalhadas
         </div>
         <div style="position:relative; width: 20%; float: left; text-align: center;">
-            00:00
+            {{horasTrabalhadas}}
         </div>
     </div>
 
     <div class="row">
         <div style="position:relative; width: 80%; float: left;">
             Saldo
+            <span ng-show="saldoFinal > 0" style="color: #00DF00;">+</span>
+            <span ng-show="saldoFinal < 0" style="color: red">-</span>
         </div>
         <div style="position:relative; width: 20%; float: left; text-align: center;">
-            08:48
+            {{saldo}}
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" ng-show="horaIr">
         <div style="position:relative; width: 80%; float: left;">
             Hora de ir
         </div>
