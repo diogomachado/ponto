@@ -1,6 +1,6 @@
 <div ng-hide="checkpoints.length !== 0" class="alert alert-job">
     <span class="icon-job"></span>
-    <p>Você não começou a trabalhar ainda</p>
+    <p class="text">Você não começou a trabalhar ainda</p>
 </div>
 
 <ul id="checkpoints">
@@ -22,12 +22,12 @@
     </div>
 
     <div class="row">
-        <div style="position:relative; width: 80%; float: left;">
+        <div style="position:relative; width: 78%; float: left;">
             Saldo
+        </div>
+        <div style="position:relative; width: 22%; float: left; text-align: center;">
             <span ng-show="saldoFinal > 0" style="color: #00DF00;">+</span>
             <span ng-show="saldoFinal < 0" style="color: red">-</span>
-        </div>
-        <div style="position:relative; width: 20%; float: left; text-align: center;">
             {{saldo}}
         </div>
     </div>
