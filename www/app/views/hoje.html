@@ -4,7 +4,12 @@
 </div>
 
 <ul id="checkpoints">
-    <li ng-click="hoje.deletar($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">{{checkpoint}}</li>
+    <li on-long-press="hoje.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">  {{checkpoint}}
+        <div class="menu-box" id="menu-box-{{$index}}">
+            <button type="button" class="edit" ng-click="hoje.editar()"><span class="icon-edit"></span></button>
+            <button type="button" class="remove" ng-click="hoje.deletar($index)"><span class="icon-remove"></span></button>
+        </div>
+    </li>
 </ul>
 
 <button class="fx-button" type="button" ng-click="hoje.salvarData()">

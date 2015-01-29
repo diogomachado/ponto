@@ -71,16 +71,25 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-out:before {
-    content: "\e601";
-}
 
 .icon-in:before {
     content: "\e600";
 }
 
+.icon-out:before {
+    content: "\e601";
+}
+
+.icon-edit:before {
+    content: "\e905";
+}
+
 .icon-conf:before {
     content: "\e994";
+}
+
+.icon-remove:before {
+    content: "\e9ac";
 }
 
 .icon-job:before {
@@ -380,4 +389,125 @@ input[type=checkbox] {
     border-top: 1px #0a69b5 solid;
     box-shadow: 0 4px 3px #0a69b5 inset;
     color: #c2e2fc;
+}
+
+/* Menu box - Abre ao pressionar*/
+.menu-box::before{
+    position: fixed;
+    margin-left: 6px;
+    margin-top: -7.5px;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 0; 
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #ccc;
+}
+
+.menu-box{
+    position: fixed;
+    display: none;
+    width: 90px;
+    background: #ccc;
+    z-index: 30;
+    height: 40px;
+    border-radius: 3px;
+    margin-top: 7px;
+
+}
+.menu-box.show{
+    display: block;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+    -webkit-backface-visibility: visible !important;
+          backface-visibility: visible !important;
+    -webkit-animation-name: flipInX;
+            animation-name: flipInX;
+}
+
+@-webkit-keyframes flipInX {
+  0% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-transition-timing-function: ease-in;
+            transition-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-transition-timing-function: ease-in;
+            transition-timing-function: ease-in;
+  }
+
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  100% {
+    -webkit-transform: perspective(400px);
+            transform: perspective(400px);
+  }
+}
+
+@keyframes flipInX {
+  0% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-transition-timing-function: ease-in;
+            transition-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-transition-timing-function: ease-in;
+            transition-timing-function: ease-in;
+  }
+
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  100% {
+    -webkit-transform: perspective(400px);
+            transform: perspective(400px);
+  }
+}
+
+.menu-box button{
+    width: 50%;
+    height: 100%;
+    float: left;
+    border:0;
+    background: #ccc;
+    font-size: 1em;
+}
+.menu-box button.edit{
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.menu-box button.remove{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }

@@ -154,10 +154,18 @@
 				if ($rootScope.itensLocal[today][0] !== undefined){
 
 					if ($rootScope.itensLocal[today].length === 1){
+
 						// Calcula a diferença de horas
 						diferenca = diferencaHoras($rootScope.itensLocal[today][0].substr(0,5), time.substr(0,5));
+						
+						// Soma a diferença de horas
 						$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
+
 					}else{
+
+						// Zero porque com 1 registro eu calculo com base na hora atual
+						$scope.horasTrabalhadas = "00:00";
+
 						angular.forEach($rootScope.itensLocal[today], function(value, key){
 							
 							// verifica se é par
@@ -184,7 +192,6 @@
 
 			// Salvo as alterações no localStorage
 			localStorage.setItem("ponto-horarios", angular.toJson($rootScope.itensLocal));
-	      
 	    }
 
 	    this.deletar = function(checkpoint){
@@ -198,6 +205,21 @@
 	    	localStorage.setItem("ponto-horarios", JSON.stringify(itens));
 
 	    	atualizar();
+	    }
+
+	    this.editar = function(){
+	    	console.log('vamos editar');
+	    }
+
+	    this.abrirMenu = function(index){
+
+	    	// Remove todos show
+	    	angular.element(document.querySelector('.checkpoints')).removeClass('show');
+
+	    	// Adiciona classe para aparecer
+	    	angular.element(document.querySelector('#menu-box-' + index)).addClass('show');
+	    	
+	    	// navigator.notification.vibrate(1000);
 	    }
 
 
