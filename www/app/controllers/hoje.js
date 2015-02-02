@@ -225,7 +225,8 @@
 	    	// Adiciona classe para aparecer
 	    	angular.element(document.querySelector('#menu-box-' + index)).addClass('show');
 	    	
-	    	navigator.vibrate(200);
+	    	// Vibra rapidão
+	    	navigator.vibrate(50);
 	    }
 
 
