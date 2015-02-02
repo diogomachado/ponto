@@ -375,7 +375,6 @@ input[type=checkbox] {
     outline: none;
     display: inline-block;
     font-family: monospace;
-    box-shadow: 0 2px 10px #686868;
 }
 .fx-button.out{
     background: #d90a01;
@@ -403,14 +402,13 @@ input[type=checkbox] {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid #ccc;
+    border-bottom: 8px solid white;
 }
 
 .menu-box{
     position: fixed;
     display: none;
     width: 90px;
-    background: #ccc;
     z-index: 30;
     height: 40px;
     border-radius: 3px;
@@ -500,7 +498,7 @@ input[type=checkbox] {
     height: 100%;
     float: left;
     border:0;
-    background: #ccc;
+    background: white;
     font-size: 1em;
 }
 .menu-box button.edit{
