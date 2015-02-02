@@ -107,10 +107,21 @@
 		        	trabalhou = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
 		        	tinhaTrabalhar = (parseInt($scope.saldoBase.substr(0,2)) * 60) + (parseInt($scope.saldoBase.substr(3,2)));
 
+		        	// Acho o saldo final
 		        	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
 		        }
 
 	        	$scope.saldo = diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
+
+	        	// Se já tenho 3 registros, calculo a hora de ir
+				if ($rootScope.itensLocal[today].length === 3){
+					$scope.horaIr = true;
+
+					// Aqui eu calculo a hora de ir
+					$scope.horasHoraIr = somaHora($scope.saldo, $rootScope.itensLocal[today][2].substr(0,5));
+				}else{
+					$scope.horaIr = false;
+				}
 	        }
 		}
 
@@ -128,11 +139,6 @@
 
 				// Beleza, adiciona a hora (antes verifico se existe)
 				if ($rootScope.itensLocal[today].indexOf(time) == -1){
-
-					// Se já tenho 3 registros, mostro a hora de ir
-					if ($rootScope.itensLocal[today].length === 2){
-						$scope.horaIr = true;
-					}
 
 					// Puxa a hora para dentro do array
 					$rootScope.itensLocal[today].push(time);
