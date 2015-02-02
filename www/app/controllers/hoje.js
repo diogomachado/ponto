@@ -220,7 +220,7 @@
 	    this.abrirMenu = function(index){
 
 	    	// Remove todos show
-	    	angular.element(document.querySelector('.checkpoints')).removeClass('show');
+	    	angular.element(document.querySelectorAll('.menu-box')).removeClass('show');
 
 	    	// Adiciona classe para aparecer
 	    	angular.element(document.querySelector('#menu-box-' + index)).addClass('show');
