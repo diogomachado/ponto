@@ -56,43 +56,10 @@
 		today = day();
 		time  = now();
 
-		// Atualiza total executado
-		if (today in $rootScope.itensLocal){
-			// Primeira verificação de horas trabalhadas
-			if ($rootScope.itensLocal[today][0] !== undefined){
+		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados
+		$rootScope.$watchCollection('itensLocal["'+ today + '"]', function(){
 
-				if ($rootScope.itensLocal[today].length === 1){
-					// Calcula a diferença de horas
-					diferenca = diferencaHoras($rootScope.itensLocal[today][0].substr(0,5), time.substr(0,5));
-					$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
-				}else{
-					angular.forEach($rootScope.itensLocal[today], function(value, key){
-						
-						// verifica se é par
-						if (key % 2 == 0){
-							// verifica se existe o proximo elemento
-							if ($rootScope.itensLocal[today][key + 1] !== undefined)
-							{
-								// Calcula a diferença de horas
-								diferenca = diferencaHoras($rootScope.itensLocal[today][key].substr(0,5), $rootScope.itensLocal[today][key + 1].substr(0,5));
-
-								// Se as horas trabalhadas estão zeradas
-								if ($scope.horasTrabalhadas == "00:00"){
-									$scope.horasTrabalhadas = diferenca;	
-								}else{
-									// Soma as horas com a diferença
-									$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
-								}
-							}
-						}
-					});
-				}
-			}
-		}
-
-		atualizar();
-
-		function atualizar(){
+			console.log("Atualizando...");
 
 			// Verifica se existe essa data dentro do objeto
 	      	if (today in $rootScope.itensLocal){
@@ -110,9 +77,10 @@
 		        	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
 		        }
 
+		        // Atualiza o saldo
 	        	$scope.saldo = diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
 
-	        	// Se já tenho 3 registros, calculo a hora de ir
+	        	// Calculo da hora de ir
 				if ($rootScope.itensLocal[today].length === 3){
 					$scope.horaIr = true;
 
@@ -121,8 +89,42 @@
 				}else{
 					$scope.horaIr = false;
 				}
+
+				// Primeira verificação de horas trabalhadas
+				// -----------------------------------------------------------------------------------------------------
+				if ($rootScope.itensLocal[today][0] !== undefined){
+
+					if ($rootScope.itensLocal[today].length === 1){
+						// Calcula a diferença de horas
+						diferenca = diferencaHoras($rootScope.itensLocal[today][0].substr(0,5), time.substr(0,5));
+						$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
+					}else{
+						angular.forEach($rootScope.itensLocal[today], function(value, key){
+							
+							// verifica se é par
+							if (key % 2 == 0){
+								// verifica se existe o proximo elemento
+								if ($rootScope.itensLocal[today][key + 1] !== undefined)
+								{
+									// Calcula a diferença de horas
+									diferenca = diferencaHoras($rootScope.itensLocal[today][key].substr(0,5), $rootScope.itensLocal[today][key + 1].substr(0,5));
+
+									// Se as horas trabalhadas estão zeradas
+									if ($scope.horasTrabalhadas == "00:00"){
+										$scope.horasTrabalhadas = diferenca;	
+									}else{
+										// Soma as horas com a diferença
+										$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
+									}
+								}
+							}
+						});
+					}
+				}
+				// -----------------------------------------------------------------------------------------------------
 	        }
-		}
+
+		});
 
 		// Definindo métodos globais para serem acessados pelos controllers
 	    this.salvarData = function(){
@@ -151,9 +153,8 @@
 				$rootScope.itensLocal[today] = [time];        
 			}
 
-			atualizar();
-
-			// Atualiza total executado
+			// Atualiza total executado [REVER CÓDIGO]
+			// ------------------------------------------------------------------------------------------------
 			if (today in $rootScope.itensLocal){
 				// Primeira verificação de horas trabalhadas
 				if ($rootScope.itensLocal[today][0] !== undefined){
@@ -194,6 +195,7 @@
 					}
 				}
 			}
+			// ------------------------------------------------------------------------------------------------
 
 			// Salvo as alterações no localStorage
 			localStorage.setItem("ponto-horarios", angular.toJson($rootScope.itensLocal));
@@ -203,13 +205,10 @@
 
 	    	// Remove do array
 	    	$rootScope.itensLocal[today].splice(checkpoint, 1);
-
-	    	var itens = $rootScope.itensLocal;
+	    	// delete $rootScope.itensLocal[today][checkpoint];
 
 	    	// Re-salvo no local
-	    	localStorage.setItem("ponto-horarios", JSON.stringify(itens));
-
-	    	atualizar();
+	    	localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
 	    }
 
 	    this.novoCheckpoint = function(index){
@@ -254,65 +253,6 @@
 	    	// Vibra rapidão
 	    	navigator.vibrate(50);
 	    }
-
-
-	    /**
-		 * Realiza os cálculos dos horários, com base nas horas informadas.
-		 */
-		function calculaHoras(){
-			
-			// valores inseridos
-			totalHorasDia = "08:48"; // Default ainda
-			
-			// Entrada e saida
-			horaEntrada = $("#horaEntrada").val();
-			horaIdaAlmoco = $("#horaIdaAlmoco").val();
-			horaVoltaAlmoco = $("#horaVoltaAlmoco").val();	
-			horaSaida = $("#horaSaida").val();	
-			
-			// Limpa os campos calculados
-			$("#diferencaPrimeiroTurno").html('');
-			$("#tempoRestante").html('');
-			$("#horaSaidaMinima").html('');
-			$("#saldoHoras").html('');
-			
-			if( possuiValor(horaEntrada) && possuiValor(horaIdaAlmoco) ) {
-				
-				// Calcula o intervalo entre a entrada e o almoco
-				diffEntradaAlmoco = diferencaHoras( horaEntrada, horaIdaAlmoco );
-				$("#diferencaPrimeiroTurno").html(diffEntradaAlmoco);
-				
-				if( possuiValor(totalHorasDia) ){
-				
-					// A partir do tempo que ja passou entre a entrada e o almoco,
-					// calcula o tempo que falta para completar o total de horas do dia
-					tempoRestante = diferencaHoras( diffEntradaAlmoco, totalHorasDia);
-					$("#tempoRestante").html(tempoRestante);
-					
-					if( possuiValor(horaVoltaAlmoco) ){
-					
-						// Calcula, a partir da hora do retorno do almoço e do tempo restante
-						// para completar as horas, qual o horário ideal para ir embora
-						horaSaidaCerta = somaHora(horaVoltaAlmoco, tempoRestante);
-						$("#horaSaidaMinima").html(horaSaidaCerta);
-						
-						if( possuiValor(horaSaida) ){
-					
-							// Caso a pessoa vá embora antes ou depois do horário ideal, calcula
-							// o tempo q mais ou a menos que ela trabalhou do total que ela devia
-							// trabalhar
-							saldoHoras = diferencaHoras(horaSaidaCerta, horaSaida);
-							$("#saldoHoras").html(saldoHoras);
-							
-							// Se ela ficou tempo a mais, o saldo é positivo; se a pessoa
-							// saiu mais cedo do que devia, o saldo é negativo
-							if( isHoraInicialMenorHoraFinal(horaSaida, horaSaidaCerta) )
-								$("#saldoHoras").html("-"+ $("#saldoHoras").html());
-						}
-					}
-				}
-			}
-		}
 
 		/**
 		* Código fonte: http://www.sistemaseweb.com.br/computacaoemfoco/CalculadorHoras.html
@@ -416,10 +356,5 @@
 		function completaZeroEsquerda( numero ){
 			return ( numero < 10 ? "0" + numero : numero);
 		}
-
-
-
-
-
 	});
 })();
