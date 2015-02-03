@@ -57,5 +57,11 @@
 			}
 		}
 
+		this.fechar = function(){
+
+			// Retiro a janela de exibir
+			angular.element(document.querySelector('#dialog')).removeClass('show');
+		}
+
 	});
 })();

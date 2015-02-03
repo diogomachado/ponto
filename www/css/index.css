@@ -595,10 +595,8 @@ input[type=checkbox] {
   color: #666;
 }
 
-/*.dialog-view-details button {
+.dialog-view-details .dialog-view-buttons button {
   position: relative;
-  bottom: 10px;
-  right: 10px;
   background: none;
   border-radius: 2px;
   border: none;
@@ -607,10 +605,10 @@ input[type=checkbox] {
   text-transform: uppercase;
 }
 
-.dialog-view-details button.dialog-button-ok {
+.dialog-view-details .dialog-view-buttons button.dialog-button-ok {
   color: #3C78D8;
 }
-*/
+
 .dialog:after {
   position: fixed;
   background: rgba(0,0,0,0.4);

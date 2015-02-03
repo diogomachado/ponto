@@ -212,12 +212,27 @@
 	    	atualizar();
 	    }
 
+	    this.novoCheckpoint = function(index){
+
+	    	var today = new Date();
+
+	    	// Recolho a hora pegando do index do array do dia de hoje
+			$scope.horas = today.getHours();
+			$scope.minutos = today.getMinutes();
+
+	    	// Scope é passado como modelo para a directiva de tempo (index é a ID do array de horas registradas)
+	    	$scope.indexSelecionado = index;
+			
+			// Exibe o dialog
+	    	angular.element(document.querySelector('#dialog')).addClass('show');
+
+	    	// Vibra rapidão
+	    	navigator.vibrate(50);
+	    }
+
 	    this.editar = function(index){
 
-	    	
-	    	$rootScope.itensLocal[today][index].substr(3,2);
-
-			// Recolho a hora atual
+			// Recolho a hora pegando do index do array do dia de hoje
 			$scope.horas = $rootScope.itensLocal[today][index].substr(0,2);
 			$scope.minutos = $rootScope.itensLocal[today][index].substr(3,2);
 
