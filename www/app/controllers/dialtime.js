@@ -1,5 +1,5 @@
 (function() {
-	angular.module('appponto').controller('DialtimeCtrl', function($scope){
+	angular.module('appponto').controller('DialtimeCtrl', function($scope, $rootScope){
 			
 		// function adicionaZero(){
 
@@ -11,7 +11,6 @@
 		// 	  $scope.minutos ='0' + $scope.minutos
 		// 	}
 		// }
-
 
 		this.aumentarHora = function(){
 
@@ -59,6 +58,34 @@
 
 		this.fechar = function(){
 
+			// Retiro a janela de exibir
+			angular.element(document.querySelector('#dialog')).removeClass('show');
+		}
+
+		this.salvar = function(){
+
+			// Pega o dia de hoje
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+
+			if(dd<10) {
+			  dd='0'+dd
+			} 
+
+			if(mm<10) {
+			  mm='0'+mm
+			} 
+
+			day = dd+'/'+mm+'/'+yyyy;
+
+			// Atualiza com os valores do scopo
+			$rootScope.itensLocal[day][$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
+
+	    	// Re-salvo no local
+	    	localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
+			
 			// Retiro a janela de exibir
 			angular.element(document.querySelector('#dialog')).removeClass('show');
 		}
