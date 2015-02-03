@@ -4,11 +4,13 @@
 		return {
 			restrict: 'E',
 			scope: {
-				id : '@id',
+				index : '=',
+				horas : '=horas',
+				minutos : '=minutos',
 			},
-			templateUrl: 'app/views/template/dialogTime.html'
-			// controller: 'MainCtrl',
-			// controllerAs: 'main'
+			templateUrl: 'app/views/template/dialogTime.html',
+			controller: 'DialtimeCtrl',
+			controllerAs: 'dialtime'
 		};
 	});
 		

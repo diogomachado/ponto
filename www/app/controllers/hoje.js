@@ -10,7 +10,6 @@
 		$scope.horaIr = false;
 		$scope.saldoFinal = -9000;
 
-
 		// Retorna a hora de agora
 		function now(){
 			
@@ -213,8 +212,20 @@
 	    	atualizar();
 	    }
 
-	    this.editar = function(){
-	    	console.log('vamos editar');
+	    this.editar = function(index){
+
+	    	
+	    	$rootScope.itensLocal[today][index].substr(3,2);
+
+			// Recolho a hora atual
+			$scope.horas = $rootScope.itensLocal[today][index].substr(0,2);
+			$scope.minutos = $rootScope.itensLocal[today][index].substr(3,2);
+
+	    	// Scope é passado como modelo para a directiva de tempo (index é a ID do array de horas registradas)
+	    	$scope.indexSelecionado = index;
+
+	    	// Exibe o dialog
+	    	angular.element(document.querySelector('#dialog')).addClass('show');
 	    }
 
 	    this.abrirMenu = function(index){

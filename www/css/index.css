@@ -26,7 +26,7 @@
 
 @font-face {
     font-family: 'Roboto-regular';
-    src:url('../fonts/Roboto-regular.ttf?-hgk9u8') format('truetype');
+    src:url('../fonts/Roboto-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -71,25 +71,32 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-minus:before {
+  content: "\e6012";
+}
+
+.icon-plus:before {
+  content: "\e602";
+}
 
 .icon-in:before {
-    content: "\e600";
+  content: "\e600";
 }
 
 .icon-out:before {
+  content: "\e606";
+}
+
+.icon-conf:before {
     content: "\e601";
 }
 
 .icon-edit:before {
-    content: "\e905";
-}
-
-.icon-conf:before {
-    content: "\e994";
+  content: "\e603";
 }
 
 .icon-remove:before {
-    content: "\e9ac";
+  content: "\e604";
 }
 
 .icon-job:before {
@@ -206,7 +213,7 @@ a.active ~ .bar:before, a.active ~ .bar:after {
 }
 
 #checkpoints li.out:after{
-    content: "\e601";
+    content: "\e606";
     color: #d90a01;
 }
 
@@ -547,7 +554,7 @@ input[type=checkbox] {
 
 }
 
-.view.dialog.visible {
+.view.dialog.show {
   pointer-events: auto;
   opacity: 1;
   -webkit-transform: scale(1);
@@ -570,14 +577,15 @@ input[type=checkbox] {
   transform: translate(-50%, -50%);
   border-radius: 2px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+  text-align: center;
 }
 
 .dialog-view-details h1 {
-  margin: 0.2em 0 0.4em 0;
+  margin: 0.2em 0 0.85em 0;
   padding: 0;
   line-height: 1;
-  font-size: 24px;
-  color: #111;
+  font-size: 20px;
+  color: #353535;
 }
 
 .dialog-view-details p {
@@ -632,6 +640,18 @@ dialtime{
     display: block
 }
 
+.time-wrapper{
+  position: relative;
+  width: 130px;
+  margin: 0 auto 12px;
+  clear: both;
+  overflow: hidden;
+}
+
+.time-box:first-child{
+  margin-right: 10px;
+}
+
 .time-box{
     position: relative;
     width: 60px;
@@ -639,12 +659,19 @@ dialtime{
 }
 .time-box button{
     width: 100%;
-    padding: 15px;
+  padding: 20px;
+  border: 0;
+  margin: 0;
+  line-height: 0;
 }
 
 .time-box input{
     width: 100%;
     text-align: center;
-    height: 37px;
+    height: 45px;
     font-size: 2.2em;
+    border: 0;
+    padding: 0;
+    border-left: 1px #EFEFEF solid;
+    border-right: 1px #EFEFEF solid;
 }
