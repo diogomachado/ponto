@@ -1,16 +1,27 @@
 (function() {
 	angular.module('appponto').controller('DialtimeCtrl', function($scope, $rootScope){
 			
-		// function adicionaZero(){
+		$scope.$watch('horas', function(){
 
-		// 	if($scope.horas<10) {
-		// 	  $scope.horas = '0' + $scope.horas
-		// 	}
+			// A hora chega aqui como string, então transformo ela em int antes de trabalhar
+			$scope.horas = parseInt($scope.horas);
 
-		// 	if($scope.minutos<10) {
-		// 	  $scope.minutos ='0' + $scope.minutos
-		// 	}
-		// }
+			if(parseInt($scope.horas) < 10) {
+			  $scope.horas = '0' + $scope.horas;
+			}			
+
+		});
+
+		$scope.$watch('minutos', function(){
+
+			// A hora chega aqui como string, então transformo ela em int antes de trabalhar
+			$scope.minutos = parseInt($scope.minutos);
+
+			if(parseInt($scope.minutos) < 10) {
+			  $scope.minutos = '0' + $scope.minutos;
+			}			
+
+		});
 
 		this.aumentarHora = function(){
 
