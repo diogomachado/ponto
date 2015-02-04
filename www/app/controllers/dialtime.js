@@ -38,7 +38,7 @@
 			// Limite 00 horas
 			if ($scope.horas > 1){
 				$scope.horas--;
-			}else if ($scope.horas === 0){
+			}else if ($scope.horas == 0){
 				$scope.horas = 23;
 			}else{
 				$scope.horas = 0;
@@ -60,7 +60,7 @@
 			// Limite 00 horas
 			if ($scope.minutos > 1){
 				$scope.minutos--;
-			}else if ($scope.minutos === 0){
+			}else if ($scope.minutos == 0){
 				$scope.minutos = 59;
 			}else{
 				$scope.minutos = 0;
@@ -74,6 +74,8 @@
 		}
 
 		this.salvar = function(){
+
+			console.log("Salvando");
 
 			// Pega o dia de hoje
 			var today = new Date();
