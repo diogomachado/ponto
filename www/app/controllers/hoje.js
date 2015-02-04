@@ -63,8 +63,67 @@
 
 			// Verifica se existe essa data dentro do objeto
 	      	if (today in $rootScope.itensLocal){
+
 				// Itens para mostrar na view
 	        	$scope.checkpoints = $rootScope.itensLocal[today];
+
+	        	// Primeira verificação de horas trabalhadas
+				// -----------------------------------------------------------------------------------------------------
+				if ($rootScope.itensLocal[today][0] !== undefined){
+
+					if ($rootScope.itensLocal[today].length === 1){
+
+						// Calcula a diferença de horas
+						diferenca = diferencaHoras($rootScope.itensLocal[today][0].substr(0,5), time.substr(0,5));
+						$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
+
+					}else{
+
+						// Faço um loop pelos checkpoints
+						angular.forEach($rootScope.itensLocal[today], function(value, key){
+							
+							// verifica se é par
+							if (key % 2 == 0){
+
+								// verifica se existe o proximo elemento
+								if ($rootScope.itensLocal[today][key + 1] !== undefined)
+								{
+									console.log(key);
+
+									// Calcula a diferença de horas
+									diferenca = diferencaHoras($rootScope.itensLocal[today][key].substr(0,5), $rootScope.itensLocal[today][key + 1].substr(0,5));
+
+									// Se as horas trabalhadas estão zeradas
+									if ($scope.horasTrabalhadas !== "00:00"){
+
+										console.log(diferenca);
+										console.log($scope.horasTrabalhadas);
+
+										if (key ===0){
+
+											$scope.horasTrabalhadas = diferenca;	
+
+										}else{
+
+											$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
+											
+										}
+
+									}else{
+
+										console.log(diferenca);
+										console.log($scope.horasTrabalhadas);
+										console.log(somaHora($scope.horasTrabalhadas, diferenca));
+										// Soma as horas com a diferença
+										$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
+
+									}
+								}
+							}
+						});
+					}
+				}
+				// -----------------------------------------------------------------------------------------------------
 
 	        	// Se tem 4 registros ou mais
 		        if ($rootScope.itensLocal[today].length >= 1)
@@ -89,39 +148,6 @@
 				}else{
 					$scope.horaIr = false;
 				}
-
-				// Primeira verificação de horas trabalhadas
-				// -----------------------------------------------------------------------------------------------------
-				if ($rootScope.itensLocal[today][0] !== undefined){
-
-					if ($rootScope.itensLocal[today].length === 1){
-						// Calcula a diferença de horas
-						diferenca = diferencaHoras($rootScope.itensLocal[today][0].substr(0,5), time.substr(0,5));
-						$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
-					}else{
-						angular.forEach($rootScope.itensLocal[today], function(value, key){
-							
-							// verifica se é par
-							if (key % 2 == 0){
-								// verifica se existe o proximo elemento
-								if ($rootScope.itensLocal[today][key + 1] !== undefined)
-								{
-									// Calcula a diferença de horas
-									diferenca = diferencaHoras($rootScope.itensLocal[today][key].substr(0,5), $rootScope.itensLocal[today][key + 1].substr(0,5));
-
-									// Se as horas trabalhadas estão zeradas
-									if ($scope.horasTrabalhadas == "00:00"){
-										$scope.horasTrabalhadas = diferenca;	
-									}else{
-										// Soma as horas com a diferença
-										$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
-									}
-								}
-							}
-						});
-					}
-				}
-				// -----------------------------------------------------------------------------------------------------
 	        }
 
 		});
@@ -141,8 +167,11 @@
 				// Beleza, adiciona a hora (antes verifico se existe)
 				if ($rootScope.itensLocal[today].indexOf(time) == -1){
 
-					// Puxa a hora para dentro do array
-					$rootScope.itensLocal[today].push(time);
+					if (!(isHoraInicialMenorHoraFinal(time, $rootScope.itensLocal[today][($rootScope.itensLocal[today].length -1)]))){
+						
+						// Puxa a hora para dentro do array
+						$rootScope.itensLocal[today].push(time);
+					}
 				}
 
 				// Itens para mostrar na view
@@ -152,50 +181,6 @@
 				// Se não tinha nenhum item, esse é o primeiro registro
 				$rootScope.itensLocal[today] = [time];        
 			}
-
-			// Atualiza total executado [REVER CÓDIGO]
-			// ------------------------------------------------------------------------------------------------
-			if (today in $rootScope.itensLocal){
-				// Primeira verificação de horas trabalhadas
-				if ($rootScope.itensLocal[today][0] !== undefined){
-
-					if ($rootScope.itensLocal[today].length === 1){
-
-						// Calcula a diferença de horas
-						diferenca = diferencaHoras($rootScope.itensLocal[today][0].substr(0,5), time.substr(0,5));
-						
-						// Soma a diferença de horas
-						$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
-
-					}else{
-
-						// Zero porque com 1 registro eu calculo com base na hora atual
-						$scope.horasTrabalhadas = "00:00";
-
-						angular.forEach($rootScope.itensLocal[today], function(value, key){
-							
-							// verifica se é par
-							if (key % 2 == 0){
-								// verifica se existe o proximo elemento
-								if ($rootScope.itensLocal[today][key + 1] !== undefined)
-								{
-									// Calcula a diferença de horas
-									diferenca = diferencaHoras($rootScope.itensLocal[today][key].substr(0,5), $rootScope.itensLocal[today][key + 1].substr(0,5));
-
-									// Se as horas trabalhadas estão zeradas
-									if ($scope.horasTrabalhadas == "00:00"){
-										$scope.horasTrabalhadas = diferenca;	
-									}else{
-										// Soma as horas com a diferença
-										$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
-									}
-								}
-							}
-						});
-					}
-				}
-			}
-			// ------------------------------------------------------------------------------------------------
 
 			// Salvo as alterações no localStorage
 			localStorage.setItem("ponto-horarios", angular.toJson($rootScope.itensLocal));
