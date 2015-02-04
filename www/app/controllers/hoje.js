@@ -122,6 +122,15 @@
 							}
 						});
 					}
+				}else{
+
+					// Reset dos valores
+					$scope.saldoBase = "08:48"; // Não pode ser mudado, vem das configurações
+					$scope.saldo = "08:48"; // Será decrementado
+					$scope.horasTrabalhadas = "00:00";
+					$scope.horaIr = false;
+					$scope.saldoFinal = -9000;
+
 				}
 				// -----------------------------------------------------------------------------------------------------
 
