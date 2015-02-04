@@ -166,11 +166,19 @@
 
 				// Beleza, adiciona a hora (antes verifico se existe)
 				if ($rootScope.itensLocal[today].indexOf(time) == -1){
+					
+					if ($rootScope.itensLocal[today].length === 0){	
 
-					if (!(isHoraInicialMenorHoraFinal(time, $rootScope.itensLocal[today][($rootScope.itensLocal[today].length -1)]))){
-						
 						// Puxa a hora para dentro do array
 						$rootScope.itensLocal[today].push(time);
+
+					}else{						
+
+						if (!(isHoraInicialMenorHoraFinal(time, $rootScope.itensLocal[today][($rootScope.itensLocal[today].length -1)]))){
+							
+							// Puxa a hora para dentro do array
+							$rootScope.itensLocal[today].push(time);
+						}
 					}
 				}
 
