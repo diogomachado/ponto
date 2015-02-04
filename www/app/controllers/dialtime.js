@@ -69,6 +69,9 @@
 
 		this.fechar = function(){
 
+			// Remove todos show
+	    	angular.element(document.querySelectorAll('.menu-box')).removeClass('show');
+			
 			// Retiro a janela de exibir
 			angular.element(document.querySelector('#dialog')).removeClass('show');
 		}
@@ -94,7 +97,16 @@
 			day = dd+'/'+mm+'/'+yyyy;
 
 			// Atualiza com os valores do scopo
-			$rootScope.itensLocal[day][$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
+			if ($scope.index == undefined){
+				
+				// Puxa a hora para dentro do array
+				$rootScope.itensLocal[day].push($scope.horas + ":" + $scope.minutos + ":00");
+
+			}else{
+
+				$rootScope.itensLocal[day][$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
+
+			}
 
 	    	// Re-salvo no local
 	    	localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));

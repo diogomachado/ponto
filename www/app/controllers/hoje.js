@@ -73,6 +73,9 @@
 
 					if ($rootScope.itensLocal[today].length === 1){
 
+						// Reseto as horas trabalhadas porque eu tenho que pensar tb na exclusão
+						$scope.horasTrabalhadas = "00:00";
+
 						// Calcula a diferença de horas
 						diferenca = diferencaHoras($rootScope.itensLocal[today][0].substr(0,5), time.substr(0,5));
 						$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);

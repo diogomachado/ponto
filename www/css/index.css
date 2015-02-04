@@ -370,31 +370,32 @@ input[type=checkbox] {
 .fx-button{
     position: fixed;
     z-index: 50;
-    bottom: 115px;
-    right: 20px;
+    bottom: 130px;
+    right: 15px;
     border: 0;
     background: #2196F3;
     font-size: 30px;
     line-height: 0.7em;
-    border-radius: 50%;
+    border-radius: 30%;
     color: #FFF;
     padding: 15px 16px;
     outline: none;
     display: inline-block;
     font-family: monospace;
 }
+.fx-button.ng-click-active{
+  background: #085795;
+  border-top: 1px #0a69b5 solid;
+  color: #c2e2fc;
+}
+
+
 .fx-button.out{
     background: #d90a01;
 }
 
 .fx-button.in{
     background: #19bd40;
-}
-
-.fx-button:active{
-    border-top: 1px #0a69b5 solid;
-    box-shadow: 0 4px 3px #0a69b5 inset;
-    color: #c2e2fc;
 }
 
 /* Menu box - Abre ao pressionar*/
@@ -415,13 +416,19 @@ input[type=checkbox] {
 .menu-box{
     position: fixed;
     display: none;
-    width: 90px;
+    width: 130px;
     z-index: 30;
-    height: 40px;
-    border-radius: 3px;
+    height: 65px;
     margin-top: 7px;
+    font-size: 1.6em;
 
 }
+
+.menu-box .edit.ng-click-active,
+.menu-box .remove.ng-click-active{
+  background: #c2e2fc;
+}
+
 .menu-box.show{
     display: block;
     -webkit-animation-duration: 1s;

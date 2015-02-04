@@ -20,7 +20,7 @@
 
 <footer id="footer"> 
     <div class="row">
-        <div style="position:relative; width: 80%; float: left;">
+        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
             Horas trabalhadas
         </div>
         <div style="position:relative; width: 20%; float: left; text-align: center;">
@@ -29,18 +29,18 @@
     </div>
 
     <div class="row">
-        <div style="position:relative; width: 78%; float: left;">
-            Saldo
+        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
+            Saldo &nbsp;&nbsp;&nbsp;
+            <span ng-show="saldoFinal > 0" style="color: #00DF00; float: right; margin-right: 11px;" class="icon-plus"></span>
+            <span ng-show="saldoFinal < 0" style="color: red; float: right; margin-right: 11px;" class="icon-minus"></span>
         </div>
-        <div style="position:relative; width: 22%; float: left; text-align: center;">
-            <span ng-show="saldoFinal > 0" style="color: #00DF00;">+</span>
-            <span ng-show="saldoFinal < 0" style="color: red">-</span>
+        <div style="position:relative; width: 20%; float: left; text-align: center;">
             {{saldo}}
         </div>
     </div>
 
-    <div class="row" ng-show="horaIr">
-        <div style="position:relative; width: 80%; float: left;">
+    <div class="row" ng-show="horaIr" style="margin: 0;">
+        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
             Hora de ir
         </div>
         <div style="position:relative; width: 20%; float: left; text-align: center;">
