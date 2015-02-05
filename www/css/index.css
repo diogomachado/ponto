@@ -252,12 +252,16 @@ a.active ~ .bar:before, a.active ~ .bar:after {
 .conf-dias-botoes button{
     width: 100%;
     background: #444;
-    border: 0;
-    margin-bottom: 10px;
-    font-size: 2.2em;
-    color: #797979;
-    line-height: 1.5em;
+    font-size: 1.01em;
+    color: #757575;
     text-transform: uppercase;
+    margin-right: 0;
+    line-height: normal;
+    text-align: left;
+    padding: 6px;
+    border: 1px solid #292929;
+    border-radius: 3px;
+    margin-bottom: 5px;
 }
 
 .conf-dias input{

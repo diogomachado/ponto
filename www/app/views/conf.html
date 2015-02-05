@@ -12,19 +12,20 @@
 	</div>
 </section> -->
 
+<dialtime index="indexSelecionado" horas="horas" minutos="minutos"></dialtime>
+
 <section class="conf-dias">
 	<div class="conf-header">Horas de trabalho</div>
 	
 	<div class="conf-body">
-
 		<div class="conf-dias-botoes">
-			<button>Segunda</button>
-			<button>Terça</button>
-			<button>Quarta</button>
-			<button>Quinta</button>
-			<button>Sexta</button>
-			<button>Sábado</button>
-			<button>Domingo</button>
+			<button type="button" ng-click="conf.configurarDia('segunda')">Segunda</button>
+			<button type="button" ng-click="conf.configurarDia('terca')">Terça</button>
+			<button type="button" ng-click="conf.configurarDia('quarta')">Quarta</button>
+			<button type="button" ng-click="conf.configurarDia('quinta')">Quinta</button>
+			<button type="button" ng-click="conf.configurarDia('sexta')">Sexta</button>
+			<button type="button" ng-click="conf.configurarDia('sabado')">Sábado</button>
+			<button type="button" ng-click="conf.configurarDia('domingo')">Domingo</button>
 		</div>
 	</div>
 

@@ -92,11 +92,16 @@
     }
 
     $rootScope.checkLocal(); // inicializa localStorage
-
-    // Configuração inicial
-    localStorage.setItem("ponto-conf", JSON.stringify(conf));
     
+    // Lê as configurações do soft
     var conf_local = JSON.parse(localStorage["ponto-conf"]);
+    $rootScope.configs = conf_local;
+
+    // Verifica se o sujeito já configurou o software
+    if (conf_local.length === 0){
+      // Configuração inicial
+      localStorage.setItem("ponto-conf", JSON.stringify(conf));
+    }
 
     if (conf_local.default === 0){
       console.log("Usuário ainda não configurou");
