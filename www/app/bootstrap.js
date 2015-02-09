@@ -93,6 +93,8 @@
 
     $rootScope.checkLocal(); // inicializa localStorage
     
+    // Configurações
+    // ------------------------------------------------------
     if (localStorage.getItem("ponto-conf") !== null){
         // Retorna a lista em formato array
         var conf_local = JSON.parse(localStorage["ponto-conf"]);
@@ -108,6 +110,7 @@
     if (conf_local.default === 0){
       console.log("Usuário ainda não configurou");
     }
+    // ------------------------------------------------------
 
   });
 

@@ -100,11 +100,11 @@
 			if ($scope.index == undefined){
 				
 				// Puxa a hora para dentro do array
-				$rootScope.itensLocal[day].push($scope.horas + ":" + $scope.minutos + ":00");
+				$rootScope.itensLocal[day].horas.push($scope.horas + ":" + $scope.minutos + ":00");
 
 			}else{
 
-				$rootScope.itensLocal[day][$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
+				$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
 
 			}
 

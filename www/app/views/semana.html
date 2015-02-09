@@ -1,9 +1,25 @@
 <ul id="checkpoints">
-    <li>22/01 Segunda <span style="float:right;"><span style="color: #00DF00;" class="icon-plus"></span> 00:32</span></li>
-    <li>23/01 Terça <span style="float:right;"><span style="color: red;" class="icon-minus"></span> 00:02</span></li>
-    <li>24/01 Quarta <span style="float:right;"><span style="color: #00DF00;" class="icon-plus"></span> 00:32</span></li>
-    <li>25/01 Quinta <span style="float:right;"><span style="color: #00DF00;" class="icon-plus"></span> 00:32</span></li>
-    <li>26/01 Sexta <span style="float:right;"><span style="color: #00DF00;" class="icon-plus"></span> 00:32</span></li>
-    <li>27/01 Sábado <span style="float:right;"><span style="color: red;" class="icon-minus"></span> 00:52</span></li>
-    <li>28/01 Domingo <span style="float:right;"><span style="color: #00DF00;" class="icon-plus"></span> 00:32</span></li>
+    <li ng-repeat="obj in objsemana"> {{obj.dia}} &nbsp;&nbsp; {{obj.diaNumero}}
+    	<span style="float:right;" ng-show="obj.saldo > 0"><span style="color: #00DF00;" class="icon-plus"></span>&nbsp;&nbsp;{{obj.saldoFmt}}</span>
+        <span style="float:right;" ng-show="obj.saldo < 0"><span style="color: red;" class="icon-minus"></span>&nbsp;&nbsp;{{obj.saldoFmt}}</span>
+    </li>
 </ul>
+
+<footer id="footer"> 
+    <div class="row">
+        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
+            Total executado
+        </div>
+        <div style="position:relative; width: 20%; float: left; text-align: center;">
+            {{totalExecutado}}
+        </div>
+    </div>
+    <div class="row">
+        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
+         	Saldo
+        </div>
+        <div style="position:relative; width: 20%; float: left; text-align: center;">
+            {{saldoTotalFmt}}
+        </div>
+    </div>
+</footer>

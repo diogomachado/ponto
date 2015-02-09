@@ -53,11 +53,19 @@
 			return dd+'/'+mm+'/'+yyyy;
 		}
 
+		function dayNumber(){
+			
+			var today = new Date();
+
+			// Retorna o dia (0 a 6)
+			return today.getDay();
+		}
+
 		today = day();
 		time  = now();
 
 		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados
-		$rootScope.$watchCollection('itensLocal["'+ today + '"]', function(){
+		$rootScope.$watchCollection('itensLocal["'+ today + '"].horas', function(){
 
 			console.log("Atualizando...");
 
@@ -65,36 +73,36 @@
 	      	if (today in $rootScope.itensLocal){
 
 				// Itens para mostrar na view
-	        	$scope.checkpoints = $rootScope.itensLocal[today];
+	        	$scope.checkpoints = $rootScope.itensLocal[today].horas;
 
 	        	// Primeira verificação de horas trabalhadas
 				// -----------------------------------------------------------------------------------------------------
-				if ($rootScope.itensLocal[today][0] !== undefined){
+				if ($rootScope.itensLocal[today].horas[0] !== undefined){
 
-					if ($rootScope.itensLocal[today].length === 1){
+					if ($rootScope.itensLocal[today].horas.length === 1){
 
 						// Reseto as horas trabalhadas porque eu tenho que pensar tb na exclusão
 						$scope.horasTrabalhadas = "00:00";
 
 						// Calcula a diferença de horas
-						diferenca = diferencaHoras($rootScope.itensLocal[today][0].substr(0,5), time.substr(0,5));
+						diferenca = diferencaHoras($rootScope.itensLocal[today].horas[0].substr(0,5), time.substr(0,5));
 						$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
 
 					}else{
 
 						// Faço um loop pelos checkpoints
-						angular.forEach($rootScope.itensLocal[today], function(value, key){
+						angular.forEach($rootScope.itensLocal[today].horas, function(value, key){
 							
 							// verifica se é par
 							if (key % 2 == 0){
 
 								// verifica se existe o proximo elemento
-								if ($rootScope.itensLocal[today][key + 1] !== undefined)
+								if ($rootScope.itensLocal[today].horas[key + 1] !== undefined)
 								{
 									console.log(key);
 
 									// Calcula a diferença de horas
-									diferenca = diferencaHoras($rootScope.itensLocal[today][key].substr(0,5), $rootScope.itensLocal[today][key + 1].substr(0,5));
+									diferenca = diferencaHoras($rootScope.itensLocal[today].horas[key].substr(0,5), $rootScope.itensLocal[today].horas[key + 1].substr(0,5));
 
 									// Se as horas trabalhadas estão zeradas
 									if ($scope.horasTrabalhadas !== "00:00"){
@@ -114,13 +122,12 @@
 
 									}else{
 
-										console.log(diferenca);
-										console.log($scope.horasTrabalhadas);
-										console.log(somaHora($scope.horasTrabalhadas, diferenca));
 										// Soma as horas com a diferença
 										$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
 
 									}
+
+									$rootScope.itensLocal[today].total = $scope.horasTrabalhadas;
 								}
 							}
 						});
@@ -133,12 +140,14 @@
 					$scope.horasTrabalhadas = "00:00";
 					$scope.horaIr = false;
 					$scope.saldoFinal = -9000;
+					$rootScope.itensLocal[today].saldo = 0;
+					$rootScope.itensLocal[today].total = 0;
 
 				}
 				// -----------------------------------------------------------------------------------------------------
 
 	        	// Se tem 4 registros ou mais
-		        if ($rootScope.itensLocal[today].length >= 1)
+		        if ($rootScope.itensLocal[today].horas.length >= 1)
 		        {
 		        	// Aqui eu vejo se o saldo foi positivo ou negativo
 		        	trabalhou = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
@@ -150,13 +159,14 @@
 
 		        // Atualiza o saldo
 	        	$scope.saldo = diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
+	        	$rootScope.itensLocal[today].saldo = $scope.saldoFinal;
 
 	        	// Calculo da hora de ir
-				if ($rootScope.itensLocal[today].length === 3){
+				if ($rootScope.itensLocal[today].horas.length === 3){
 					$scope.horaIr = true;
 
 					// Aqui eu calculo a hora de ir
-					$scope.horasHoraIr = somaHora($scope.saldo, $rootScope.itensLocal[today][2].substr(0,5));
+					$scope.horasHoraIr = somaHora($scope.saldo, $rootScope.itensLocal[today].horas[2].substr(0,5));
 				}else{
 					$scope.horaIr = false;
 				}
@@ -177,29 +187,29 @@
 			if (today in $rootScope.itensLocal){
 
 				// Beleza, adiciona a hora (antes verifico se existe)
-				if ($rootScope.itensLocal[today].indexOf(time) == -1){
+				if ($rootScope.itensLocal[today].horas.indexOf(time) == -1){
 					
-					if ($rootScope.itensLocal[today].length === 0){	
+					if ($rootScope.itensLocal[today].horas.length === 0){	
 
 						// Puxa a hora para dentro do array
-						$rootScope.itensLocal[today].push(time);
+						$rootScope.itensLocal[today].horas.push(time);
 
 					}else{						
 
-						if (!(isHoraInicialMenorHoraFinal(time, $rootScope.itensLocal[today][($rootScope.itensLocal[today].length -1)]))){
+						if (!(isHoraInicialMenorHoraFinal(time, $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)]))){
 							
 							// Puxa a hora para dentro do array
-							$rootScope.itensLocal[today].push(time);
+							$rootScope.itensLocal[today].horas.push(time);
 						}
 					}
 				}
 
 				// Itens para mostrar na view
-				$scope.checkpoints = $rootScope.itensLocal[today];
+				$scope.checkpoints = $rootScope.itensLocal[today].horas;
 
 			}else{
 				// Se não tinha nenhum item, esse é o primeiro registro
-				$rootScope.itensLocal[today] = [time];        
+				$rootScope.itensLocal[today] = {'horas':[time], 'saldo':0, 'total':0};
 			}
 
 			// Salvo as alterações no localStorage
@@ -209,8 +219,8 @@
 	    this.deletar = function(checkpoint){
 
 	    	// Remove do array
-	    	$rootScope.itensLocal[today].splice(checkpoint, 1);
-	    	// delete $rootScope.itensLocal[today][checkpoint];
+	    	$rootScope.itensLocal[today].horas.splice(checkpoint, 1);
+	    	// delete $rootScope.itensLocal[today].horas[checkpoint];
 
 	    	// Re-salvo no local
 	    	localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
@@ -237,8 +247,8 @@
 	    this.editar = function(index){
 
 			// Recolho a hora pegando do index do array do dia de hoje
-			$scope.horas = $rootScope.itensLocal[today][index].substr(0,2);
-			$scope.minutos = $rootScope.itensLocal[today][index].substr(3,2);
+			$scope.horas = $rootScope.itensLocal[today].horas[index].substr(0,2);
+			$scope.minutos = $rootScope.itensLocal[today].horas[index].substr(3,2);
 
 	    	// Scope é passado como modelo para a directiva de tempo (index é a ID do array de horas registradas)
 	    	$scope.indexSelecionado = index;
