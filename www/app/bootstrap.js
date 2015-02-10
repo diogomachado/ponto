@@ -50,7 +50,7 @@
     })
     .otherwise ({ redirectTo: '/' });
   })
-  .run(function($rootScope){
+  .run(function($rootScope, $location){
     
     // Registra o evento menubutton
     document.addEventListener('menubutton', menu, false);
