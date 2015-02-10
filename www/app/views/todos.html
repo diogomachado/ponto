@@ -1,7 +1,7 @@
 <ul id="checkpoints">
     <span ng-repeat="(key, day) in checkpoints">
         <li ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="hour in day.horas">
-            <span class="checkpoint-day">{{key}}</span> {{hour}}
+            <span class="checkpoint-day">{{key}}</span> {{hour.substr(0,5)}}
         </li>
     </span>
 </ul>

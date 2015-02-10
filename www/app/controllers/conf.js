@@ -2,6 +2,9 @@
 	angular.module('appponto').controller('ConfCtrl', function($location, $scope, $rootScope){
 		$rootScope.page = $location.path();
 
+		// Horas marcadas, para exibir no conf
+		$scope.semana = $scope.horas = $rootScope.configs.semana;
+
 		this.configurar = function(index){
 
 			// Recolho a hora pegando do index do array do dia de hoje

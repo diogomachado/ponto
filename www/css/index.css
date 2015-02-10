@@ -118,8 +118,8 @@ body {
 
 #header{
     overflow: hidden;
-    background: #2196F3;
-    box-shadow: 0 2px 8px #292929;
+    background: #3D3D3D;
+    box-shadow: 0 2px 8px #1D1D1D;
 }
 
 #header > nav > ul{
@@ -144,17 +144,17 @@ body {
     padding: 15px 0;
     display: inline-block;
     text-decoration: none;
-    color: #C8EAFF;
+    color: #ABABAB;
 }
 #header > nav > ul > li > a.active{
     border-bottom: 2px #03A9F4 solid;
-    background: #0D47A1;
+    background: #111;
     color: #FFF;
 }
 
 #header > nav > ul > li > a:active{
     border-bottom: 2px #03A9F4 solid;
-    background: #0D47A1;
+    background: #111;
 }
 
 .bar    { position:relative; display:block; width:100%; }
@@ -258,10 +258,21 @@ a.active ~ .bar:before, a.active ~ .bar:after {
     margin-right: 0;
     line-height: normal;
     text-align: left;
-    padding: 6px;
-    border: 1px solid #292929;
-    border-radius: 3px;
-    margin-bottom: 5px;
+    padding: 12px;
+    border: 0;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+.conf-dias-botoes button.ng-click-active{
+  background: #f5e02d;
+}
+
+.conf-dias-botoes button > span{
+  position: relative;
+  float: right;
+  font-weight: bold;
+  color: #C8C8C8;
 }
 
 .conf-dias input{
@@ -430,7 +441,7 @@ input[type=checkbox] {
 
 .menu-box .edit.ng-click-active,
 .menu-box .remove.ng-click-active{
-  background: #c2e2fc;
+  background: #f5e02d;
 }
 
 .menu-box.show{
