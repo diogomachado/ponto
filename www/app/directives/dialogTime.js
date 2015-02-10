@@ -7,6 +7,7 @@
 				index : '=',
 				horas : '=horas',
 				minutos : '=minutos',
+				conf : '@conf',
 			},
 			templateUrl: 'app/views/template/dialogTime.html',
 			controller: 'DialtimeCtrl',

@@ -2,6 +2,7 @@
 	angular.module('appponto').controller('HojeCtrl', function($scope, $rootScope, $location){
 		
 		$rootScope.page = $location.path();
+		$rootScope.checkpoints = [];
 
 		// Inicializando
 		$scope.saldoBase = "08:48"; // Não pode ser mudado, vem das configurações

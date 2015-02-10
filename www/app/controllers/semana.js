@@ -70,13 +70,7 @@
 
 			return dd+'/'+mm+'/'+yyyy;
 		}
-
-		this.calcularSaldo = function(saldo){
-
-			return 100;
-
-		}
-
+		
 		today = day();
 		time  = now();
 
@@ -124,6 +118,17 @@
 					restoMinutos = minutos % 60;
 					minutos = minutos + restoMinutos;
 				}
+
+				totalHora = totalHora + horas;
+				totalMinutos = totalMinutos + minutos;
+
+				if (horas < 9){
+					horas = "0"+horas;
+				}
+
+				if (minutos < 9){
+					minutos = "0"+minutos;
+				}
 				// ---------------------------------
 
 				// Crio objeto com as informações
@@ -134,9 +139,6 @@
 										'saldo': $rootScope.itensLocal[formatar(dt)].saldo,
 										'saldoFmt': horas + ":" + minutos
 									}];
-
-				totalHora = totalHora + horas;
-				totalMinutos = totalMinutos + minutos;
 			}
 
 			// Horas que ficaram nos minutos totais
@@ -145,13 +147,22 @@
 				totalMinutos = totalMinutos % 60;
 			}
 
-
-			$scope.saldoTotalFmt = (totalHora + restoTotalHoras) + ":" + totalMinutos;
-
 			dt.setDate(day + 1); // Seta próxima data
 			n++; // Incrementa
 		}
 		// ----------------------------------------------------------------
+
+		totalHora = totalHora + restoTotalHoras;
+
+		if (totalHora < 9){
+			totalHora = "0"+totalHora;
+		}
+
+		if (totalMinutos < 9){
+			totalMinutos = "0"+totalMinutos;
+		}
+
+		$scope.saldoTotalFmt = totalHora + ":" + totalMinutos;
 
 	});
 })();

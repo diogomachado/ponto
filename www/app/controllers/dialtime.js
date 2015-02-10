@@ -78,41 +78,54 @@
 
 		this.salvar = function(){
 
-			console.log("Salvando");
-
-			// Pega o dia de hoje
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1; //January is 0!
-			var yyyy = today.getFullYear();
-
-			if(dd<10) {
-			  dd='0'+dd
-			} 
-
-			if(mm<10) {
-			  mm='0'+mm
-			} 
-
-			day = dd+'/'+mm+'/'+yyyy;
-
-			// Atualiza com os valores do scopo
-			if ($scope.index == undefined){
+			if ($scope.conf !== undefined){
 				
-				// Puxa a hora para dentro do array
-				$rootScope.itensLocal[day].horas.push($scope.horas + ":" + $scope.minutos + ":00");
+				// Seta
+	    		$rootScope.configs.semana[$scope.index] = $scope.horas + ":" + $scope.minutos; // TESTE
 
-			}else{
+	    		// Grava
+	    		localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));
 
-				$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
+		    	// Retiro a janela de exibir
+				angular.element(document.querySelector('#dialog')).removeClass('show');
+
+			}else{				
+
+				// Pega o dia de hoje
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth()+1; //January is 0!
+				var yyyy = today.getFullYear();
+
+				if(dd<10) {
+				  dd='0'+dd
+				} 
+
+				if(mm<10) {
+				  mm='0'+mm
+				} 
+
+				day = dd+'/'+mm+'/'+yyyy;
+
+				// Atualiza com os valores do scopo
+				if ($scope.index == undefined){
+					
+					// Puxa a hora para dentro do array
+					$rootScope.itensLocal[day].horas.push($scope.horas + ":" + $scope.minutos + ":00");
+
+				}else{
+
+					$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
+
+				}
+
+		    	// Re-salvo no local
+		    	localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
+				
+				// Retiro a janela de exibir
+				angular.element(document.querySelector('#dialog')).removeClass('show');
 
 			}
-
-	    	// Re-salvo no local
-	    	localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
-			
-			// Retiro a janela de exibir
-			angular.element(document.querySelector('#dialog')).removeClass('show');
 		}
 
 	});
