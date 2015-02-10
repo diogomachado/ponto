@@ -4,12 +4,14 @@
 		$rootScope.page = $location.path();
 		$rootScope.checkpoints = [];
 
-		// Inicializando
-		$scope.saldoBase = "08:48"; // Não pode ser mudado, vem das configurações
-		$scope.saldo = "08:48"; // Será decrementado
+		// Inicializando dados
+		// ------------------------------------------------------------------------
+		$scope.saldoBase = $rootScope.configs.semana[dayNumber()]; 
+		$scope.saldo = $rootScope.configs.semana[dayNumber()]; // Será decrementado
 		$scope.horasTrabalhadas = "00:00";
 		$scope.horaIr = false;
 		$scope.saldoFinal = -9000;
+		// ------------------------------------------------------------------------
 
 		// Retorna a hora de agora
 		function now(){
@@ -135,12 +137,16 @@
 					}
 				}else{
 
-					// Reset dos valores
-					$scope.saldoBase = "08:48"; // Não pode ser mudado, vem das configurações
-					$scope.saldo = "08:48"; // Será decrementado
+					// Inicializando dados
+					// ------------------------------------------------------------------------
+					$scope.saldoBase = $rootScope.configs.semana[dayNumber()]; 
+					$scope.saldo = $rootScope.configs.semana[dayNumber()]; // Será decrementado
 					$scope.horasTrabalhadas = "00:00";
 					$scope.horaIr = false;
 					$scope.saldoFinal = -9000;
+					// ------------------------------------------------------------------------
+					
+					// Zera saldo e total do dia
 					$rootScope.itensLocal[today].saldo = 0;
 					$rootScope.itensLocal[today].total = 0;
 

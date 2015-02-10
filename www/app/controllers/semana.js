@@ -3,6 +3,8 @@
 		
 		$rootScope.page = $location.path();
 		$scope.objsemana = {};
+		
+		var saldo = 0;
 		var totalHora = 0;
 		var totalMinutos = 0;
 		var restoTotalHoras = 0;
@@ -108,8 +110,7 @@
 					horas = horas * -1;
 				}
 
-				minutos = saldo%60 * -1;
-
+				minutos = saldo%60;
 				if (minutos < 0){
 					minutos = minutos * -1;
 				}
@@ -139,18 +140,19 @@
 										'saldo': $rootScope.itensLocal[formatar(dt)].saldo,
 										'saldoFmt': horas + ":" + minutos
 									}];
-			}
 
-			// Horas que ficaram nos minutos totais
-			if (totalMinutos > 60){	
-				restoTotalHoras = parseInt(totalMinutos/60);
-				totalMinutos = totalMinutos % 60;
 			}
 
 			dt.setDate(day + 1); // Seta próxima data
 			n++; // Incrementa
 		}
 		// ----------------------------------------------------------------
+		
+		// Horas que ficaram nos minutos totais
+		if (totalMinutos > 60){	
+			restoTotalHoras = parseInt(totalMinutos/60);
+			totalMinutos = totalMinutos % 60;
+		}
 
 		totalHora = totalHora + restoTotalHoras;
 

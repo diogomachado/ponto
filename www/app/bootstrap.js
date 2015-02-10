@@ -73,7 +73,7 @@
 
     // Menu bar
     function menu(){
-      navigator.notification.beep(4);
+      $location.path('/conf');
     }
 
     // Verifica se tem uma lista armazenada offline
