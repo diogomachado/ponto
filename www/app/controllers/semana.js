@@ -106,12 +106,17 @@
 				// Divido para achar as horas
 				// ---------------------------------
 				horas = parseInt(saldo/60);
+				minutos = saldo%60;
 
+				// Calcula o total
+				totalHora = totalHora + horas;
+				totalMinutos = totalMinutos + minutos;
+
+				// Muda sinal caso seja positivo
 				if (horas < 0){
 					horas = horas * -1;
 				}
 
-				minutos = saldo%60;
 				if (minutos < 0){
 					minutos = minutos * -1;
 				}
@@ -120,9 +125,6 @@
 					restoMinutos = minutos % 60;
 					minutos = minutos + restoMinutos;
 				}
-
-				totalHora = totalHora + horas;
-				totalMinutos = totalMinutos + minutos;
 
 				if (horas < 9){
 					horas = "0"+horas;
@@ -160,6 +162,24 @@
 
 		// Soma o total com o resto das horas
 		totalHora = totalHora + restoTotalHoras;
+
+		// Saldo total em int
+		$scope.saldoTotal = (totalHora * 60) + totalMinutos;
+
+		// Muda sinal caso seja positivo
+		if (totalHora < 0){
+			totalHora = totalHora * -1;
+		}
+
+		if (totalMinutos < 0){
+			totalMinutos = totalMinutos * -1;
+		}
+
+		if (totalMinutos >= 60)
+		{
+			totalHora = totalMinutos/60;
+			totalMinutos = totalMinutos % 60;
+		}
 
 		if (totalHora < 9){
 			totalHora = "0"+totalHora;

@@ -19,7 +19,8 @@
          	Saldo
         </div>
         <div style="position:relative; width: 20%; float: left; text-align: center;">
-            {{saldoTotalFmt}}
+            <span style="float:right;" ng-show="saldoTotal > 0"><span style="color: #00DF00;" class="icon-plus"></span>&nbsp;&nbsp;{{saldoTotalFmt}}</span>
+            <span style="float:right;" ng-show="saldoTotal < 0"><span style="color: red;" class="icon-minus"></span>&nbsp;&nbsp;{{saldoTotalFmt}}</span>
         </div>
     </div>
 </footer>
