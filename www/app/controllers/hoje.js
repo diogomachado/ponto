@@ -5,6 +5,9 @@
 		$rootScope.checkpoints = [];
 
 		// Inicializando dados
+		console.log(dayNumber());
+		console.log($rootScope.configs.semana[dayNumber()]);
+
 		// ------------------------------------------------------------------------
 		$scope.saldoBase = $rootScope.configs.semana[dayNumber()]; 
 		$scope.saldo = $rootScope.configs.semana[dayNumber()]; // Será decrementado
@@ -177,6 +180,9 @@
 				}else{
 					$scope.horaIr = false;
 				}
+
+				// Salvo tudo que eu fiz dentro de itensLocal no storage
+				localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
 	        }
 
 		});

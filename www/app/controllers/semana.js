@@ -2,16 +2,15 @@
 	angular.module('appponto').controller('SemanaCtrl', function($location, $scope, $rootScope){
 		
 		$rootScope.page = $location.path();
-		$scope.objsemana = {};
+		$scope.objsemana = [];
 		
-		var saldo = 0;
 		var totalHora = 0;
 		var totalMinutos = 0;
 		var restoTotalHoras = 0;
 		var restoTotalMinutos = 0;
 
 		// Representação escrita de dias
-		dias_semana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+		dias_semana = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 
 		// Retorna a hora de agora
 		function now(){
@@ -88,19 +87,21 @@
 
 		// Agora acho o primeiro dia da semana
 		dt.setDate(day - (dayNumber-1));
-		console.log(formatar(dt));
 
 		n = dayNumber + 1;
 
 		// Agora eu vou percorrer a semana
-		while(n < 6)
+		while(n <= 6)
 		{
 			var day = dt.getDate(); // Atualiza day
 
 			// Verifica se está nos objetos salvos
 			if (formatar(dt) in $rootScope.itensLocal){
 
-				saldo = $rootScope.itensLocal[formatar(dt)].saldo;
+				var saldo = parseInt($rootScope.itensLocal[formatar(dt)].saldo);
+
+				// console.log("O saldo de "+ formatar(dt) + " é " + saldo);
+				console.log("O saldo de "+ formatar(dt) + " é " + $rootScope.itensLocal['11/02/2015'].saldo);
 
 				// Divido para achar as horas
 				// ---------------------------------
@@ -133,18 +134,21 @@
 				// ---------------------------------
 
 				// Crio objeto com as informações
-				$scope.objsemana = [{
-										'dia': formatar(dt).substr(0,5),
-										'diaNumero': dias_semana[dt.getDay()],
-										'totalTrabalhado': $rootScope.itensLocal[formatar(dt)].total,
-										'saldo': $rootScope.itensLocal[formatar(dt)].saldo,
-										'saldoFmt': horas + ":" + minutos
-									}];
+				objsemana = { 	'dia'            : formatar(dt).substr(0,5),
+							 	'diaNumero'      : dias_semana[dt.getDay()],
+								'totalTrabalhado': $rootScope.itensLocal[formatar(dt)].total,
+								'saldo'          : saldo,
+								'saldoFmt'       : horas + ":" + minutos };
+
+				// Adiciono no array
+				$scope.objsemana.push(objsemana);
 
 			}
 
 			dt.setDate(day + 1); // Seta próxima data
 			n++; // Incrementa
+			horas = 0;
+			minutos = 0;
 		}
 		// ----------------------------------------------------------------
 		
@@ -154,6 +158,7 @@
 			totalMinutos = totalMinutos % 60;
 		}
 
+		// Soma o total com o resto das horas
 		totalHora = totalHora + restoTotalHoras;
 
 		if (totalHora < 9){
