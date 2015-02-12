@@ -76,6 +76,22 @@
 			angular.element(document.querySelector('#dialog')).removeClass('show');
 		}
 
+		function atualizarHoras(day){
+
+			// Atualiza com os valores do scopo
+			if ($scope.index == undefined){
+				
+				// Puxa a hora para dentro do array
+				$rootScope.itensLocal[day].horas.push($scope.horas + ":" + $scope.minutos + ":00");
+
+			}else{
+
+				$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
+
+			}
+
+		}
+
 		this.salvar = function(){
 
 			if ($scope.conf !== undefined){
@@ -106,17 +122,32 @@
 				} 
 
 				day = dd+'/'+mm+'/'+yyyy;
+				time = $scope.horas + ":" + $scope.minutos + ":00";
 
-				// Atualiza com os valores do scopo
-				if ($scope.index == undefined){
-					
-					// Puxa a hora para dentro do array
-					$rootScope.itensLocal[day].horas.push($scope.horas + ":" + $scope.minutos + ":00");
+				// Verifica se existe essa data dentro do objeto
+				if (day in $rootScope.itensLocal){
+
+					// Beleza, adiciona a hora (antes verifico se existe)
+					if ($rootScope.itensLocal[day].horas.indexOf(time) == -1){
+						
+						if ($rootScope.itensLocal[day].horas.length === 0){	
+
+							// Puxa a hora para dentro do array
+							atualizarHoras(day);
+
+						}else{						
+
+							if (!(isHoraInicialMenorHoraFinal(time, $rootScope.itensLocal[day].horas[($rootScope.itensLocal[day].horas.length - 1)]))){
+								
+								// Puxa a hora para dentro do array
+								atualizarHoras(day);
+							}
+						}
+					}
 
 				}else{
-
-					$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
-
+					// Se não tinha nenhum item, esse é o primeiro registro
+					$rootScope.itensLocal[day] = {'horas':[time], 'saldo':0, 'total':0};
 				}
 
 		    	// Re-salvo no local
