@@ -176,7 +176,7 @@
 					$scope.horaIr = true;
 
 					// Aqui eu calculo a hora de ir
-					$scope.horasHoraIr = somaHora($scope.saldo, $rootScope.itensLocal[today].horas[2].substr(0,5));
+					$scope.horasHoraIr = somaHora($scope.saldo, $rootScope.itensLocal[today].horas[2].substr(0,5), true);
 				}else{
 					$scope.horaIr = false;
 				}
@@ -316,7 +316,7 @@
 		* Soma duas horas.
 		* Exemplo:  12:35 + 07:20 = 19:55.
 		*/
-		function somaHora(horaInicio, horaSomada) {
+		function somaHora(horaInicio, horaSomada, virarHoras) {
 			
 		    horaIni = horaInicio.split(':');
 		    horaSom = horaSomada.split(':');
@@ -328,6 +328,13 @@
 		        minutosTotal -= 60;
 		        horasTotal += 1;
 		    }
+
+			// virarHoras é apenas para se a soma der mais que 23 horas ele começar a contar do 0 de novo
+			if (virarHoras){
+				if (horasTotal > 24){
+					horasTotal = horasTotal - 24;
+				}
+			}
 			
 		    horaFinal = completaZeroEsquerda(horasTotal) + ":" + completaZeroEsquerda(minutosTotal);
 		    return horaFinal;

@@ -701,3 +701,11 @@ dialtime{
     border-left: 1px #EFEFEF solid;
     border-right: 1px #EFEFEF solid;
 }
+
+.total-intervalo{
+  position: absolute;
+  margin-top: -23px;
+  font-size: 13px;
+  color: #919191;
+  right: 7.5px;
+}
