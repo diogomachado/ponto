@@ -78,6 +78,8 @@
 
 		function atualizarHoras(day){
 
+			console.log("Atualizando horas");
+
 			// Atualiza com os valores do scopo
 			if ($scope.index == undefined){
 				
@@ -85,9 +87,7 @@
 				$rootScope.itensLocal[day].horas.push($scope.horas + ":" + $scope.minutos + ":00");
 
 			}else{
-
 				$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
-
 			}
 
 		}
@@ -106,6 +106,8 @@
 				angular.element(document.querySelector('#dialog')).removeClass('show');
 
 			}else{				
+
+				console.log("Vamos salvar!");
 
 				// Pega o dia de hoje
 				var today = new Date();
@@ -126,23 +128,16 @@
 
 				// Verifica se existe essa data dentro do objeto
 				if (day in $rootScope.itensLocal){
+	
+					if ($rootScope.itensLocal[day].horas.length === 0){	
 
-					// Beleza, adiciona a hora (antes verifico se existe)
-					if ($rootScope.itensLocal[day].horas.indexOf(time) == -1){
-						
-						if ($rootScope.itensLocal[day].horas.length === 0){	
+						// Puxa a hora para dentro do array
+						atualizarHoras(day);
 
-							// Puxa a hora para dentro do array
-							atualizarHoras(day);
+					}else{						
 
-						}else{						
-
-							if (!(isHoraInicialMenorHoraFinal(time, $rootScope.itensLocal[day].horas[($rootScope.itensLocal[day].horas.length - 1)]))){
-								
-								// Puxa a hora para dentro do array
-								atualizarHoras(day);
-							}
-						}
+						// Puxa a hora para dentro do array
+						atualizarHoras(day);
 					}
 
 				}else{
@@ -157,6 +152,27 @@
 				angular.element(document.querySelector('#dialog')).removeClass('show');
 
 			}
+		}
+
+		/**
+		 * Verifica se a hora inicial é menor que a final.
+		 */
+		function isHoraInicialMenorHoraFinal(horaInicial, horaFinal){
+			horaIni = horaInicial.split(':');
+		    horaFim = horaFinal.split(':');
+
+			// Verifica as horas. Se forem diferentes, é só ver se a inicial 
+			// é menor que a final.
+			hIni = parseInt(horaIni[0], 10);
+			hFim = parseInt(horaFim[0], 10);
+			if(hIni != hFim)
+				return hIni < hFim;
+			
+			// Se as horas são iguais, verifica os minutos então.
+		    mIni = parseInt(horaIni[1], 10);
+			mFim = parseInt(horaFim[1], 10);
+			if(mIni != mFim)
+				return mIni < mFim;
 		}
 
 	});

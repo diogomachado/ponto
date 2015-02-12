@@ -165,10 +165,14 @@
 
 		        	// Acho o saldo final
 		        	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
+
+		        	// Atualiza o que já trabalhou
+	        		$rootScope.itensLocal[today].total = trabalhou;
 		        }
 
 		        // Atualiza o saldo
 	        	$scope.saldo = diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
+	        	
 	        	$rootScope.itensLocal[today].saldo = $scope.saldoFinal;
 
 	        	// Calculo da hora de ir
