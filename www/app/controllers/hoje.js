@@ -4,10 +4,6 @@
 		$rootScope.page = $location.path();
 		$rootScope.checkpoints = [];
 
-		// Inicializando dados
-		console.log(dayNumber());
-		console.log($rootScope.configs.semana[dayNumber()]);
-
 		// ------------------------------------------------------------------------
 		$scope.saldoBase = $rootScope.configs.semana[dayNumber()]; 
 		$scope.saldo = $rootScope.configs.semana[dayNumber()]; // Será decrementado
@@ -16,64 +12,18 @@
 		$scope.saldoFinal = -9000;
 		// ------------------------------------------------------------------------
 
-		// Retorna a hora de agora
-		function now(){
-			
+		// Pego dia de hoje e a hora atual
+		today = $rootScope.today;
+		time  = $rootScope.time;
+
+		// Retorna o dia (0 a 6)
+		function dayNumber(){	
 			var today = new Date();
-
-			var H = today.getHours();
-			var i = today.getMinutes();
-			var s = today.getSeconds();
-
-			if(H<10) {
-			  H='0'+H
-			}
-
-			if(i<10) {
-			  i='0'+i
-			}
-
-			if(s<10) {
-			  s='0'+s
-			}
-
-			return H + ':' + i + ':' + s;
-		}
-
-		// Retorna o dia de hoje
-		function day(){
-			
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1; //January is 0!
-			var yyyy = today.getFullYear();
-
-			if(dd<10) {
-			  dd='0'+dd
-			} 
-
-			if(mm<10) {
-			  mm='0'+mm
-			} 
-
-			return dd+'/'+mm+'/'+yyyy;
-		}
-
-		function dayNumber(){
-			
-			var today = new Date();
-
-			// Retorna o dia (0 a 6)
 			return today.getDay();
 		}
 
-		today = day();
-		time  = now();
-
 		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados
 		$rootScope.$watchCollection('itensLocal["'+ today + '"].horas', function(){
-
-			console.log("Atualizando...");
 
 			// Verifica se existe essa data dentro do objeto
 	      	if (today in $rootScope.itensLocal){
@@ -105,16 +55,11 @@
 								// verifica se existe o proximo elemento
 								if ($rootScope.itensLocal[today].horas[key + 1] !== undefined)
 								{
-									console.log(key);
-
 									// Calcula a diferença de horas
 									diferenca = diferencaHoras($rootScope.itensLocal[today].horas[key].substr(0,5), $rootScope.itensLocal[today].horas[key + 1].substr(0,5));
 
 									// Se as horas trabalhadas estão zeradas
 									if ($scope.horasTrabalhadas !== "00:00"){
-
-										console.log(diferenca);
-										console.log($scope.horasTrabalhadas);
 
 										if (key ===0){
 
@@ -193,10 +138,6 @@
 
 		// Definindo métodos globais para serem acessados pelos controllers
 	    this.salvarData = function(){
-
-	    	// atualiza dia e hora
-	      	today = day();
-			time  = now();
 
 			$rootScope.checkLocal();
 

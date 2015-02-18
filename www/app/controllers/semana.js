@@ -4,56 +4,19 @@
 		$rootScope.page = $location.path();
 		$scope.objsemana = [];
 		
+		// Representação escrita de dias
+		dias_semana = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+
+		// Pego dia de hoje e a hora atual
+		today = $rootScope.today;
+		time  = $rootScope.time;
+
+		// Variaveis usadas para contar
 		var totalHora = 0;
 		var totalMinutos = 0;
 		var restoTotalHoras = 0;
 		var restoTotalMinutos = 0;
-
-		// Representação escrita de dias
-		dias_semana = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
-
-		// Retorna a hora de agora
-		function now(){
-			
-			var today = new Date();
-
-			var H = today.getHours();
-			var i = today.getMinutes();
-			var s = today.getSeconds();
-
-			if(H<10) {
-			  H='0'+H
-			}
-
-			if(i<10) {
-			  i='0'+i
-			}
-
-			if(s<10) {
-			  s='0'+s
-			}
-
-			return H + ':' + i + ':' + s;
-		}
-
-		// Retorna o dia de hoje
-		function day(){
-			
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1; //January is 0!
-			var yyyy = today.getFullYear();
-
-			if(dd<10) {
-			  dd='0'+dd
-			} 
-
-			if(mm<10) {
-			  mm='0'+mm
-			}
-
-			return dd+'/'+mm+'/'+yyyy;
-		}
+		var totalExecutado = 0;
 
 		function formatar(day){
 			
@@ -71,9 +34,6 @@
 
 			return dd+'/'+mm+'/'+yyyy;
 		}
-		
-		today = day();
-		time  = now();
 
 		// ----------------------------------------------------------------
 		// Instancio um obj data atual
@@ -99,9 +59,9 @@
 			if (formatar(dt) in $rootScope.itensLocal){
 
 				var saldo = parseInt($rootScope.itensLocal[formatar(dt)].saldo);
+				var total = parseInt($rootScope.itensLocal[formatar(dt)].total);
 
-				// console.log("O saldo de "+ formatar(dt) + " é " + saldo);
-				console.log("O saldo de "+ formatar(dt) + " é " + $rootScope.itensLocal['11/02/2015'].saldo);
+				totalExecutado += total; 
 
 				// Divido para achar as horas
 				// ---------------------------------
@@ -152,6 +112,8 @@
 			horas = 0;
 			minutos = 0;
 		}
+
+		console.log(totalExecutado);
 		// ----------------------------------------------------------------
 		
 		// Horas que ficaram nos minutos totais

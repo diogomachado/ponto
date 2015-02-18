@@ -50,7 +50,7 @@
     })
     .otherwise ({ redirectTo: '/' });
   })
-  .run(function($rootScope, $location){
+  .run(function($rootScope, $location, $interval){
     
     // Registra o evento menubutton
     document.addEventListener('menubutton', menu, false);
@@ -113,6 +113,44 @@
       console.log("Usuário ainda não configurou");
     }
     // ------------------------------------------------------
+
+    $interval(function(){
+      // Retorna a hora de agora      
+      var today = new Date();
+
+      var H = today.getHours();
+      var i = today.getMinutes();
+      var s = today.getSeconds();
+
+      if(H<10) {
+        H='0'+H
+      }
+
+      if(i<10) {
+        i='0'+i
+      }
+
+      if(s<10) {
+        s='0'+s
+      }
+
+      $rootScope.time = H + ':' + i + ':' + s;
+
+      // Retorna o dia de hoje
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if(dd<10) {
+        dd='0'+dd
+      } 
+
+      if(mm<10) {
+        mm='0'+mm
+      }
+
+      $rootScope.today = dd+'/'+mm+'/'+yyyy;
+    }, 1);
 
   });
 

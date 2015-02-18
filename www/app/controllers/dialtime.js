@@ -77,9 +77,7 @@
 		}
 
 		function atualizarHoras(day){
-
-			console.log("Atualizando horas");
-
+			console.log("Atualizando hora!");
 			// Atualiza com os valores do scopo
 			if ($scope.index == undefined){
 				
@@ -97,7 +95,7 @@
 			if ($scope.conf !== undefined){
 				
 				// Seta
-	    		$rootScope.configs.semana[$scope.index] = $scope.horas + ":" + $scope.minutos; // TESTE
+	    		$rootScope.configs.semana[$scope.index] = $scope.horas + ":" + $scope.minutos;
 
 	    		// Grava
 	    		localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));
@@ -107,42 +105,45 @@
 
 			}else{				
 
-				console.log("Vamos salvar!");
-
-				// Pega o dia de hoje
-				var today = new Date();
-				var dd = today.getDate();
-				var mm = today.getMonth()+1; //January is 0!
-				var yyyy = today.getFullYear();
-
-				if(dd<10) {
-				  dd='0'+dd
-				} 
-
-				if(mm<10) {
-				  mm='0'+mm
-				} 
-
-				day = dd+'/'+mm+'/'+yyyy;
-				time = $scope.horas + ":" + $scope.minutos + ":00";
+				today = $rootScope.today;
+				time = $scope.horas + ":" + $scope.minutos;
 
 				// Verifica se existe essa data dentro do objeto
-				if (day in $rootScope.itensLocal){
-	
-					if ($rootScope.itensLocal[day].horas.length === 0){	
+				if (today in $rootScope.itensLocal){
+					
+					// Só deixa salvar se a hora for maior que a ultima
+					if ($rootScope.itensLocal[today].horas.length === 0){	
 
 						// Puxa a hora para dentro do array
-						atualizarHoras(day);
+						atualizarHoras(today);
 
 					}else{						
+						
+						// Se tiver mais que 3 registros
+						if ($rootScope.itensLocal[today].horas.length >= 3){
 
-						// Puxa a hora para dentro do array
-						atualizarHoras(day);
+							// Pego a hora anterior
+							horaAnterior = $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)].substr(0,5);
+
+							console.log(time);
+							console.log(horaAnterior);
+
+							// Verifico se pode cadastrar a hora, se ela não é menor que o ultimo checkin
+							if ( !(isHoraInicialMenorHoraFinal(time, horaAnterior))){
+								// Puxa a hora para dentro do array
+								atualizarHoras(today);
+							}
+
+						}else{
+							
+							// Puxa a hora para dentro do array
+							atualizarHoras(today);
+						}
 					}
 
 				}else{
 					// Se não tinha nenhum item, esse é o primeiro registro
-					$rootScope.itensLocal[day] = {'horas':[time], 'saldo':0, 'total':0};
+					$rootScope.itensLocal[today] = {'horas':[time], 'saldo':0, 'total':0};
 				}
 
 		    	// Re-salvo no local
