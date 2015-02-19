@@ -127,8 +127,13 @@
 					}
 					// ---------------------------------
 
+					diaUrl = formatar(dt);
+					var re = new RegExp('/', 'g');
+					var diaUrl = diaUrl.replace(re, '-');
+
 					// Crio objeto com as informações
 					objsemana = { 	'dia'            : formatar(dt).substr(0,5),
+					                'diaUrl'         : diaUrl,
 								 	'diaNumero'      : dias_semana[dt.getDay()],
 									'totalTrabalhado': $rootScope.itensLocal[formatar(dt)].total,
 									'saldo'          : saldo,
@@ -184,6 +189,13 @@
 
 			$scope.totalExecutado = formatarHora(totalExecutado);
 			$scope.saldoTotalFmt = totalHora + ":" + totalMinutos;
+		}
+
+		this.abrirDia = function(dia){
+
+			$rootScope.nav_primary = false;
+			$rootScope.dia_inner = dia.replace(/-/g, '/');
+			$location.path('/horas/' + dia);
 		}
 
 	});

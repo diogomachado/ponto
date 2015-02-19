@@ -1,0 +1,41 @@
+<dialtime index="indexSelecionado" horas="horas" minutos="minutos" edit="editar"></dialtime>
+
+<ul id="checkpoints">
+    <li on-long-press="hoje.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">  {{checkpoint.substr(0,5)}}
+        <div class="menu-box" id="menu-box-{{$index}}">
+            <button type="button" class="edit" ng-click="hoje.editar($index)"><span class="icon-edit"></span></button>
+            <button type="button" class="remove" ng-click="hoje.deletar($index)"><span class="icon-remove"></span></button>
+        </div>
+    </li>
+</ul>
+
+<footer id="footer"> 
+    <div class="row">
+        <div class="left">
+            Horas trabalhadas
+        </div>
+        <div class="right">
+            {{horasTrabalhadas}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="left">
+            Saldo &nbsp;&nbsp;&nbsp;
+            <span ng-show="saldoFinal > 0" class="icon-saldo-plus icon-plus"></span>
+            <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
+        </div>
+        <div class="right">
+            {{saldo}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="horaIr" style="margin: 0;">
+        <div class="left">
+            Hora de ir
+        </div>
+        <div class="right">
+            {{horasHoraIr}}
+        </div>
+    </div>
+</footer>

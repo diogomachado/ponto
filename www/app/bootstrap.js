@@ -43,6 +43,11 @@
       controller  : 'MesCtrl',
       controllerAs: 'mes'
     })
+    .when('/horas/:dia', {
+      templateUrl : 'app/views/horas.html',
+      controller  : 'HorasCtrl',
+      controllerAs: 'hora'
+    })
     .when('/todos', {
       templateUrl : 'app/views/todos.html',
       controller  : 'TodosCtrl',
@@ -52,6 +57,14 @@
   })
   .run(function($rootScope, $location, $interval){
     
+    // Mostra nav principal
+    $rootScope.nav_primary = true;
+
+    $rootScope.voltar = function(){
+      $rootScope.nav_primary = true;
+      $location.path('/semana');
+    }
+
     // Registra o evento menubutton
     document.addEventListener('menubutton', menu, false);
 
