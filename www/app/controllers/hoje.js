@@ -4,6 +4,8 @@
 		$rootScope.page = $location.path();
 		$rootScope.checkpoints = [];
 
+		$scope.editar = false;
+
 		// ------------------------------------------------------------------------
 		$scope.saldoBase = $rootScope.configs.semana[dayNumber()];
 		$scope.saldo = $rootScope.configs.semana[dayNumber()]; // Será decrementado
@@ -138,8 +140,16 @@
 
 		// Definindo métodos globais para serem acessados pelos controllers
 	    this.salvarData = function(){
-
+	    	
+	    	today = $rootScope.today;
+			time  = $rootScope.time;
+			
 			$rootScope.checkLocal();
+
+			console.log(today);
+			console.log(time);
+			console.log(time.substr(0,5));
+			console.log($rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)].substr(0,5));
 
 			// Verifica se existe essa data dentro do objeto
 			if (today in $rootScope.itensLocal){
@@ -154,7 +164,11 @@
 
 					}else{						
 
-						if (!(isHoraInicialMenorHoraFinal(time, $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)]))){
+						// Variavel de ajuda
+						inicio = time.substr(0,5);
+						fim = $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)].substr(0,5);
+
+						if (!(isHoraInicialMenorHoraFinal(inicio, fim)) && (inicio !== fim)){
 							
 							// Puxa a hora para dentro do array
 							$rootScope.itensLocal[today].horas.push(time);
@@ -181,7 +195,6 @@
 
 	    	// Remove do array
 	    	$rootScope.itensLocal[today].horas.splice(checkpoint, 1);
-	    	// delete $rootScope.itensLocal[today].horas[checkpoint];
 
 	    	// Re-salvo no local
 	    	localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
@@ -189,11 +202,11 @@
 
 	    this.novoCheckpoint = function(index){
 
-	    	var today = new Date();
+	    	var dt = new Date();
 
 	    	// Recolho a hora pegando do index do array do dia de hoje
-			$scope.horas = today.getHours();
-			$scope.minutos = today.getMinutes();
+			$scope.horas = dt.getHours();
+			$scope.minutos = dt.getMinutes();
 
 	    	// Scope é passado como modelo para a directiva de tempo (index é a ID do array de horas registradas)
 	    	$scope.indexSelecionado = index;
@@ -219,6 +232,8 @@
 	    }
 
 	    this.abrirMenu = function(index){
+
+	    	$scope.editar = true;
 
 	    	// Remove todos show
 	    	angular.element(document.querySelectorAll('.menu-box')).removeClass('show');

@@ -1,4 +1,4 @@
-<dialtime index="indexSelecionado" horas="horas" minutos="minutos"></dialtime>
+<dialtime index="indexSelecionado" horas="horas" minutos="minutos" edit="editar"></dialtime>
 
 <ul id="checkpoints">
     <li on-long-press="hoje.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="checkpoint in checkpoints">  {{checkpoint.substr(0,5)}}

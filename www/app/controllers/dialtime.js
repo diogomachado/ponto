@@ -74,6 +74,8 @@
 			
 			// Retiro a janela de exibir
 			angular.element(document.querySelector('#dialog')).removeClass('show');
+
+			$scope.edit = false;
 		}
 
 		function atualizarHoras(day){
@@ -122,11 +124,18 @@
 						// Se tiver mais que 3 registros
 						if ($rootScope.itensLocal[today].horas.length >= 2){
 
-							// Pego a hora anterior
-							horaAnterior = $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)].substr(0,5);
+							// Variavel de ajuda
+							inicio = time.substr(0,5);
+
+							// Se for edição de uma hora, então eu pego o penultimo item, e não o último para comparar
+							if ($scope.edit === true){
+								fim = $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 2)].substr(0,5);
+							}else{
+								fim = $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)].substr(0,5);
+							}
 
 							// Verifico se pode cadastrar a hora, se ela não é menor que o ultimo checkin
-							if ( !(isHoraInicialMenorHoraFinal(time, horaAnterior))){
+							if (!(isHoraInicialMenorHoraFinal(inicio, fim)) && (inicio !== fim)){
 								// Puxa a hora para dentro do array
 								atualizarHoras(today);
 							}else{
