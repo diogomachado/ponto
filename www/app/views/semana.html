@@ -1,5 +1,5 @@
 <ul id="checkpoints">
-    <li ng-repeat="obj in objsemana"> {{obj.dia}} &nbsp;&nbsp; {{obj.diaNumero}}
+    <li ng-repeat="obj in objsemana"> <span class="checkpoint-day">{{obj.dia}}</span> {{obj.diaNumero}}
     	<span style="float:right;" ng-show="obj.saldo > 0"><span style="color: #00DF00;" class="icon-plus"></span>&nbsp;&nbsp;{{obj.saldoFmt}}</span>
         <span style="float:right;" ng-show="obj.saldo < 0"><span style="color: red;" class="icon-minus"></span>&nbsp;&nbsp;{{obj.saldoFmt}}</span>
     </li>
@@ -7,20 +7,22 @@
 
 <footer id="footer"> 
     <div class="row">
-        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
+        <div class="left">
             Total executado
         </div>
-        <div style="position:relative; width: 20%; float: left; text-align: center;">
+        <div class="right">
             {{totalExecutado}}
         </div>
     </div>
     <div class="row">
-        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
+        <div class="left">
          	Saldo
+
+            <span ng-show="saldoTotal > 0" class="icon-saldo-plus icon-plus"></span>
+            <span ng-show="saldoTotal < 0" class="icon-saldo-minus icon-minus"></span>
         </div>
-        <div style="position:relative; width: 20%; float: left; text-align: center;">
-            <span style="float:right;" ng-show="saldoTotal > 0"><span style="color: #00DF00;" class="icon-plus"></span>&nbsp;&nbsp;{{saldoTotalFmt}}</span>
-            <span style="float:right;" ng-show="saldoTotal < 0"><span style="color: red;" class="icon-minus"></span>&nbsp;&nbsp;{{saldoTotalFmt}}</span>
+        <div class="right">
+            {{saldoTotalFmt}}
         </div>
     </div>
 </footer>

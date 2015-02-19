@@ -120,18 +120,17 @@
 					}else{						
 						
 						// Se tiver mais que 3 registros
-						if ($rootScope.itensLocal[today].horas.length >= 3){
+						if ($rootScope.itensLocal[today].horas.length >= 2){
 
 							// Pego a hora anterior
 							horaAnterior = $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)].substr(0,5);
-
-							console.log(time);
-							console.log(horaAnterior);
 
 							// Verifico se pode cadastrar a hora, se ela não é menor que o ultimo checkin
 							if ( !(isHoraInicialMenorHoraFinal(time, horaAnterior))){
 								// Puxa a hora para dentro do array
 								atualizarHoras(today);
+							}else{
+								console.error("Você tentou adicionar uma data menor que o último checkin");
 							}
 
 						}else{

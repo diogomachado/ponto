@@ -71,6 +71,20 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-saldo-minus,
+.icon-saldo-plus{
+  float: right; 
+  margin-right: 11px;
+}
+
+.icon-saldo-minus{
+  color: red;
+}
+
+.icon-saldo-plus{
+  color: #00DF00;
+}
+
 .icon-minus:before {
   content: "\e6012";
 }
@@ -235,6 +249,13 @@ a.active ~ .bar:before, a.active ~ .bar:after {
     margin-bottom: 14px;
     position: relative;
     overflow: hidden;
+}
+#footer .row .left{
+  position:relative; width: 80%; float: left; color: #7B7B7B;
+}
+
+#footer .row .right{
+  position:relative; width: 20%; float: left; text-align: center;
 }
 
 .conf-body{

@@ -158,6 +158,9 @@
 							
 							// Puxa a hora para dentro do array
 							$rootScope.itensLocal[today].horas.push(time);
+							
+						}else{
+							console.error("Você tentou adicionar uma data menor que o último checkin");
 						}
 					}
 				}

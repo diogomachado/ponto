@@ -35,6 +35,36 @@
 			return dd+'/'+mm+'/'+yyyy;
 		}
 
+		function formatarHora(h){
+			
+			horas = parseInt(h/60);
+			minutos = h%60;
+
+			// Muda sinal caso seja positivo
+			if (horas < 0){
+				horas = horas * -1;
+			}
+
+			if (minutos < 0){
+				minutos = minutos * -1;
+			}
+
+			if (minutos > 60){	
+				restoMinutos = minutos % 60;
+				minutos = minutos + restoMinutos;
+			}
+
+			if (horas < 9){
+				horas = "0"+horas;
+			}
+
+			if (minutos < 9){
+				minutos = "0"+minutos;
+			}
+
+			return horas + ":" + minutos;
+		}
+
 		// ----------------------------------------------------------------
 		// Instancio um obj data atual
 		var dt = new Date();
@@ -51,17 +81,18 @@
 		n = dayNumber;
 
 		// Agora eu vou percorrer a semana
-		while(n <= 6)
+		while(n <= 7)
 		{
 			var day = dt.getDate(); // Atualiza day
 
+			console.log(formatar(dt));
 			// Verifica se está nos objetos salvos
 			if (formatar(dt) in $rootScope.itensLocal){
 
 				var saldo = parseInt($rootScope.itensLocal[formatar(dt)].saldo);
 				var total = parseInt($rootScope.itensLocal[formatar(dt)].total);
 
-				totalExecutado += total; 
+				totalExecutado += total;
 
 				// Divido para achar as horas
 				// ---------------------------------
@@ -113,7 +144,6 @@
 			minutos = 0;
 		}
 
-		console.log(totalExecutado);
 		// ----------------------------------------------------------------
 		
 		// Horas que ficaram nos minutos totais
@@ -151,6 +181,7 @@
 			totalMinutos = "0"+totalMinutos;
 		}
 
+		$scope.totalExecutado = formatarHora(totalExecutado);
 		$scope.saldoTotalFmt = totalHora + ":" + totalMinutos;
 
 	});

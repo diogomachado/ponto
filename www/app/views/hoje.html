@@ -15,30 +15,30 @@
 
 <footer id="footer"> 
     <div class="row">
-        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
+        <div class="left">
             Horas trabalhadas
         </div>
-        <div style="position:relative; width: 20%; float: left; text-align: center;">
+        <div class="right">
             {{horasTrabalhadas}}
         </div>
     </div>
 
     <div class="row">
-        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
+        <div class="left">
             Saldo &nbsp;&nbsp;&nbsp;
-            <span ng-show="saldoFinal > 0" style="color: #00DF00; float: right; margin-right: 11px;" class="icon-plus"></span>
-            <span ng-show="saldoFinal < 0" style="color: red; float: right; margin-right: 11px;" class="icon-minus"></span>
+            <span ng-show="saldoFinal > 0" class="icon-saldo-plus icon-plus"></span>
+            <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
         </div>
-        <div style="position:relative; width: 20%; float: left; text-align: center;">
+        <div class="right">
             {{saldo}}
         </div>
     </div>
 
     <div class="row" ng-show="horaIr" style="margin: 0;">
-        <div style="position:relative; width: 80%; float: left; color: #7B7B7B;">
+        <div class="left">
             Hora de ir
         </div>
-        <div style="position:relative; width: 20%; float: left; text-align: center;">
+        <div class="right">
             {{horasHoraIr}}
         </div>
     </div>
