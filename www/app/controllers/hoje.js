@@ -5,11 +5,11 @@
 		$rootScope.checkpoints = [];
 
 		// ------------------------------------------------------------------------
-		$scope.saldoBase = $rootScope.configs.semana[dayNumber()]; 
+		$scope.saldoBase = $rootScope.configs.semana[dayNumber()];
 		$scope.saldo = $rootScope.configs.semana[dayNumber()]; // Será decrementado
 		$scope.horasTrabalhadas = "00:00";
 		$scope.horaIr = false;
-		$scope.saldoFinal = -9000;
+		$scope.saldoFinal = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
 		// ------------------------------------------------------------------------
 
 		// Pego dia de hoje e a hora atual
@@ -91,7 +91,7 @@
 					$scope.saldo = $rootScope.configs.semana[dayNumber()]; // Será decrementado
 					$scope.horasTrabalhadas = "00:00";
 					$scope.horaIr = false;
-					$scope.saldoFinal = -9000;
+					$scope.saldoFinal = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
 					// ------------------------------------------------------------------------
 					
 					// Zera saldo e total do dia
@@ -158,7 +158,7 @@
 							
 							// Puxa a hora para dentro do array
 							$rootScope.itensLocal[today].horas.push(time);
-							
+
 						}else{
 							console.error("Você tentou adicionar uma data menor que o último checkin");
 						}
