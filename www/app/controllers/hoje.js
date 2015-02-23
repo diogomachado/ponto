@@ -216,6 +216,9 @@
 
 	    	// Vibra rapidão
 	    	navigator.vibrate(50);
+
+	    	// Test do alarte notification
+	    	window.plugin.notification.local.add({ sound: 'TYPE_ALARM' });
 	    }
 
 	    this.editar = function(index){
