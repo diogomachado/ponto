@@ -218,7 +218,16 @@
 	    	navigator.vibrate(50);
 
 	    	// Test do alarte notification
-	    	window.plugin.notification.local.add({ sound: 'TYPE_ALARM' });
+	    	var now                  = new Date().getTime(),
+			    _60_seconds_from_now = new Date(now + 60*1000);
+
+			window.plugin.notification.local.add({
+			    id:      1,
+			    title:   'Lembre-se',
+			    message: 'Não se esqueça que você tem que voltar a trabalhar',
+			    repeat:  'weekly',
+			    date:    _60_seconds_from_now
+			});
 	    }
 
 	    this.editar = function(index){
