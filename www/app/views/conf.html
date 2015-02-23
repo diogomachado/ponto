@@ -1,21 +1,26 @@
-<!-- <section>
+<section>
 	<div class="conf-header">Notificações</div>
 	<div class="conf-body">
 
-		<div class="checkbox">
-			Alertar quando for a hora de ir &nbsp;
-			<div class="slideThree">	
-				<input type="checkbox" id="slideThree" name="check" />
-				<label for="slideThree"></label>
-			</div>
-		</div>
+		<ul class="nav-system">
+			<li>
+				<h1>Notificação de saída</h1>
+				<p>Notificar quando completar as horas do dia</p>
+			</li>
+
+			<li>
+				<h1>Notificação intervalo almoço</h1>
+				<p>Defina aqui quantas horas de almoço você tem e vamos te alertar</p>
+			</li>
+		</ul>
+
 	</div>
-</section> -->
+</section>
 
 <dialtime index="indexSelecionado" horas="horas" minutos="minutos" conf="true"></dialtime>
 
 <section class="conf-dias">
-	<div class="conf-header">Horas de trabalho</div>
+	<div class="conf-header">Horas por dia</div>
 	
 	<div class="conf-body">
 		<div class="conf-dias-botoes">
@@ -28,5 +33,4 @@
 			<button type="button" ng-click="conf.configurar(0)">Domingo <span>{{semana.0}}</span></button>
 		</div>
 	</div>
-
 </section>

@@ -124,10 +124,28 @@
 
 	        	// Calculo da hora de ir
 				if ($rootScope.itensLocal[today].horas.length === 3){
+					
+					// Passo a exibir a hora de ir
 					$scope.horaIr = true;
 
 					// Aqui eu calculo a hora de ir
 					$scope.horasHoraIr = somaHora($scope.saldo, $rootScope.itensLocal[today].horas[2].substr(0,5), true);
+
+					// Crio um array com horas e minutos
+					var horas = $scope.horasHoraIr.split(':');
+
+					// Crio um objeto date com as horas de sair
+					var d = new Date();
+					d.setHours(parseInt(horas[0]),parseInt(horas[1]));
+
+					// Agora vamos notificar o cara na hora de ir
+					window.plugin.notification.local.add({
+					    id:      1,
+					    title:   'Hora de ir',
+					    message: 'Seu dia de trabalho se encerrou, você já pode ir!',
+					    date:    d
+					});
+
 				}else{
 					$scope.horaIr = false;
 				}
@@ -145,11 +163,6 @@
 			time  = $rootScope.time;
 			
 			$rootScope.checkLocal();
-
-			console.log(today);
-			console.log(time);
-			console.log(time.substr(0,5));
-			console.log($rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)].substr(0,5));
 
 			// Verifica se existe essa data dentro do objeto
 			if (today in $rootScope.itensLocal){
@@ -218,16 +231,16 @@
 	    	navigator.vibrate(50);
 
 	    	// Test do alarte notification
-	    	var now                  = new Date().getTime(),
-			    _60_seconds_from_now = new Date(now + 60*1000);
+		  //   	var now                  = new Date().getTime(),
+				//     _60_seconds_from_now = new Date(now + 60*1000);
 
-			window.plugin.notification.local.add({
-			    id:      1,
-			    title:   'Lembre-se',
-			    message: 'Não se esqueça que você tem que voltar a trabalhar',
-			    repeat:  'weekly',
-			    date:    _60_seconds_from_now
-			});
+				// window.plugin.notification.local.add({
+				//     id:      1,
+				//     title:   'Lembre-se',
+				//     message: 'Não se esqueça que você tem que voltar a trabalhar',
+				//     repeat:  'weekly',
+				//     date:    _60_seconds_from_now
+				// });
 	    }
 
 	    this.editar = function(index){

@@ -753,3 +753,23 @@ dialtime{
   color: #919191;
   right: 7.5px;
 }
+
+/* Links do sistema - checkbox falso*/
+.nav-system{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.nav-system h1, .nav-system p{
+  margin: 0;
+}
+.nav-system h1{
+  color: #C5C5C5;
+}
+.nav-system p{
+  color: #919191;
+}
+
+.nav-system li{
+  padding: 2.5% 0;
+}
