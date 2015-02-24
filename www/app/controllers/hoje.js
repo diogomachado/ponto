@@ -47,6 +47,37 @@
 						$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
 
 					}else{
+						
+						// Acabou de sair para almoçar
+						if ($rootScope.itensLocal[today].horas.length === 2){
+							
+							// ---------------------------------------------------------------------------
+							// Calculo a hora que tem que voltar do almoço baseado no tempo configurado
+							horaVoltar = somaHora('01:00',$rootScope.itensLocal[today].horas[1]);
+
+							// Crio um array com horas e minutos
+							var arrayHoraVoltar = horaVoltar.split(':');
+
+							// Crio um objeto date
+							var d = new Date();
+
+							// Pego hora e minutos
+							horasVoltar = parseInt(arrayHoraVoltar[0]);
+							minutosVoltar = parseInt(arrayHoraVoltar[1]) - 10; // Pode ser (15, 10, 5) é definido na configuracao
+
+							// Atualizo o objeto
+							d.setHours(horasVoltar,minutosVoltar);
+
+							// Defino um alarme programado para 10 minutos antes de dar aquela hora
+							window.plugin.notification.local.add({
+							    id:      2,
+							    title:   'Bora trabalhar',
+							    message: 'Seu horário de almoço esta terminando',
+							    date:    d,
+							    sound: 'TYPE_ALARM'
+							});
+							// ---------------------------------------------------------------------------
+						}
 
 						// Faço um loop pelos checkpoints
 						angular.forEach($rootScope.itensLocal[today].horas, function(value, key){
@@ -229,9 +260,6 @@
 
 	    	// Vibra rapidão
 	    	navigator.vibrate(50);
-
-	    	// Envia alarma
-	    	window.plugin.notification.local.add({ sound: '/android_asset/www/siren.mp3' });
 	    }
 
 	    this.editar = function(index){
