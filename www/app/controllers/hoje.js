@@ -230,17 +230,8 @@
 	    	// Vibra rapidão
 	    	navigator.vibrate(50);
 
-	    	// Test do alarte notification
-		  //   	var now                  = new Date().getTime(),
-				//     _60_seconds_from_now = new Date(now + 60*1000);
-
-				// window.plugin.notification.local.add({
-				//     id:      1,
-				//     title:   'Lembre-se',
-				//     message: 'Não se esqueça que você tem que voltar a trabalhar',
-				//     repeat:  'weekly',
-				//     date:    _60_seconds_from_now
-				// });
+	    	// Envia alarma
+	    	window.plugin.notification.local.add({ sound: '/www/siren.mp3' });
 	    }
 
 	    this.editar = function(index){
