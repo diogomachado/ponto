@@ -231,7 +231,7 @@
 	    	navigator.vibrate(50);
 
 	    	// Envia alarma
-	    	window.plugin.notification.local.add({ sound: '/www/siren.mp3' });
+	    	window.plugin.notification.local.add({ sound: '/android_asset/www/siren.mp3' });
 	    }
 
 	    this.editar = function(index){
