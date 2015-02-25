@@ -185,7 +185,7 @@
 					// Envio um SMS para mozão
 					// -------------------------------------------------
 					var messageInfo = {
-					    phoneNumber: "+5528992565405",
+					    phoneNumber: "+5528999243865",
 					    textMessage: "Estou liberado hoje as " + $scope.horasHoraIr
 					};
 
