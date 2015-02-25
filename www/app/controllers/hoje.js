@@ -177,6 +177,20 @@
 					    date:    d
 					});
 
+					// Envio um SMS para mozão
+					// -------------------------------------------------
+					var messageInfo = {
+					    phoneNumber: "+5528992565405",
+					    textMessage: "Estou liberado hoje as " + $scope.horasHoraIr
+					};
+
+					sms.sendMessage(messageInfo, function(message) {
+					    console.log("success: " + message);
+					}, function(error) {
+					    console.log("code: " + error.code + ", message: " + error.message);
+					});
+					// -------------------------------------------------
+
 				}else{
 					$scope.horaIr = false;
 				}
