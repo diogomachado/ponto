@@ -165,7 +165,11 @@
 					// Crio um array com horas e minutos
 					var horas = $scope.horasHoraIr.split(':');
 
+
+					// [ATENÇÃO - Preciso fazer de uma forma que envia apenas uma vez]
+
 					// Crio um objeto date com as horas de sair
+					// -------------------------------------------------
 					var d = new Date();
 					d.setHours(parseInt(horas[0]),parseInt(horas[1]));
 
@@ -176,6 +180,7 @@
 					    message: 'Seu dia de trabalho se encerrou, você já pode ir!',
 					    date:    d
 					});
+					// -------------------------------------------------
 
 					// Envio um SMS para mozão
 					// -------------------------------------------------
