@@ -184,16 +184,16 @@
 
 					// Envio um SMS para mozão
 					// -------------------------------------------------
-					var messageInfo = {
-					    phoneNumber: "+5528999243865",
-					    textMessage: "Estou liberado hoje as " + $scope.horasHoraIr
-					};
+					// var messageInfo = {
+					//     phoneNumber: "+5528999243865",
+					//     textMessage: "Estou liberado hoje as " + $scope.horasHoraIr
+					// };
 
-					sms.sendMessage(messageInfo, function(message) {
-					    console.log("success: " + message);
-					}, function(error) {
-					    console.log("code: " + error.code + ", message: " + error.message);
-					});
+					// sms.sendMessage(messageInfo, function(message) {
+					//     console.log("success: " + message);
+					// }, function(error) {
+					//     console.log("code: " + error.code + ", message: " + error.message);
+					// });
 					// -------------------------------------------------
 
 				}else{
