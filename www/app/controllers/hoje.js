@@ -180,21 +180,27 @@
 					// Crio um array com horas e minutos
 					var horas = $scope.horasHoraIr.split(':');
 
-
-					// [ATENÇÃO - Preciso fazer de uma forma que envia apenas uma vez]
-
-					// Crio um objeto date com as horas de sair
+					// Verifico se posso criar uma schedule para avisar saida
 					// -------------------------------------------------
-					// var d = new Date();
-					// d.setHours(parseInt(horas[0]),parseInt(horas[1]));
+					if ($rootScope.itensLocal[today].end == 0){
 
-					// // Agora vamos notificar o cara na hora de ir
-					// window.plugin.notification.local.add({
-					//     id:      1,
-					//     title:   'Hora de ir',
-					//     message: 'Seu dia de trabalho se encerrou, você já pode ir!',
-					//     date:    d
-					// });
+						// Crio um objeto date com as horas de sair
+						var d = new Date();
+						d.setHours(parseInt(horas[0]),parseInt(horas[1]));
+
+						// Agora vamos notificar o cara na hora de ir
+						window.plugin.notification.local.add({
+						    id:      1,
+						    title:   'Hora de ir',
+						    message: 'Seu dia de trabalho se encerrou, você já pode ir!',
+						    date:    d
+						});
+
+						$rootScope.itensLocal[today].end = 1; // Pronto, já agendou, agora chega
+
+						// Salva local
+						localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
+					}
 					// -------------------------------------------------
 
 					// Envio um SMS para mozão
@@ -262,7 +268,7 @@
 
 			}else{
 				// Se não tinha nenhum item, esse é o primeiro registro
-				$rootScope.itensLocal[today] = {'horas':[time], 'saldo':0, 'total':0};
+				$rootScope.itensLocal[today] = {'horas':[time], 'saldo':0, 'total':0, 'end':0, 'sms':0};
 			}
 
 			// Salvo as alterações no localStorage
@@ -400,37 +406,6 @@
 			mFim = parseInt(horaFim[1], 10);
 			if(mIni != mFim)
 				return mIni < mFim;
-		}
-
-		/**
-		 * Verifica se o usuário informou todos os campos da hora (hh:mm).
-		 */
-		function preencheuHoraCompleta( horario ){
-			var hora = horario.replace(/[^0-9:]/g ,''); // deixa só números e o ponto
-			return hora.length == 5;
-		}
-
-		/**
-		 * Verifica se a hora é válidas. Exemplo: 12:34 é válido, 03:89 é inválido.
-		 */
-		function isHoraValida( horario ) {
-			var regex = new RegExp("^([0-1][0-9]|[2][0-3]):([0-5][0-9])$");
-			return regex.exec( horario ) != null;
-		}
-
-		/**
-		 * Verifica se um campo está vazio.
-		 */
-		function possuiValor( valor ){
-			return valor != undefined && valor != '';
-		}
-
-		/**
-		 * Completa um número menor que dez com um zero à esquerda.
-		 * Usado aqui para formatar as horas... Exemplo: 3:10 -> 03:10 , 10:5 -> 10:05
-		 */
-		function completaZeroEsquerda( numero ){
-			return ( numero < 10 ? "0" + numero : numero);
 		}
 	});
 })();
