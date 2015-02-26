@@ -97,7 +97,7 @@
 			if ($scope.conf !== undefined){
 				
 				// Seta
-	    		$rootScope.configs.semana[$scope.index] = $scope.horas + ":" + $scope.minutos;
+	    		$rootScope.configs.week[$scope.index] = $scope.horas + ":" + $scope.minutos;
 
 	    		// Grava
 	    		localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));

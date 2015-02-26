@@ -789,5 +789,12 @@ dialtime{
 }
 
 .nav-system li{
-  padding: 2.5% 0;
+  padding: 3.5%;
+  border-left: 5px #444444 solid;
+  margin-bottom: 12px;
+}
+
+.nav-system li.active{
+ border-left: 5px #00BD00 solid; 
+ transition-duration: 0.75s;
 }

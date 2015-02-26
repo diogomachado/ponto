@@ -7,8 +7,8 @@
 		$scope.editar = false;
 
 		// ------------------------------------------------------------------------
-		$scope.saldoBase = $rootScope.configs.semana[dayNumber()];
-		$scope.saldo = $rootScope.configs.semana[dayNumber()]; // Será decrementado
+		$scope.saldoBase = $rootScope.configs.week[dayNumber()];
+		$scope.saldo = $rootScope.configs.week[dayNumber()]; // Será decrementado
 		$scope.horasTrabalhadas = "00:00";
 		$scope.horaIr = false;
 		$scope.saldoFinal = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
@@ -136,8 +136,8 @@
 
 					// Inicializando dados
 					// ------------------------------------------------------------------------
-					$scope.saldoBase = $rootScope.configs.semana[dayNumber()]; 
-					$scope.saldo = $rootScope.configs.semana[dayNumber()]; // Será decrementado
+					$scope.saldoBase = $rootScope.configs.week[dayNumber()]; 
+					$scope.saldo = $rootScope.configs.week[dayNumber()]; // Será decrementado
 					$scope.horasTrabalhadas = "00:00";
 					$scope.horaIr = false;
 					$scope.saldoFinal = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));

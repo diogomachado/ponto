@@ -72,8 +72,10 @@
     var conf = {
 
       'default'     : 0,
-      'notificacao' : 0,
-      'semana'      : {
+      'end'         : 0,
+      'dinner'      : { 'active':0, 'minutes':0   },
+      'sms'         : { 'active':0, 'number':null },
+      'week'        : {
                         0:'00:00',
                         1:'00:00',
                         2:'00:00',

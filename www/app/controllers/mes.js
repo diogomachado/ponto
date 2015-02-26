@@ -6,6 +6,7 @@
 		
 		// Representação escrita de dias
 		dias_semana = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+		meses       = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
 		// Pego dia de hoje e a hora atual
 		today = $rootScope.today;
@@ -138,7 +139,8 @@
 								 	'diaNumero'      : dias_semana[dt.getDay()],
 									'totalTrabalhado': $rootScope.itensLocal[formatar(dt)].total,
 									'saldo'          : saldo,
-									'saldoFmt'       : horas + ":" + minutos };
+									'saldoFmt'       : horas + ":" + minutos,
+									'mes'            : dt.getMonth() + 1 };
 
 					// Adiciono no array
 					$scope.objsemana.push(objsemana);
