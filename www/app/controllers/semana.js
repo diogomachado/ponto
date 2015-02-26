@@ -88,7 +88,6 @@
 				{
 					var day = dt.getDate(); // Atualiza day
 
-					console.log(formatar(dt));
 					// Verifica se está nos objetos salvos
 					if (formatar(dt) in $rootScope.itensLocal){
 
@@ -175,12 +174,14 @@
 					totalMinutos = totalMinutos * -1;
 				}
 
+				// Se o total de minutos for maior que 60, extraimos as horas
 				if (totalMinutos >= 60)
 				{
-					totalHora = totalMinutos/60;
+					totalHora = totalHora + parseInt(totalMinutos/60);
 					totalMinutos = totalMinutos % 60;
 				}
 
+				// Aqui é apenas para formatação
 				if (totalHora < 9){
 					totalHora = "0"+totalHora;
 				}
@@ -189,6 +190,7 @@
 					totalMinutos = "0"+totalMinutos;
 				}
 
+				// Seta na view
 				$scope.totalExecutado = formatarHora(totalExecutado);
 				$scope.saldoTotalFmt = totalHora + ":" + totalMinutos;
 			}

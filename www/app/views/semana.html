@@ -5,24 +5,27 @@
     </li>
 </ul>
 
-<footer id="footer"> 
-    <div class="row">
-        <div class="left">
-            Total executado
-        </div>
-        <div class="right">
-            {{totalExecutado}}
-        </div>
-    </div>
-    <div class="row">
-        <div class="left">
-         	Saldo
 
-            <span ng-show="saldoTotal > 0" class="icon-saldo-plus icon-plus"></span>
-            <span ng-show="saldoTotal < 0" class="icon-saldo-minus icon-minus"></span>
+<footer id="footer">
+    <div id="footer-wrapper">
+        <div class="row">
+            <div class="left">
+                Total executado
+            </div>
+            <div class="right">
+                {{totalExecutado}}
+            </div>
         </div>
-        <div class="right">
-            {{saldoTotalFmt}}
+        <div class="row">
+            <div class="left">
+             	Saldo
+
+                <span ng-show="saldoTotal > 0" class="icon-saldo-plus icon-plus"></span>
+                <span ng-show="saldoTotal < 0" class="icon-saldo-minus icon-minus"></span>
+            </div>
+            <div class="right">
+                {{saldoTotalFmt}}
+            </div>
         </div>
     </div>
 </footer>
