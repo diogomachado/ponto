@@ -151,7 +151,7 @@
 
 				}else{
 					// Se não tinha nenhum item, esse é o primeiro registro
-					$rootScope.itensLocal[today] = {'horas':[time], 'saldo':0, 'total':0};
+					$rootScope.itensLocal[today] = {'horas':[time], 'saldo':0, 'total':0, 'end':0, 'sms':0};
 				}
 
 		    	// Re-salvo no local
