@@ -259,16 +259,24 @@ a.active ~ .bar:before, a.active ~ .bar:after {
     color: #19bd40;
 }
 
+#footer-wrapper{
+  background: #414141;
+  padding: 10px;
+  -webkit-box-shadow: 0 5px 5px #4F4F4F inset;
+  box-shadow: 0 5px 5px #4F4F4F inset;
+}
+
 #footer{
     position: fixed;
+    width: 100%;
     bottom: 0;
-    padding: 10px;
-    background: #414141;
     width: 100%;
     color: #C9C9C9;
     font-size: 1.4em;
 }
-#footer > .row{
+
+
+#footer .row{
     margin-bottom: 14px;
     position: relative;
     overflow: hidden;
@@ -279,6 +287,10 @@ a.active ~ .bar:before, a.active ~ .bar:after {
 
 #footer .row .right{
   position:relative; width: 20%; float: left; text-align: center;
+}
+
+.minus-margin-row{
+  margin-bottom: 0!important;
 }
 
 .conf-body{
@@ -426,16 +438,19 @@ input[type=checkbox] {
     left: 43px;
 }
 
+#fx-button-wrapper{
+  text-align: right;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
 .fx-button{
-    position: fixed;
-    z-index: 50;
-    bottom: 130px;
-    right: 15px;
+    position: relative;
     border: 0;
     background: #2196F3;
     font-size: 30px;
     line-height: 0.7em;
-    border-radius: 30%;
+    border-radius: 20%;
     color: #FFF;
     padding: 15px 16px;
     outline: none;

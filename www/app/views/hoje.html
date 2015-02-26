@@ -9,37 +9,43 @@
     </li>
 </ul>
 
-<button class="fx-button" type="button" ng-click="hoje.salvarData()" on-long-press="hoje.novoCheckpoint($index)">
-    <span style="margin-top: 100%;">&#43</span>
-</button>
-
 <footer id="footer"> 
-    <div class="row">
-        <div class="left">
-            Horas trabalhadas
+    
+    <div id="fx-button-wrapper">
+        <button class="fx-button" type="button" ng-click="hoje.salvarData()" on-long-press="hoje.novoCheckpoint($index)">
+            <span style="margin-top: 100%;">&#43</span>
+        </button>
+    </div>
+
+    <div id="footer-wrapper">
+        <div class="row">
+            <div class="left">
+                Horas trabalhadas
+            </div>
+            <div class="right">
+                {{horasTrabalhadas}}
+            </div>
         </div>
-        <div class="right">
-            {{horasTrabalhadas}}
+
+        <div class="row" ng-class="{'minus-margin-row': horaIr != true}">
+            <div class="left">
+                Saldo &nbsp;&nbsp;&nbsp;
+                <span ng-show="saldoFinal > 0" class="icon-saldo-plus icon-plus"></span>
+                <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
+            </div>
+            <div class="right">
+                {{saldo}}
+            </div>
+        </div>
+
+        <div class="row" ng-show="horaIr" style="margin: 0;">
+            <div class="left">
+                Hora de ir
+            </div>
+            <div class="right">
+                {{horasHoraIr}}
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="left">
-            Saldo &nbsp;&nbsp;&nbsp;
-            <span ng-show="saldoFinal > 0" class="icon-saldo-plus icon-plus"></span>
-            <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
-        </div>
-        <div class="right">
-            {{saldo}}
-        </div>
-    </div>
-
-    <div class="row" ng-show="horaIr" style="margin: 0;">
-        <div class="left">
-            Hora de ir
-        </div>
-        <div class="right">
-            {{horasHoraIr}}
-        </div>
-    </div>
 </footer>

@@ -39,6 +39,8 @@
 
 					if ($rootScope.itensLocal[today].horas.length === 1){
 
+						console.log("Apenas uma hora");
+
 						// Reseto as horas trabalhadas porque eu tenho que pensar tb na exclusão
 						$scope.horasTrabalhadas = "00:00";
 
@@ -48,10 +50,23 @@
 
 					}else{
 						
+						// Único checkpoint
+						if ($rootScope.itensLocal[today].horas.length === 1){
+
+							// Calcula a diferença de horas com a hora de agora (time)
+							diferenca = diferencaHoras($rootScope.itensLocal[today].horas[0].substr(0,5), time.substr(0,5));
+
+							// Soma as horas com a diferença
+							$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
+
+							$rootScope.itensLocal[today].total = $scope.horasTrabalhadas;
+
+						}
+
 						// Acabou de sair para almoçar
+						// ---------------------------------------------------------------------------
 						if ($rootScope.itensLocal[today].horas.length === 2){
 							
-							// ---------------------------------------------------------------------------
 							// Calculo a hora que tem que voltar do almoço baseado no tempo configurado
 							horaVoltar = somaHora('01:00',$rootScope.itensLocal[today].horas[1]);
 
@@ -69,15 +84,15 @@
 							d.setHours(horasVoltar,minutosVoltar);
 
 							// Defino um alarme programado para 10 minutos antes de dar aquela hora
-							window.plugin.notification.local.add({
-							    id:      2,
-							    title:   'Bora trabalhar',
-							    message: 'Seu horário de almoço esta terminando',
-							    date:    d,
-							    sound: 'TYPE_ALARM'
-							});
-							// ---------------------------------------------------------------------------
+							// window.plugin.notification.local.add({
+							//     id:      2,
+							//     title:   'Bora trabalhar',
+							//     message: 'Seu horário de almoço esta terminando',
+							//     date:    d,
+							//     sound: 'TYPE_ALARM'
+							// });
 						}
+						// ---------------------------------------------------------------------------
 
 						// Faço um loop pelos checkpoints
 						angular.forEach($rootScope.itensLocal[today].horas, function(value, key){
@@ -85,6 +100,7 @@
 							// verifica se é par
 							if (key % 2 == 0){
 
+								console.log(key);
 								// verifica se existe o proximo elemento
 								if ($rootScope.itensLocal[today].horas[key + 1] !== undefined)
 								{
@@ -150,7 +166,6 @@
 
 		        // Atualiza o saldo
 	        	$scope.saldo = diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
-	        	
 	        	$rootScope.itensLocal[today].saldo = $scope.saldoFinal;
 
 	        	// Calculo da hora de ir
@@ -170,16 +185,16 @@
 
 					// Crio um objeto date com as horas de sair
 					// -------------------------------------------------
-					var d = new Date();
-					d.setHours(parseInt(horas[0]),parseInt(horas[1]));
+					// var d = new Date();
+					// d.setHours(parseInt(horas[0]),parseInt(horas[1]));
 
-					// Agora vamos notificar o cara na hora de ir
-					window.plugin.notification.local.add({
-					    id:      1,
-					    title:   'Hora de ir',
-					    message: 'Seu dia de trabalho se encerrou, você já pode ir!',
-					    date:    d
-					});
+					// // Agora vamos notificar o cara na hora de ir
+					// window.plugin.notification.local.add({
+					//     id:      1,
+					//     title:   'Hora de ir',
+					//     message: 'Seu dia de trabalho se encerrou, você já pode ir!',
+					//     date:    d
+					// });
 					// -------------------------------------------------
 
 					// Envio um SMS para mozão
