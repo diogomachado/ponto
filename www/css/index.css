@@ -234,6 +234,17 @@ a.active ~ .bar:before, a.active ~ .bar:after {
     border-bottom: 1px #4d4d4d solid;
     color: #F2F2F2;
 }
+
+#checkpoints li .interval{
+  position: fixed;
+  margin-top: -25px;
+  color: #A5A5A5;
+  font-size: 15px;
+  padding-left: 18px;
+  border-left: 1px #00C5FF dashed;
+  margin-left: 8px;
+}
+
 #checkpoints li:after{
     font-family: 'icomoon';
     speak: none;

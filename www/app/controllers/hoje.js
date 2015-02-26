@@ -177,6 +177,11 @@
 					// Aqui eu calculo a hora de ir
 					$scope.horasHoraIr = somaHora($scope.saldo, $rootScope.itensLocal[today].horas[2].substr(0,5), true);
 
+					// Calculo quanto tempo de almoço
+					$scope.interval = diferencaHoras($rootScope.itensLocal[today].horas[1].substr(0,5),$rootScope.itensLocal[today].horas[2].substr(0,5));
+
+					console.log($scope.interval);
+
 					// Crio um array com horas e minutos
 					var horas = $scope.horasHoraIr.split(':');
 
@@ -407,5 +412,14 @@
 			if(mIni != mFim)
 				return mIni < mFim;
 		}
+
+		/**
+		 * Completa um número menor que dez com um zero à esquerda.
+		 * Usado aqui para formatar as horas... Exemplo: 3:10 -> 03:10 , 10:5 -> 10:05
+		 */
+		function completaZeroEsquerda( numero ){
+			return ( numero < 10 ? "0" + numero : numero);
+		}
+
 	});
 })();
