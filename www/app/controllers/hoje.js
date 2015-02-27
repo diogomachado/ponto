@@ -33,8 +33,7 @@
 				// Itens para mostrar na view
 	        	$scope.checkpoints = $rootScope.itensLocal[today].horas;
 
-	        	// Primeira verificação de horas trabalhadas
-				// -----------------------------------------------------------------------------------------------------
+	        	// Se existir a primeira hora marcada
 				if ($rootScope.itensLocal[today].horas[0] !== undefined){
 
 					if ($rootScope.itensLocal[today].horas.length === 1){
@@ -42,29 +41,20 @@
 						// Reseto as horas trabalhadas porque eu tenho que pensar tb na exclusão
 						$scope.horasTrabalhadas = "00:00";
 
-						// Calcula a diferença de horas
+						// Calcula a diferença de horas com a hora de agora (time)
 						diferenca = diferencaHoras($rootScope.itensLocal[today].horas[0].substr(0,5), time.substr(0,5));
+
+						// Soma as horas com a diferença
 						$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
 
+						$rootScope.itensLocal[today].total = $scope.horasTrabalhadas;
+
+					// Acabou de sair para almoçar
+					// ---------------------------------------------------------------------------
 					}else{
-						
-						// Único checkpoint
-						if ($rootScope.itensLocal[today].horas.length === 1){
 
-							// Calcula a diferença de horas com a hora de agora (time)
-							diferenca = diferencaHoras($rootScope.itensLocal[today].horas[0].substr(0,5), time.substr(0,5));
-
-							// Soma as horas com a diferença
-							$scope.horasTrabalhadas = somaHora($scope.horasTrabalhadas, diferenca);
-
-							$rootScope.itensLocal[today].total = $scope.horasTrabalhadas;
-
-						}
-
-						// Acabou de sair para almoçar
-						// ---------------------------------------------------------------------------
 						if ($rootScope.itensLocal[today].horas.length === 2){
-							
+
 							// Calculo a hora que tem que voltar do almoço baseado no tempo configurado
 							horaVoltar = somaHora('01:00',$rootScope.itensLocal[today].horas[1]);
 
@@ -73,7 +63,7 @@
 
 							// Verifico se posso criar uma schedule para avisar saida
 							// -------------------------------------------------
-							if ($rootScope.itensLocal[today].dinner.active == 0){
+							if ($rootScope.configs.dinner.active == 1 && $rootScope.itensLocal[today].dinner == 0){
 
 								// Crio um objeto date
 								var d = new Date();
@@ -94,34 +84,37 @@
 								    sound: 'TYPE_ALARM'
 								});
 
-								$rootScope.itensLocal[today].dinner.active = 1; // Pronto, já marcou, agora chega
+								$rootScope.itensLocal[today].dinner = 1; // Pronto, já marcou, agora chega
 
 								// Salva local
 								localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
 							}
-							// -------------------------------------------------
 						}
-						
+					
 						// Verifica o intervalo de almoço
-						if ($rootScope.itensLocal[today].horas.length >= 3){
+						// -------------------------------------------------
+						if ($rootScope.itensLocal[today].horas.length > 1){
 							
-							// Calculo quanto tempo de almoço
-							$scope.interval = diferencaHoras($rootScope.itensLocal[today].horas[1].substr(0,5),$rootScope.itensLocal[today].horas[2].substr(0,5));
-						}
+							// // Calculo quanto tempo de almoço
+							// $scope.interval = diferencaHoras($rootScope.itensLocal[today].horas[1].substr(0,5),$rootScope.itensLocal[today].horas[2].substr(0,5));
 
+							// Faço um loop pelos checkpoints
+							angular.forEach($rootScope.itensLocal[today].horas, function(value, key){
+								
+								// verifica se é par
+								if (key % 2 == 0){
+									
+									// verifica se existe o proximo elemento
+									if ($rootScope.itensLocal[today].horas[key + 1] !== undefined)
+									{
+										// Calcula a diferença de horas
+										diferenca = diferencaHoras($rootScope.itensLocal[today].horas[key].substr(0,5), $rootScope.itensLocal[today].horas[key + 1].substr(0,5));
 
-						// Faço um loop pelos checkpoints
-						angular.forEach($rootScope.itensLocal[today].horas, function(value, key){
-							
-							// verifica se é par
-							if (key % 2 == 0){
+									}else{
 
-								console.log(key);
-								// verifica se existe o proximo elemento
-								if ($rootScope.itensLocal[today].horas[key + 1] !== undefined)
-								{
-									// Calcula a diferença de horas
-									diferenca = diferencaHoras($rootScope.itensLocal[today].horas[key].substr(0,5), $rootScope.itensLocal[today].horas[key + 1].substr(0,5));
+										diferenca = diferencaHoras($rootScope.itensLocal[today].horas[key].substr(0,5), time.substr(0,5));
+									
+									}
 
 									// Se as horas trabalhadas estão zeradas
 									if ($scope.horasTrabalhadas !== "00:00"){
@@ -145,8 +138,8 @@
 
 									$rootScope.itensLocal[today].total = $scope.horasTrabalhadas;
 								}
-							}
-						});
+							});
+						}
 					}
 				}else{
 
@@ -297,7 +290,7 @@
 
 			}else{
 				// Se não tinha nenhum item, esse é o primeiro registro
-				$rootScope.itensLocal[today] = {'horas':[time], 'saldo':0, 'total':0, 'end':0, 'sms':0};
+				$rootScope.itensLocal[today] = {'horas':[time], 'saldo':0, 'total':0, 'end':0, 'sms':0, 'dinner':0};
 			}
 
 			// Salvo as alterações no localStorage
