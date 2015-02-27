@@ -39,8 +39,6 @@
 
 					if ($rootScope.itensLocal[today].horas.length === 1){
 
-						console.log("Apenas uma hora");
-
 						// Reseto as horas trabalhadas porque eu tenho que pensar tb na exclusão
 						$scope.horasTrabalhadas = "00:00";
 
@@ -73,26 +71,44 @@
 							// Crio um array com horas e minutos
 							var arrayHoraVoltar = horaVoltar.split(':');
 
-							// Crio um objeto date
-							var d = new Date();
+							// Verifico se posso criar uma schedule para avisar saida
+							// -------------------------------------------------
+							if ($rootScope.itensLocal[today].dinner.active == 0){
 
-							// Pego hora e minutos
-							horasVoltar = parseInt(arrayHoraVoltar[0]);
-							minutosVoltar = parseInt(arrayHoraVoltar[1]) - 10; // Pode ser (15, 10, 5) é definido na configuracao
+								// Crio um objeto date
+								var d = new Date();
 
-							// Atualizo o objeto
-							d.setHours(horasVoltar,minutosVoltar);
+								// Pego hora e minutos
+								horasVoltar = parseInt(arrayHoraVoltar[0]);
+								minutosVoltar = parseInt(arrayHoraVoltar[1]) - 10; // Pode ser (15, 10, 5) é definido na configuracao
 
-							// Defino um alarme programado para 10 minutos antes de dar aquela hora
-							// window.plugin.notification.local.add({
-							//     id:      2,
-							//     title:   'Bora trabalhar',
-							//     message: 'Seu horário de almoço esta terminando',
-							//     date:    d,
-							//     sound: 'TYPE_ALARM'
-							// });
+								// Atualizo o objeto
+								d.setHours(horasVoltar,minutosVoltar);
+
+								// Defino um alarme programado para 10 minutos antes de dar aquela hora
+								window.plugin.notification.local.add({
+								    id:      2,
+								    title:   'Intervalo terminando',
+								    message: 'Horário de almoço termina em ' + $rootScope.itensLocal[today].dinner.minutes + ' minutos',
+								    date:    d,
+								    sound: 'TYPE_ALARM'
+								});
+
+								$rootScope.itensLocal[today].dinner.active = 1; // Pronto, já marcou, agora chega
+
+								// Salva local
+								localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
+							}
+							// -------------------------------------------------
 						}
-						// ---------------------------------------------------------------------------
+						
+						// Verifica o intervalo de almoço
+						if ($rootScope.itensLocal[today].horas.length >= 3){
+							
+							// Calculo quanto tempo de almoço
+							$scope.interval = diferencaHoras($rootScope.itensLocal[today].horas[1].substr(0,5),$rootScope.itensLocal[today].horas[2].substr(0,5));
+						}
+
 
 						// Faço um loop pelos checkpoints
 						angular.forEach($rootScope.itensLocal[today].horas, function(value, key){
@@ -180,8 +196,6 @@
 					// Calculo quanto tempo de almoço
 					$scope.interval = diferencaHoras($rootScope.itensLocal[today].horas[1].substr(0,5),$rootScope.itensLocal[today].horas[2].substr(0,5));
 
-					console.log($scope.interval);
-
 					// Crio um array com horas e minutos
 					var horas = $scope.horasHoraIr.split(':');
 
@@ -208,19 +222,29 @@
 					}
 					// -------------------------------------------------
 
-					// Envio um SMS para mozão
+					// Verifico se já mandei sms
 					// -------------------------------------------------
-					// var messageInfo = {
-					//     phoneNumber: "+5528999243865",
-					//     textMessage: "Estou liberado hoje as " + $scope.horasHoraIr
-					// };
+					if ($rootScope.itensLocal[today].sms == 0){
+						
+						// Prepara mensagem
+						var messageInfo = {
+						    phoneNumber: "+5528999152884",
+						    textMessage: "Estou liberado hoje as " + $scope.horasHoraIr
+						};
 
-					// sms.sendMessage(messageInfo, function(message) {
-					//     console.log("success: " + message);
-					// }, function(error) {
-					//     console.log("code: " + error.code + ", message: " + error.message);
-					// });
-					// -------------------------------------------------
+						// Envio um SMS para mozão
+						sms.sendMessage(messageInfo, function(message) {
+						    console.log("success: " + message);
+						}, function(error) {
+						    console.log("code: " + error.code + ", message: " + error.message);
+						});
+						// -------------------------------------------------
+
+						$rootScope.itensLocal[today].sms = 1; // Pronto, já mandou sms, agora chega
+
+						// Salva local
+						localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
+					}
 
 				}else{
 					$scope.horaIr = false;
