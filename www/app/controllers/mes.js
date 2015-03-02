@@ -84,8 +84,6 @@
 		{
 			var day = dt.getDate(); // Atualiza day
 
-			console.log(formatar(dt));
-
 			// Verifica se está nos objetos salvos
 			if (formatar(dt) in $rootScope.itensLocal){
 
