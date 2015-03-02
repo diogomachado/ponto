@@ -263,7 +263,7 @@
 						inicio = time.substr(0,5);
 						fim = $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)].substr(0,5);
 
-						if (!(isHoraInicialMenorHoraFinal(inicio, fim)) && (inicio !== fim)){
+						if (!(Tool.isHoraInicialMenorHoraFinal(inicio, fim)) && (inicio !== fim)){
 							
 							// Puxa a hora para dentro do array
 							$rootScope.itensLocal[today].horas.push(time);

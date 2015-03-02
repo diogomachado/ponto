@@ -223,6 +223,15 @@ a.active ~ .bar:before, a.active ~ .bar:after {
   width:50%;
 }
 
+.checkpoint-month{
+  padding: 5px;
+  background: #171717;
+  margin-bottom: 5px;
+  border-bottom: 1px #414141 solid;
+  color: #5E5E5E;
+  padding: 5px 0;
+}
+
 .checkpoint-day{
     color: #636363;
     margin-right: 10px;
