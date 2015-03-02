@@ -159,9 +159,9 @@
 				}
 				// -----------------------------------------------------------------------------------------------------
 
-	        	// Se tem 4 registros ou mais
-		        if ($rootScope.itensLocal[today].horas.length >= 1)
-		        {
+	        	// // Se tem 4 registros ou mais
+		        // if ($rootScope.itensLocal[today].horas.length >= 1)
+		        // {
 		        	// Aqui eu vejo se o saldo foi positivo ou negativo
 		        	trabalhou = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
 		        	tinhaTrabalhar = (parseInt($scope.saldoBase.substr(0,2)) * 60) + (parseInt($scope.saldoBase.substr(3,2)));
@@ -171,7 +171,7 @@
 
 		        	// Atualiza o que já trabalhou
 	        		$rootScope.itensLocal[today].total = trabalhou;
-		        }
+		        // }
 
 		        // Atualiza o saldo
 	        	$scope.saldo = diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
