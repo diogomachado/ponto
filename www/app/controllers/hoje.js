@@ -184,7 +184,7 @@
 					$scope.horaIr = true;
 
 					// Aqui eu calculo a hora de ir
-					$scope.horasHoraIr = somaHora($scope.saldo, $rootScope.itensLocal[today].horas[2].substr(0,5), true);
+					$scope.horasHoraIr = somaHora(time.substr(0,5), $scope.saldo, true);
 
 					// Calculo quanto tempo de almoço
 					$scope.interval = diferencaHoras($rootScope.itensLocal[today].horas[1].substr(0,5),$rootScope.itensLocal[today].horas[2].substr(0,5));
