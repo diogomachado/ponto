@@ -6,18 +6,9 @@
 		$scope.semana = $rootScope.configs.week;
 
 		// Verifica se os botões estão ativos
-		if ($rootScope.configs.dinner.active == 1){
-			$scope.active_dinner = true; // Desativa visualmente
-		}else{
-			$scope.active_dinner = false; // Ativa visualmente
-		}
-			
-		if ($rootScope.configs.end == 1){
-			$scope.active_end = true; // Desativa visualmente
-		}else{
-			$scope.active_end = false; // Ativa visualmente
-		}
-
+		($rootScope.configs.dinner.active == 1) ? $scope.active_dinner = true : $scope.active_dinner = false;;
+		($rootScope.configs.end == 1)           ? $scope.active_end    = true : $scope.active_end    = false;
+		($rootScope.configs.sms.active == 1)    ? $scope.active_sms    = true : $scope.active_sms    = false;
 
 		this.configurar = function(index){
 

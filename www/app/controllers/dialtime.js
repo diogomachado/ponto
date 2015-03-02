@@ -1,5 +1,5 @@
 (function() {
-	angular.module('appponto').controller('DialtimeCtrl', function($scope, $rootScope){
+	angular.module('appponto').controller('DialtimeCtrl', function($scope, $rootScope, Tool){
 			
 		$scope.$watch('horas', function(){
 
@@ -135,7 +135,7 @@
 							}
 
 							// Verifico se pode cadastrar a hora, se ela não é menor que o ultimo checkin
-							if (!(isHoraInicialMenorHoraFinal(inicio, fim)) && (inicio !== fim)){
+							if (!(Tool.isHoraInicialMenorHoraFinal(inicio, fim)) && (inicio !== fim)){
 								// Puxa a hora para dentro do array
 								atualizarHoras(today);
 							}else{
@@ -162,27 +162,5 @@
 
 			}
 		}
-
-		/**
-		 * Verifica se a hora inicial é menor que a final.
-		 */
-		function isHoraInicialMenorHoraFinal(horaInicial, horaFinal){
-			horaIni = horaInicial.split(':');
-		    horaFim = horaFinal.split(':');
-
-			// Verifica as horas. Se forem diferentes, é só ver se a inicial 
-			// é menor que a final.
-			hIni = parseInt(horaIni[0], 10);
-			hFim = parseInt(horaFim[0], 10);
-			if(hIni != hFim)
-				return hIni < hFim;
-			
-			// Se as horas são iguais, verifica os minutos então.
-		    mIni = parseInt(horaIni[1], 10);
-			mFim = parseInt(horaFim[1], 10);
-			if(mIni != mFim)
-				return mIni < mFim;
-		}
-
 	});
 })();
