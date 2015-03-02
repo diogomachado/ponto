@@ -12,9 +12,15 @@
     </head>
     <body>
 
-        <header id="header">
-            
-            <nav ng-show="nav_primary">
+        <header id="header" ng-switch on="page">          
+            <nav ng-switch-when="/horas" class="nav-inner">
+                <button ng-click="voltar()" type="button" class="back">
+                    <span class="icon-arrow-left"></span>
+                </button>
+                <h1>{{dia_inner}}</h1>
+            </nav>
+
+            <nav ng-switch-default>
                 <ul>
                     <li>
                         <a ng-class="{'active': page == '/'}" href="#/hoje">Hoje</a>
@@ -37,13 +43,6 @@
                         <span class="bar"></span>
                     </li>
                 </ul>
-            </nav>
-
-            <nav ng-hide="nav_primary" class="nav-inner">
-                <button ng-click="voltar()" type="button" class="back">
-                    <span class="icon-arrow-left"></span>
-                </button>
-                <h1>{{dia_inner}}</h1>
             </nav>
         </header>
 

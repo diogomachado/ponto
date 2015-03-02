@@ -55,13 +55,9 @@
     })
     .otherwise ({ redirectTo: '/' });
   })
-  .run(function($rootScope, $location, $interval){
-    
-    // Mostra nav principal
-    $rootScope.nav_primary = true;
+  .run(function($rootScope, $location, $interval){ 
 
     $rootScope.voltar = function(){
-      $rootScope.nav_primary = true;
       $location.path('/semana');
     }
 

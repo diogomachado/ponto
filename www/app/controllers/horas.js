@@ -1,6 +1,6 @@
 (function() {
 	angular.module('appponto').controller('HorasCtrl', function($location, $scope, $rootScope, $routeParams){
-		$rootScope.page = $location.path();
+		$rootScope.page = '/horas';
 
 		// Transforma dia
 		var dia = $routeParams.dia;

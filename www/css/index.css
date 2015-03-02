@@ -178,14 +178,19 @@ body {
 /* Navegação interna */
 .nav-inner button.back{
   border: 0;
-  background: #1D1D1D;
-  color: #CCC;
+  background: none;
+  color: #848484;
   padding: 13px;
   font-size: 25px;
   line-height: 1em;
   float: left;
   border-right: 1px #000 solid;
+  box-shadow: 1px 0 1px #444;
   margin-right: 5%;
+}
+
+.nav-inner button.back .ng-click-active{
+  background: yellow;
 }
 
 .nav-inner h1{
