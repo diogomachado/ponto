@@ -71,8 +71,19 @@
 		
 		this.sms = function(){
 
-			$scope.active_sms = true;
+			if ($rootScope.configs.sms.active == 1){
+				
+				$rootScope.configs.sms.active = 0; // Desativa
+				$scope.active_sms = false; // Desativa visualmente
+				localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));
 
+			}else{
+
+				$rootScope.configs.sms.active = 1; // Desativa
+				$scope.active_sms = true; // Ativa visualmente
+				localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));
+
+			}
 		}
 	});
 })();
