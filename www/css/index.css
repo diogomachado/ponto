@@ -189,8 +189,8 @@ body {
   margin-right: 5%;
 }
 
-.nav-inner button.back .ng-click-active{
-  background: yellow;
+.nav-inner button.back.ng-click-active{
+  background: #f5e02d;
 }
 
 .nav-inner h1{
