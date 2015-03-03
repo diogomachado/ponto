@@ -38,7 +38,7 @@ body {
     background-color:#333333;
     background-attachment:fixed;
     font-family: 'Roboto-regular', 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:14px;
+    font-size: 14px;
     height:100%;
     margin:0px;
     padding:0px;
@@ -163,6 +163,7 @@ body {
     display: inline-block;
     text-decoration: none;
     color: #ABABAB;
+    font-size: 1em;
 }
 #header > nav > ul > li > a.active{
     border-bottom: 2px #03A9F4 solid;
@@ -223,15 +224,6 @@ a.active ~ .bar:before, a.active ~ .bar:after {
   width:50%;
 }
 
-.checkpoint-month{
-  padding: 5px;
-  background: #171717;
-  margin-bottom: 5px;
-  border-bottom: 1px #414141 solid;
-  color: #5E5E5E;
-  padding: 5px 0;
-}
-
 .checkpoint-day{
     color: #636363;
     margin-right: 10px;
@@ -283,6 +275,16 @@ a.active ~ .bar:before, a.active ~ .bar:after {
     content: "\e600";
     color: #19bd40;
 }
+
+.checkpoint-month{
+  padding: 5px;
+  background: #171717;
+  margin-bottom: 5px;
+  border-bottom: 1px #414141 solid;
+  color: #5E5E5E;
+  padding: 5px 0;
+}
+
 
 #footer-wrapper{
   background: #414141;
@@ -710,6 +712,10 @@ input[type=checkbox] {
   padding: 6px 10px;
   text-transform: uppercase;
 }
+.dialog-view-details .dialog-view-buttons button.ng-click-active{
+  transform: scale(0.95);
+  background: #f5e02d;
+}
 
 .dialog-view-details .dialog-view-buttons button.dialog-button-ok {
   color: #3C78D8;
@@ -823,3 +829,21 @@ dialtime{
  border-left: 5px #00BD00 solid; 
  transition-duration: 0.75s;
 }
+
+/* Iphone 6 */
+@media (max-width : 240px){}
+@media (min-width: 241px) and (max-width : 320px){}
+@media (min-width: 321px) and (max-width : 480px){
+  body{
+    font-size: 17px;
+  }
+}
+@media (min-width: 481px) and (max-width : 768px){}
+@media (min-width: 769px) and (max-width : 1024px){}
+@media (min-width: 511px) and (max-width : 910px){}
+@media (min-width: 993px) and (max-width : 1125px){
+  body{
+    font-size: 20px;
+  }
+}
+@media (min-width: 1200px) and (max-width : 1325px){}
