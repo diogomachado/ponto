@@ -313,7 +313,8 @@ a.active ~ .bar:before, a.active ~ .bar:after {
 }
 
 #footer .row .right{
-  position:relative; width: 20%; float: left; text-align: center;
+  position:relative; width: 20%; float: left; 
+  text-align: right;
 }
 
 .minus-margin-row{

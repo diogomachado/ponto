@@ -87,11 +87,15 @@
 					
 						// Verifica o intervalo de almoço
 						// -------------------------------------------------
-						if ($rootScope.itensLocal[today].horas.length > 1){
+						if ($rootScope.itensLocal[today].horas.length === 3){
 							
 							// Calculo quanto tempo de almoço
 							$scope.interval = Tool.diferencaHoras($rootScope.itensLocal[today].horas[1].substr(0,5),$rootScope.itensLocal[today].horas[2].substr(0,5));
 
+						}
+						
+						if ($rootScope.itensLocal[today].horas.length > 1){
+							
 							// Faço um loop pelos checkpoints
 							angular.forEach($rootScope.itensLocal[today].horas, function(value, key){
 								

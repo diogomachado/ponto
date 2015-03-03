@@ -1,9 +1,10 @@
 <ul id="checkpoints">
-    <span ng-repeat="(key, day) in checkpoints">
-    	<span ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="hour in day.horas">
-	    	<li class="checkpoint-month" ng-show="day.horas[0] === hour">{{todos.mes(key)}}</li>
+    <span ng-repeat="(month, value) in checkpoints">
+
+    	<span ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="hour in value.horas">
+	    	<li class="checkpoint-month"></li>
 	        <li>
-	            <span class="checkpoint-day">{{key}}</span> {{hour.substr(0,5)}}
+	            <span class="checkpoint-day">{{value}}</span> {{hour.substr(0,5)}}
 	        </li>
         </span>
     </span>
