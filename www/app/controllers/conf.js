@@ -29,11 +29,26 @@
 	    // Notificações
 		this.dinner = function(){
 
-			// Exibe o dialog
-	    	angular.element(document.querySelector('#dialog-dinner')).addClass('show');
+			// Verifica se está ativado
+			if ($rootScope.configs.dinner.active == 1){
+
+				// Desativa visualmente
+				$scope.active_dinner = false;
+
+				// Seta como desativado
+				$rootScope.configs.dinner.active = 0;
+
+				// Salva local
+				localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));
+
+			}else{
+
+				// Exibe o dialog
+	    		angular.element(document.querySelector('#dialog-dinner')).addClass('show');
 	    	
-	    	// Vibra rapidão
-	    	navigator.vibrate(50);
+	    		// Vibra rapidão
+	    		navigator.vibrate(50);
+			}
 
 		}
 		
