@@ -1,9 +1,11 @@
-<ul id="checkpoints">
+<ul id="checkpoints-all">
 	<li ng-repeat="(month, value) in checkpoints">
 		<div class="checkpoint-month">{{month}}</div>
 		<ul>
 			<span ng-repeat="day in value track by $index">
-				<li ng-repeat="hour in day.horas">{{day.dia}} {{hour}}</li>
+				<li ng-repeat="hour in day.horas" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}">
+					<span class="checkpoint-day">{{day.dia}}</span> {{hour.substr(0,5)}}
+				</li>
 			</span>
 		</ul>
 	</li>
