@@ -49,8 +49,10 @@
 
 						if ($rootScope.itensLocal[today].horas.length === 2){
 
+							horaVoltarConf = $rootScope.configs.dinner.hour + ':' + $rootScope.configs.dinner.minutes;
+
 							// Calculo a hora que tem que voltar do almoço baseado no tempo configurado
-							horaVoltar = Tool.somaHora('01:00',$rootScope.itensLocal[today].horas[1]);
+							horaVoltar = Tool.somaHora(horaVoltarConf,$rootScope.itensLocal[today].horas[1]);
 
 							// Crio um array com horas e minutos
 							var arrayHoraVoltar = horaVoltar.split(':');
@@ -64,7 +66,7 @@
 
 								// Pego hora e minutos
 								horasVoltar = parseInt(arrayHoraVoltar[0]);
-								minutosVoltar = parseInt(arrayHoraVoltar[1]) - 10; // Pode ser (15, 10, 5) é definido na configuracao
+								minutosVoltar = parseInt(arrayHoraVoltar[1]) - $rootScope.itensLocal[today].dinner.minutesbefore; // Pode ser (15, 10, 5) é definido na configuracao
 
 								// Atualizo o objeto
 								d.setHours(horasVoltar,minutosVoltar);
@@ -73,7 +75,7 @@
 								window.plugin.notification.local.add({
 								    id:      2,
 								    title:   'Intervalo terminando',
-								    message: 'Horário de almoço termina em ' + $rootScope.itensLocal[today].dinner.minutes + ' minutos',
+								    message: 'Horário de almoço termina em ' + $rootScope.configs.dinner.minutesbefore + ' minutos',
 								    date:    d,
 								    sound: 'TYPE_ALARM'
 								});

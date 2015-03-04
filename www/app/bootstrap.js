@@ -69,7 +69,7 @@
 
       'default'     : 0,
       'end'         : 0,
-      'dinner'      : { 'active':0, 'minutes':0   },
+      'dinner'      : { 'active':0, 'hour':0, 'minutes':0, 'minutesbefore':0 },
       'sms'         : { 'active':0, 'number':null },
       'week'        : {
                         0:'00:00',

@@ -796,7 +796,7 @@ dialtime{
 }
 .time-box button{
   width: 100%;
-  padding: 20px;
+  padding: 20px; 
   border: 0;
   margin: 0;
   line-height: 0;
@@ -817,6 +817,40 @@ dialtime{
     padding: 0;
     border-left: 1px #EFEFEF solid;
     border-right: 1px #EFEFEF solid;
+}
+
+.time-box.horizontal{
+    position: relative;
+    width: 100%;
+    float: left;
+}
+.time-box.horizontal button{
+  position: relative;
+  float: left;
+  width: 33.333333333%;
+  padding: 20px 0; 
+  border: 0;
+  margin: 0;
+  line-height: 0;
+  background: #E0E0E0;
+}
+
+.time-box button.ng-click-active{
+  background: #f5e02d;
+  outline: none;
+}
+
+.time-box.horizontal input{
+  position: relative;
+  float: left;
+  width: 33.333333333%;
+  text-align: center;
+  height: 53px;
+  font-size: 2.2em;
+  border: 0;
+  padding: 0;
+  border-top: 1px #EFEFEF solid;
+  border-bottom: 1px #EFEFEF solid;
 }
 
 .total-intervalo{

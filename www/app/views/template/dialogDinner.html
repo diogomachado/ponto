@@ -1,0 +1,37 @@
+<div class="dialog-view-container">
+    <div id="dialog-dinner" class="dialog view">
+      <div class="dialog-view-details">
+        
+        <h3>Tempo almoço</h3>
+        <div class="time-wrapper">
+            <div class="time-box">
+    			<button type="button" ng-click="dinner.aumentarHora()"><span class="icon-plus"></span></button>
+    			<input type="text" ng-model="horas">
+    			<button type="button" ng-click="dinner.diminuirHora()"><span class="icon-minus"></span></button>
+    		</div>
+    		<div class="time-box">
+    			<button type="button" ng-click="dinner.aumentarMinuto()"><span class="icon-plus"></span></button>
+    			<input type="text" ng-model="minutos">
+    			<button type="button" ng-click="dinner.diminuirMinuto()"><span class="icon-minus"></span></button>
+    		</div>
+        </div>
+        <br>
+
+        <h3>Alertar minutos antes acabar</h3>
+        <div class="time-wrapper">
+            <div class="time-box horizontal">
+    			<button type="button" ng-click="dinner.aumentarMinutoAlerta()"><span class="icon-plus"></span></button>
+    			<input type="text" ng-model="minutosAlerta">
+    			<button type="button" ng-click="dinner.diminuirMinutoAlerta()"><span class="icon-minus"></span></button>
+    		</div>
+        </div>
+        <br>
+
+        <div class="dialog-view-buttons text-right">
+            <button type="button" ng-click="dinner.disable()">Desativar</button>
+            <button type="button" ng-click="dinner.close()">Fechar</button>
+            <button type="button" ng-click="dinner.save()" class="dialog-button-ok">Salvar</button>
+        </div>
+      </div>
+    </div>
+</div>
