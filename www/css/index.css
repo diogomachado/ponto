@@ -834,11 +834,7 @@ dialtime{
 /* Iphone 6 */
 @media (max-width : 240px){}
 @media (min-width: 241px) and (max-width : 320px){}
-@media (min-width: 321px) and (max-width : 480px){
-  body{
-    font-size: 17px;
-  }
-}
+@media (min-width: 321px) and (max-width : 480px){}
 @media (min-width: 481px) and (max-width : 768px){}
 @media (min-width: 769px) and (max-width : 1024px){}
 @media (min-width: 511px) and (max-width : 910px){}

@@ -1,11 +1,10 @@
 <ul id="checkpoints">
-    <span ng-repeat="(month, value) in checkpoints">
-
-    	<span ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="hour in value.horas">
-	    	<li class="checkpoint-month"></li>
-	        <li>
-	            <span class="checkpoint-day">{{value}}</span> {{hour.substr(0,5)}}
-	        </li>
-        </span>
-    </span>
+	<li ng-repeat="(month, value) in checkpoints">
+		<div class="checkpoint-month">{{month}}</div>
+		<ul>
+			<span ng-repeat="day in value track by $index">
+				<li ng-repeat="hour in day.horas">{{day.dia}} {{hour}}</li>
+			</span>
+		</ul>
+	</li>
 </ul>
