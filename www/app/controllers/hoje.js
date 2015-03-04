@@ -189,7 +189,7 @@
 
 					// Verifico se posso criar uma schedule para avisar saida
 					// -------------------------------------------------
-					if ($rootScope.itensLocal[today].end == 0){
+					if ($rootScope.itensLocal[today].end == 0 && $rootScope.configs.end == 1){
 
 						// Crio um objeto date com as horas de sair
 						var d = new Date();
@@ -212,11 +212,11 @@
 
 					// Verifico se já mandei sms
 					// -------------------------------------------------
-					if ($rootScope.itensLocal[today].sms == 0){
+					if ($rootScope.itensLocal[today].sms == 0 && $rootScope.configs.sms.active == 1){
 						
 						// Prepara mensagem
 						var messageInfo = {
-						    phoneNumber: "+5528999152884",
+						    phoneNumber: $rootScope.configs.sms.number,
 						    textMessage: "Estou liberado hoje as " + $scope.horasHoraIr
 						};
 
