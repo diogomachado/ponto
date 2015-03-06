@@ -89,7 +89,7 @@
 					
 						// Verifica o intervalo de almoço
 						// -------------------------------------------------
-						if ($rootScope.itensLocal[today].horas.length === 3){
+						if ($rootScope.itensLocal[today].horas.length >= 3){
 							
 							// Calculo quanto tempo de almoço
 							$scope.interval = Tool.diferencaHoras($rootScope.itensLocal[today].horas[1].substr(0,5),$rootScope.itensLocal[today].horas[2].substr(0,5));
