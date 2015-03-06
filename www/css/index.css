@@ -868,44 +868,39 @@ dialtime{
  transition-duration: 0.75s;
 }
 
-
-/* Effect Boris */
-.cbutton--effect-boris::after {
-  background: rgba(111,148,182,0.1);
+/* Novak */
+.cbutton--effect-novak::after {
+  background: rgba(111,148,182,0.25);
 }
 
-.cbutton--effect-boris.ng-click-active::after {
-  -webkit-animation: anim-effect-boris 0.3s forwards;
-  animation: anim-effect-boris 0.3s forwards;
+.cbutton--effect-novak.ng-click-active::after {
+  -webkit-animation: anim-effect-novak 0.5s forwards;
+  animation: anim-effect-novak 0.5s forwards;
 }
 
-@-webkit-keyframes anim-effect-boris {
+@-webkit-keyframes anim-effect-novak {
   0% {
-    -webkit-transform: scale3d(0.3, 0.3, 1);
-    transform: scale3d(0.3, 0.3, 1);
-  }
-  25%, 50% {
     opacity: 1;
+    -webkit-transform: scale3d(0.1, 0.1, 1);
+    transform: scale3d(0.1, 0.1, 1);
   }
-  to {
+  100% {
     opacity: 0;
-    -webkit-transform: scale3d(1.2, 1.2, 1);
-    transform: scale3d(1.2, 1.2, 1);
+    -webkit-transform: scale3d(8, 8, 1);
+    transform: scale3d(8, 8, 1);
   }
 }
 
-@keyframes anim-effect-boris {
+@keyframes anim-effect-novak {
   0% {
-    -webkit-transform: scale3d(0.3, 0.3, 1);
-    transform: scale3d(0.3, 0.3, 1);
-  }
-  25%, 50% {
     opacity: 1;
+    -webkit-transform: scale3d(0.1, 0.1, 1);
+    transform: scale3d(0.1, 0.1, 1);
   }
-  to {
+  100% {
     opacity: 0;
-    -webkit-transform: scale3d(1.2, 1.2, 1);
-    transform: scale3d(1.2, 1.2, 1);
+    -webkit-transform: scale3d(8, 8, 1);
+    transform: scale3d(8, 8, 1);
   }
 }
 
