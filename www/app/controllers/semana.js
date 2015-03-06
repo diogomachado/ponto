@@ -77,7 +77,8 @@
 		// Agora acho o primeiro dia da semana
 		dt.setDate(day - (dayNumber-1));
 
-		n = dayNumber;
+		n = 1;
+		// n = dayNumber;
 
 		// Agora eu vou percorrer a semana
 		while(n <= 7)
