@@ -61,6 +61,10 @@
       $location.path('/semana');
     }
 
+    $rootScope.go = function(url){
+      $location.path('/'+ url);
+    }
+
     // Registra o evento menubutton
     document.addEventListener('menubutton', menu, false);
 
