@@ -904,6 +904,11 @@ dialtime{
   }
 }
 
+.day-disable{
+    color: #5E5E5E!important;
+    background: #3A3A3A!important;
+}
+
 /* Iphone 6 */
 @media (max-width : 240px){}
 @media (min-width: 241px) and (max-width : 320px){}

@@ -51,11 +51,11 @@
 					minutos = minutos + restoMinutos;
 				}
 
-				if (horas < 9){
+				if (horas <= 9){
 					horas = "0"+horas;
 				}
 
-				if (minutos < 9){
+				if (minutos <= 9){
 					minutos = "0"+minutos;
 				}
 
@@ -117,11 +117,11 @@
 						minutos = minutos + restoMinutos;
 					}
 
-					if (horas < 9){
+					if (horas <= 9){
 						horas = "0"+horas;
 					}
 
-					if (minutos < 9){
+					if (minutos <= 9){
 						minutos = "0"+minutos;
 					}
 					// ---------------------------------
@@ -180,11 +180,11 @@
 		}
 
 		// Aqui é apenas para formatação
-		if (totalHora < 9){
+		if (totalHora <= 9){
 			totalHora = "0"+totalHora;
 		}
 
-		if (totalMinutos < 9){
+		if (totalMinutos <= 9){
 			totalMinutos = "0"+totalMinutos;
 		}
 
