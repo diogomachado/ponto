@@ -1,5 +1,5 @@
 (function() {
-	angular.module('appponto').controller('HojeCtrl', function($scope, $rootScope, $location, Tool){
+	angular.module('appponto').controller('HojeCtrl', function($scope, $rootScope, $location, Tool, $interval){
 		
 		$rootScope.page = $location.path();
 		$rootScope.checkpoints = [];
@@ -17,6 +17,14 @@
 		// Pego dia de hoje e a hora atual
 		today = $rootScope.today;
 		time  = $rootScope.time;
+
+
+		// Atualiza a cada 1 minuto
+		// $interval(function(){
+			
+		// 	// Código
+
+		// }, 60000);
 
 		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados
 		$rootScope.$watchCollection('itensLocal["'+ today + '"].horas', function(){
