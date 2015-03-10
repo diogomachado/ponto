@@ -177,20 +177,17 @@
       $rootScope.today = dd+'/'+mm+'/'+yyyy;
     }, 1);
 
-    navigator.globalization.getPreferredLanguage(
-      function (language) {
+    function setLocale(locale){
         
-        if (language.value == "pt-BR"){
+        if (locale.value == "pt-BR"){
           $rootScope.globalization = pt_BR;
         }else{
           $rootScope.globalization = en_US;
         }
 
-      },
-      function () {
-        console.log('Error getting language\n');
       }
-    );
+
+    navigator.globalization.getLocaleName(setLocale(locale), function () {console.log('Error getting language\n');});
 
   });
 
