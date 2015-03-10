@@ -9,6 +9,10 @@
     -webkit-tap-highlight-color: transparent; /* For some Androids */
 }
 
+ a:focus, button:focus, input:focus{
+    outline: 0;
+}
+
 @font-face {
     font-family: 'Roboto-regular';
     src:url('../fonts/Roboto-Regular.ttf') format('truetype');
