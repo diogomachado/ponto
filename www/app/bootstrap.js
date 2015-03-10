@@ -16,6 +16,8 @@
       },
   };
 
+  conf.initialize();
+
   // Inicializa o Angular.js
   angular.module('appponto',['ngRoute', 'ngTouch'])
   .config(function($routeProvider)
@@ -94,6 +96,20 @@
     var pt_BR = {
                   'menu' : ['Today', 'Week', 'Month', 'All']
                 }
+
+    function setLocale(value){
+
+      if (value == "pt-BR"){
+        $rootScope.globalization = pt_BR;
+      }else{
+        $rootScope.globalization = en_US;
+      }
+
+    }
+
+    if (navigator.globalization !== undefined){
+      navigator.globalization.getLocaleName(setLocale(), function () {console.log('Error getting language\n');});
+    }
 
 
     // Menu bar
@@ -176,20 +192,6 @@
 
       $rootScope.today = dd+'/'+mm+'/'+yyyy;
     }, 1);
-
-    $rootScope.globalization = pt_BR;
-
-    function setLocale(value){
-        
-        if (value == "pt-BR"){
-          $rootScope.globalization = pt_BR;
-        }else{
-          $rootScope.globalization = en_US;
-        }
-
-      }
-
-    navigator.globalization.getLocaleName(setLocale(), function () {console.log('Error getting language\n');});
 
   });
 
