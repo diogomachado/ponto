@@ -18,7 +18,6 @@
 		$interval(function(){
 			calcular();
 			atualiza_saldo();
-			console.log("Verifica");
 		}, 15000);
 
 		function calcular(){
@@ -76,12 +75,8 @@
         	trabalhou = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
         	tinhaTrabalhar = (parseInt($scope.saldoBase.substr(0,2)) * 60) + (parseInt($scope.saldoBase.substr(3,2)));
 
-        	console.log(trabalhou);
-        	console.log(tinhaTrabalhar);
-
         	// Acho o saldo final
         	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
-        	console.log($scope.saldoFinal);
 
         	// Atualiza o que já trabalhou
     		$rootScope.itensLocal[$rootScope.today].total = trabalhou;
@@ -271,7 +266,7 @@
 							$rootScope.itensLocal[$rootScope.today].horas.push($rootScope.time);
 
 						}else{
-							console.error("Você tentou adicionar uma data menor que o último checkin");
+							alert("Você tentou adicionar uma data menor que o último checkin");
 						}
 					}
 				}
