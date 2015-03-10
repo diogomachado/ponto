@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="appponto">
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -23,16 +23,16 @@
             <nav ng-switch-default>
                 <ul>
                     <li>
-                        <a ng-class="{'active': page == '/'}" ng-click="go('hoje')">Hoje</a>
+                        <a ng-class="{'active': page == '/'}" ng-click="go('hoje')">{{globalization.menu[0]}}</a>
                     </li>
                     <li>
-                        <a ng-class="{'active': page == '/semana'}"  ng-click="go('semana')">Semana</a>
+                        <a ng-class="{'active': page == '/semana'}"  ng-click="go('semana')">{{globalization.menu[1]}}</a>
                     </li>
                     <li>
-                        <a ng-class="{'active': page == '/mes'}" ng-click="go('mes')">Mês</a>
+                        <a ng-class="{'active': page == '/mes'}" ng-click="go('mes')">{{globalization.menu[2]}}</a>
                     </li>
                     <li>
-                        <a ng-class="{'active': page == '/todos'}" ng-click="go('todos')">Todos</a>
+                        <a ng-class="{'active': page == '/todos'}" ng-click="go('todos')">{{globalization.menu[3]}}</a>
                     </li>
                     <li class="conf">
                         <a ng-class="{'active': page == '/conf'}" ng-click="go('conf')"><span class="icon-conf"></span></a>

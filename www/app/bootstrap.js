@@ -1,8 +1,20 @@
-// (function() {
+(function() {
   
-  document.addEventListener('deviceready', function onDeviceReady() {
-    angular.bootstrap(document, ['appponto']);
-  }, false);
+  // Inicializa phonegap.js
+  var conf = {
+
+      initialize: function() {
+          this.bindEvents();
+      },
+      bindEvents: function() {
+          document.addEventListener('deviceready', this.onDeviceReady, false);
+      },
+      
+      onDeviceReady: function() {
+        console.log('Phonegap inicializado!');
+        navigator.notification.beep(2);
+      },
+  };
 
   // Inicializa o Angular.js
   angular.module('appponto',['ngRoute', 'ngTouch'])
@@ -80,7 +92,7 @@
                 }
 
     var pt_BR = {
-                  'menu' : ['Today', 'Week', 'Month', 'All']
+                  'menu' : ['Hoje', 'Semana', 'Mês', 'Todos']
                 }
 
 
@@ -165,6 +177,12 @@
       $rootScope.today = dd+'/'+mm+'/'+yyyy;
     }, 1);
 
+    if (navigator.language == "pt-BR"){
+      $rootScope.globalization = pt_BR;
+    }else{
+      $rootScope.globalization = en_US;
+    }
+
   });
 
-// })();
+})();
