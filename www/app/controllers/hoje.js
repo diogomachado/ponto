@@ -14,7 +14,7 @@
 
 		var inicio, fim, diferenca, horaVoltarConf, horas, horaVoltar, horasVoltar, minutosVoltar, trabalhou, tinhaTrabalhar, arrayHoraVoltar;
 
-		alert(navigator.globalization);
+		// alert(navigator.globalization);
 
 		// Atualiza a cada 15 segundos
 		$interval(function(){

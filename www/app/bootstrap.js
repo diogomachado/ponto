@@ -1,20 +1,8 @@
-(function() {
+// (function() {
   
-  // Inicializa phonegap.js
-  var conf = {
-
-      initialize: function() {
-          this.bindEvents();
-      },
-      bindEvents: function() {
-          document.addEventListener('deviceready', this.onDeviceReady, false);
-      },
-      
-      onDeviceReady: function() {
-        console.log('Phonegap inicializado!');
-        navigator.notification.beep(2);
-      },
-  };
+  document.addEventListener('deviceready', function onDeviceReady() {
+    angular.bootstrap(document, ['appponto']);
+  }, false);
 
   // Inicializa o Angular.js
   angular.module('appponto',['ngRoute', 'ngTouch'])
@@ -179,4 +167,4 @@
 
   });
 
-})();
+// })();
