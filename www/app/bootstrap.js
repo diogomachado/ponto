@@ -86,6 +86,16 @@
                       },
     }
 
+    // Linguagens
+    var en_US = {
+                  'menu' : ['Today', 'Week', 'Month', 'All']
+                }
+
+    var pt_BR = {
+                  'menu' : ['Today', 'Week', 'Month', 'All']
+                }
+
+
     // Menu bar
     function menu(){
       $location.path('/conf');
@@ -166,6 +176,21 @@
 
       $rootScope.today = dd+'/'+mm+'/'+yyyy;
     }, 1);
+
+    navigator.globalization.getPreferredLanguage(
+      function (language) {
+        
+        if (language.value == "pt-BR"){
+          $rootScope.globalization = pt_BR;
+        }else{
+          $rootScope.globalization = en_US;
+        }
+
+      },
+      function () {
+        console.log('Error getting language\n');
+      }
+    );
 
   });
 
