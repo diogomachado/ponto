@@ -3,10 +3,6 @@
 		
 		$rootScope.page = $location.path();
 		$scope.objsemana = [];
-		
-		// Representação escrita de dias
-		dias_semana = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
-		meses       = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
 		// Pego dia de hoje e a hora atual
 		today = $rootScope.today;
@@ -134,7 +130,7 @@
 					// Crio objeto com as informações
 					objsemana = { 	'dia'            : formatar(dt).substr(0,5),
 					                'diaUrl'         : diaUrl,
-								 	'diaNumero'      : dias_semana[dt.getDay()],
+								 	'diaNumero'      : $rootScope.globalization.dias[dt.getDay()],
 									'totalTrabalhado': $rootScope.itensLocal[formatar(dt)].total,
 									'saldo'          : saldo,
 									'saldoFmt'       : horas + ":" + minutos,

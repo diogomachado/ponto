@@ -26,17 +26,17 @@
 <dinner></dinner>
 
 <section class="conf-dias">
-	<div class="conf-header">Horas por dia</div>
+	<div class="conf-header">{{globalization.conf[0]}}</div>
 	
 	<div class="conf-body">
 		<div class="conf-dias-botoes">
-			<button ng-class="{'day-disable': semana.1 == '00:00'}" type="button" ng-click="conf.configurar(1)">Segunda <span>{{semana.1}}</span></button>
-			<button ng-class="{'day-disable': semana.2 == '00:00'}" type="button" ng-click="conf.configurar(2)">Terça <span>{{semana.2}}</span></button>
-			<button ng-class="{'day-disable': semana.3 == '00:00'}" type="button" ng-click="conf.configurar(3)">Quarta <span>{{semana.3}}</span></button>
-			<button ng-class="{'day-disable': semana.4 == '00:00'}" type="button" ng-click="conf.configurar(4)">Quinta <span>{{semana.4}}</span></button>
-			<button ng-class="{'day-disable': semana.5 == '00:00'}" type="button" ng-click="conf.configurar(5)">Sexta <span>{{semana.5}}</span></button>
-			<button ng-class="{'day-disable': semana.6 == '00:00'}" type="button" ng-click="conf.configurar(6)">Sábado <span>{{semana.6}}</span></button>
-			<button ng-class="{'day-disable': semana.0 == '00:00'}" type="button" ng-click="conf.configurar(0)">Domingo <span>{{semana.0}}</span></button>
+			<button ng-class="{'day-disable': semana.1 == '00:00'}" type="button" ng-click="conf.configurar(1)">{{globalization.dias[0]}} <span>{{semana.1}}</span></button>
+			<button ng-class="{'day-disable': semana.2 == '00:00'}" type="button" ng-click="conf.configurar(2)">{{globalization.dias[1]}} <span>{{semana.2}}</span></button>
+			<button ng-class="{'day-disable': semana.3 == '00:00'}" type="button" ng-click="conf.configurar(3)">{{globalization.dias[2]}} <span>{{semana.3}}</span></button>
+			<button ng-class="{'day-disable': semana.4 == '00:00'}" type="button" ng-click="conf.configurar(4)">{{globalization.dias[3]}} <span>{{semana.4}}</span></button>
+			<button ng-class="{'day-disable': semana.5 == '00:00'}" type="button" ng-click="conf.configurar(5)">{{globalization.dias[4]}} <span>{{semana.5}}</span></button>
+			<button ng-class="{'day-disable': semana.6 == '00:00'}" type="button" ng-click="conf.configurar(6)">{{globalization.dias[5]}} <span>{{semana.6}}</span></button>
+			<button ng-class="{'day-disable': semana.0 == '00:00'}" type="button" ng-click="conf.configurar(0)">{{globalization.dias[6]}} <span>{{semana.0}}</span></button>
 		</div>
 	</div>
 </section>

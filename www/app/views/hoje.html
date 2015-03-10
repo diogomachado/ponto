@@ -22,7 +22,7 @@
     <div id="footer-wrapper">
         <div class="row">
             <div class="left">
-                Horas trabalhadas
+                {{globalization.rodape[0]}}
             </div>
             <div class="right">
                 {{horasTrabalhadas}}
@@ -31,7 +31,7 @@
 
         <div class="row" ng-class="{'minus-margin-row': horaIr != true}">
             <div class="left">
-                Saldo &nbsp;&nbsp;&nbsp;
+                {{globalization.rodape[1]}} &nbsp;&nbsp;&nbsp;
                 <span ng-show="saldoFinal > 0" class="icon-saldo-plus icon-plus"></span>
                 <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
             </div>
@@ -42,7 +42,7 @@
 
         <div class="row" ng-show="horaIr" style="margin: 0;">
             <div class="left">
-                Hora de ir
+                {{globalization.rodape[2]}}
             </div>
             <div class="right">
                 {{horasHoraIr}}

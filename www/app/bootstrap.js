@@ -88,11 +88,23 @@
 
     // Linguagens
     var en_US = {
-                  'menu' : ['Today', 'Week', 'Month', 'All']
+                  'dias'   : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                  'meses'  : ['January', 'February', 'March', 'April', 'may', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                  'menu'   : ['Today', 'Week', 'Month', 'All'],
+                  'rodape' : ['Hours worked', 'Balance', 'Time to go'],
+                  'conf'   : ['Hour'],
+                  'titulo_box' : 'Select a time',
+                  'acoes'  : ['Close', 'Save']
                 }
 
     var pt_BR = {
-                  'menu' : ['Hoje', 'Semana', 'Mês', 'Todos']
+                  'dias'   : ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+                  'meses'  : ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                  'menu'   : ['Hoje', 'Semana', 'Mês', 'Todos'],
+                  'rodape' : ['Horas trabalhadas', 'Saldo', 'Hora de ir'],
+                  'conf'   : ['Horas por dia'],
+                  'titulo_box' : 'Selecione um horário',
+                  'acoes'  : ['Fechar', 'Salvar']
                 }
 
 

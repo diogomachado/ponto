@@ -1,6 +1,8 @@
 (function() {
 	angular.module('appponto').controller('DialtimeCtrl', function($scope, $rootScope, Tool){
 			
+		$scope.globalization = $rootScope.globalization;
+
 		$scope.$watch('horas', function(){
 
 			// A hora chega aqui como string, então transformo ela em int antes de trabalhar

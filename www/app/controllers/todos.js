@@ -4,7 +4,7 @@
 		$scope.checkpoints = {};
 
 		// Variavel apenas de apoio
-		var meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+		meses = $rootScope.globalization.meses;
 
 		// Faz um loop
 		angular.forEach($rootScope.itensLocal, function(value, key){
