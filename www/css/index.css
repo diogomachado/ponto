@@ -16,6 +16,20 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'RobotoCondensed-Light';
+    src:url('../fonts/RobotoCondensed-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src:url('../fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
@@ -201,6 +215,7 @@ body {
     padding: 0;
     list-style: none;
     font-size: 17px;
+    font-family: "RobotoCondensed-Light";
 }
 
 #checkpoints-all li ul li.checkpoint-month{
@@ -274,6 +289,7 @@ body {
     width: 100%;
     color: #C9C9C9;
     font-size: 1.4em;
+    font-family: "RobotoCondensed-Light";
 }
 
 
@@ -784,10 +800,14 @@ dialtime{
     text-align: center;
     height: 45px;
     font-size: 2.2em;
+    font-family: "Roboto-Bold";
     border: 0;
     padding: 0;
     border-left: 1px #EFEFEF solid;
     border-right: 1px #EFEFEF solid;
+    color: #000;
+    background: #F9F9F9;
+    box-shadow: 0 0 7px #ECECEC inset;
 }
 
 .time-box.horizontal{
