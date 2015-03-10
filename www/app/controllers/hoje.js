@@ -1,6 +1,6 @@
 (function() {
 	angular.module('appponto').controller('HojeCtrl', function($scope, $rootScope, $location, Tool, $interval){
-		
+
 		$rootScope.page = $location.path();
 		
 		$rootScope.checkpoints = [];
@@ -13,6 +13,8 @@
 		$scope.saldoFinal       = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
 
 		var inicio, fim, diferenca, horaVoltarConf, horas, horaVoltar, horasVoltar, minutosVoltar, trabalhou, tinhaTrabalhar, arrayHoraVoltar;
+
+		alert(navigator.globalization);
 
 		// Atualiza a cada 15 segundos
 		$interval(function(){

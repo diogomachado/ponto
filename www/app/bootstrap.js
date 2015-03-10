@@ -95,17 +95,6 @@
                   'menu' : ['Today', 'Week', 'Month', 'All']
                 }
 
-    function setLocale(value){
-
-      if (value == "pt-BR"){
-        $rootScope.globalization = pt_BR;
-      }else{
-        $rootScope.globalization = en_US;
-      }
-
-    }
-    
-    navigator.globalization.getLocaleName(setLocale(value), function () {console.log('Error getting language\n');});
 
     // Menu bar
     function menu(){
