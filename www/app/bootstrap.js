@@ -177,9 +177,11 @@
       $rootScope.today = dd+'/'+mm+'/'+yyyy;
     }, 1);
 
-    function setLocale(locale){
+    $rootScope.globalization = pt_BR;
+
+    function setLocale(value){
         
-        if (locale.value == "pt-BR"){
+        if (value == "pt-BR"){
           $rootScope.globalization = pt_BR;
         }else{
           $rootScope.globalization = en_US;
@@ -187,7 +189,7 @@
 
       }
 
-    navigator.globalization.getLocaleName(setLocale(locale), function () {console.log('Error getting language\n');});
+    navigator.globalization.getLocaleName(setLocale(), function () {console.log('Error getting language\n');});
 
   });
 
