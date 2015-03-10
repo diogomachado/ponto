@@ -56,6 +56,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-folder-open:before {
+  content: "\e607";
+}
+
 .icon-saldo-minus,
 .icon-saldo-plus{
   float: right; 
@@ -604,11 +608,11 @@ input[type=checkbox] {
     background: white;
     font-size: 1em;
 }
-.menu-box button.edit{
+.menu-box button:first-child{
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
-.menu-box button.remove{
+.menu-box button:last-child{
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
