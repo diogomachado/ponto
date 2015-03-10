@@ -36,7 +36,12 @@
 
 					}else{
 
-						diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.time.substr(0,5));
+						if (key == 0)
+						{
+							diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.time.substr(0,5));
+						}else{
+							diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5));	
+						}
 					
 					}
 
@@ -66,12 +71,17 @@
 		}
 
 		function atualiza_saldo(){
+
 			// Aqui eu vejo se o saldo foi positivo ou negativo
         	trabalhou = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
         	tinhaTrabalhar = (parseInt($scope.saldoBase.substr(0,2)) * 60) + (parseInt($scope.saldoBase.substr(3,2)));
 
+        	console.log(trabalhou);
+        	console.log(tinhaTrabalhar);
+
         	// Acho o saldo final
         	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
+        	console.log($scope.saldoFinal);
 
         	// Atualiza o que já trabalhou
     		$rootScope.itensLocal[$rootScope.today].total = trabalhou;
@@ -168,7 +178,7 @@
 					$scope.horaIr = true;
 
 					// Aqui eu calculo a hora de ir
-					$scope.horasHoraIr = Tool.somaHora($rootScope.time.substr(0,5), $scope.saldo, true);
+					$scope.horasHoraIr = Tool.somaHora($rootScope.itensLocal[$rootScope.today].horas[2].substr(0,5), $scope.saldo, true);
 
 					// Calculo quanto tempo de almoço
 					$scope.interval = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[1].substr(0,5),$rootScope.itensLocal[$rootScope.today].horas[2].substr(0,5));
