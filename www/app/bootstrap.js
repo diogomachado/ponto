@@ -16,8 +16,6 @@
       },
   };
 
-  conf.initialize();
-
   // Inicializa o Angular.js
   angular.module('appponto',['ngRoute', 'ngTouch'])
   .config(function($routeProvider)
@@ -106,11 +104,8 @@
       }
 
     }
-
-    if (navigator.globalization !== undefined){
-      navigator.globalization.getLocaleName(setLocale(), function () {console.log('Error getting language\n');});
-    }
-
+    
+    navigator.globalization.getLocaleName(setLocale(value), function () {console.log('Error getting language\n');});
 
     // Menu bar
     function menu(){
