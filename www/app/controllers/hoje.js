@@ -21,69 +21,79 @@
 		}, 15000);
 
 		function calcular(){
-			// Faço um loop pelos checkpoints
-			angular.forEach($rootScope.itensLocal[$rootScope.today].horas, function(value, key){
-				
-				// verifica se é par
-				if (key % 2 == 0){
-					
-					// verifica se existe o proximo elemento
-					if ($rootScope.itensLocal[$rootScope.today].horas[key + 1] !== undefined)
-					{
-						// Calcula a diferença de horas
-						diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key + 1].substr(0,5));
 
-					}else{
+			// Se tem aquela data no array
+			if ($rootScope.today in $rootScope.itensLocal){
 
-						if (key == 0)
-						{
-							diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.time.substr(0,5));
-						}else{
-							diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5));	
-						}
-					
-					}
+				// Se tem horas naquela data
+				if ($rootScope.itensLocal[$rootScope.today].horas.length != 0)
 
-					// Se as horas trabalhadas estão zeradas
-					if ($scope.horasTrabalhadas !== "00:00"){
-
-						if (key ===0){
-
-							$scope.horasTrabalhadas = diferenca;	
-
-						}else{
-
-							$scope.horasTrabalhadas = Tool.somaHora($scope.horasTrabalhadas, diferenca);
+					// Faço um loop pelos checkpoints
+					angular.forEach($rootScope.itensLocal[$rootScope.today].horas, function(value, key){
+						
+						// verifica se é par
+						if (key % 2 == 0){
 							
+							// verifica se existe o proximo elemento
+							if ($rootScope.itensLocal[$rootScope.today].horas[key + 1] !== undefined)
+							{
+								// Calcula a diferença de horas
+								diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key + 1].substr(0,5));
+
+							}else{
+
+								if (key == 0)
+								{
+									diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.time.substr(0,5));
+								}else{
+									diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5));	
+								}
+							
+							}
+
+							// Se as horas trabalhadas estão zeradas
+							if ($scope.horasTrabalhadas !== "00:00"){
+
+								if (key ===0){
+
+									$scope.horasTrabalhadas = diferenca;	
+
+								}else{
+
+									$scope.horasTrabalhadas = Tool.somaHora($scope.horasTrabalhadas, diferenca);
+									
+								}
+
+							}else{
+
+								// Soma as horas com a diferença
+								$scope.horasTrabalhadas = Tool.somaHora($scope.horasTrabalhadas, diferenca);
+
+							}
+
+							$rootScope.itensLocal[$rootScope.today].total = $scope.horasTrabalhadas;
 						}
-
-					}else{
-
-						// Soma as horas com a diferença
-						$scope.horasTrabalhadas = Tool.somaHora($scope.horasTrabalhadas, diferenca);
-
-					}
-
-					$rootScope.itensLocal[$rootScope.today].total = $scope.horasTrabalhadas;
-				}
-			});
+					});
+			}
 		}
 
 		function atualiza_saldo(){
 
-			// Aqui eu vejo se o saldo foi positivo ou negativo
-        	trabalhou = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
-        	tinhaTrabalhar = (parseInt($scope.saldoBase.substr(0,2)) * 60) + (parseInt($scope.saldoBase.substr(3,2)));
+        	if ($rootScope.today in $rootScope.itensLocal){
+				// Aqui eu vejo se o saldo foi positivo ou negativo
+	        	trabalhou = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
+	        	tinhaTrabalhar = (parseInt($scope.saldoBase.substr(0,2)) * 60) + (parseInt($scope.saldoBase.substr(3,2)));
 
-        	// Acho o saldo final
-        	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
+	        	// Acho o saldo final
+	        	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
 
-        	// Atualiza o que já trabalhou
-    		$rootScope.itensLocal[$rootScope.today].total = trabalhou;
+	        	// Atualiza o que já trabalhou
+	    		$rootScope.itensLocal[$rootScope.today].total = trabalhou;
 
-	        // Atualiza o saldo
-        	$scope.saldo = Tool.diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
-        	$rootScope.itensLocal[$rootScope.today].saldo = $scope.saldoFinal;
+		        // Atualiza o saldo
+	        	$scope.saldo = Tool.diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
+	        	$rootScope.itensLocal[$rootScope.today].saldo = $scope.saldoFinal;
+        	}
 		}
 
 		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados

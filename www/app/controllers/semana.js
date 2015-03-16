@@ -82,6 +82,8 @@
 			while(n <= 7)
 			{
 				var day = dt.getDate(); // Atualiza day
+				var horas = 0;
+				var minutos = 0;
 
 				// Verifica se está nos objetos salvos
 				if (formatar(dt) in $rootScope.itensLocal){
@@ -92,6 +94,8 @@
 						var total = parseInt($rootScope.itensLocal[formatar(dt)].total);
 
 						totalExecutado += total;
+
+						console.log(totalExecutado);
 
 						// Divido para achar as horas
 						// ---------------------------------
@@ -145,8 +149,6 @@
 
 				dt.setDate(day + 1); // Seta próxima data
 				n++; // Incrementa
-				horas = 0;
-				minutos = 0;
 			}
 
 			// ----------------------------------------------------------------
