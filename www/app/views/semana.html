@@ -1,5 +1,4 @@
 <ul id="checkpoints">
-
     <li on-long-press="semana.abrirMenu($index)" ng-repeat="obj in objsemana"> <span class="checkpoint-day">{{obj.dia}}</span> {{obj.diaNumero}}
     	<span style="float:right;" ng-show="obj.saldo > 0"><span style="color: #00DF00;" class="icon-plus"></span>&nbsp;&nbsp;{{obj.saldoFmt}}</span>
         <span style="float:right;" ng-show="obj.saldo < 0"><span style="color: red;" class="icon-minus"></span>&nbsp;&nbsp;{{obj.saldoFmt}}</span>

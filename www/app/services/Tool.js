@@ -3,6 +3,51 @@
 		
 		return{
 			
+			formatarDia: function(d) {
+			
+				var dd = d.getDate();
+				var mm = d.getMonth()+1; //January is 0!
+				var yyyy = d.getFullYear();
+
+				if(dd<10) {
+				  dd='0'+dd
+				} 
+
+				if(mm<10) {
+				  mm='0'+mm
+				}
+
+				return dd+'/'+mm+'/'+yyyy;
+			},
+
+			formatarHora: function(h) {
+				
+				if (h <= 0){
+					
+					return "00:00";
+
+				}else{
+
+					horas = parseInt(h/60);
+					minutos = h%60;
+
+					if (minutos > 60){	
+						restoMinutos = minutos % 60;
+						minutos = minutos + restoMinutos;
+					}
+
+					if (horas <= 9){
+						horas = "0"+horas;
+					}
+
+					if (minutos <= 9){
+						minutos = "0"+minutos;
+					}
+
+					return horas + ":" + minutos;
+				}
+			},
+
 			diferencaHoras: function(horaInicial, horaFinal) {
 
 				// Tratamento se a hora inicial é menor que a final	

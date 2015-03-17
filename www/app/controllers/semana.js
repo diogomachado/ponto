@@ -1,57 +1,8 @@
 (function() {
-	angular.module('appponto').controller('SemanaCtrl', function($location, $scope, $rootScope){
+	angular.module('appponto').controller('SemanaCtrl', function($location, $scope, $rootScope, Tool){
 		
 		$rootScope.page = $location.path();
 		$scope.objsemana = [];
-
-		// Pego dia de hoje e a hora atual
-		today = $rootScope.today;
-		time  = $rootScope.time;
-
-		function formatar(day){
-			
-			var dd = day.getDate();
-			var mm = day.getMonth()+1; //January is 0!
-			var yyyy = day.getFullYear();
-
-			if(dd<10) {
-			  dd='0'+dd
-			} 
-
-			if(mm<10) {
-			  mm='0'+mm
-			}
-
-			return dd+'/'+mm+'/'+yyyy;
-		}
-
-		function formatarHora(h){
-			
-			if (h <= 0){
-				
-				return "00:00";
-
-			}else{
-
-				horas = parseInt(h/60);
-				minutos = h%60;
-
-				if (minutos > 60){	
-					restoMinutos = minutos % 60;
-					minutos = minutos + restoMinutos;
-				}
-
-				if (horas <= 9){
-					horas = "0"+horas;
-				}
-
-				if (minutos <= 9){
-					minutos = "0"+minutos;
-				}
-
-				return horas + ":" + minutos;
-			}
-		}
 
 		function calcular(){
 
@@ -61,13 +12,14 @@
 			var restoTotalHoras = 0;
 			var restoTotalMinutos = 0;
 			var totalExecutado = 0;
+			$scope.objsemana = [];
 
 			// ----------------------------------------------------------------
 			// Instancio um obj data atual
 			var dt = new Date();
 
 			// Capturo o número do dia (vai de 0..6) começando 0 por domingo
-			var dayNumber = dt.getDay();
+			var dayNumber = dt.getDay() - 1;
 
 			// Capturo o dia mesmo (1..31)
 			var day = dt.getDate();
@@ -76,7 +28,6 @@
 			dt.setDate(day - dayNumber);
 
 			n = 1;
-			// n = dayNumber;
 
 			// Agora eu vou percorrer a semana
 			while(n <= 7)
@@ -85,17 +36,17 @@
 				var horas = 0;
 				var minutos = 0;
 
+				console.log(Tool.formatarDia(dt));
+
 				// Verifica se está nos objetos salvos
-				if (formatar(dt) in $rootScope.itensLocal){
+				if (Tool.formatarDia(dt) in $rootScope.itensLocal){
 
-					if ($rootScope.itensLocal[formatar(dt)].horas.length != 0){
+					if ($rootScope.itensLocal[Tool.formatarDia(dt)].horas.length != 0){
 
-						var saldo = parseInt($rootScope.itensLocal[formatar(dt)].saldo);
-						var total = parseInt($rootScope.itensLocal[formatar(dt)].total);
+						var saldo = parseInt($rootScope.itensLocal[Tool.formatarDia(dt)].saldo);
+						var total = parseInt($rootScope.itensLocal[Tool.formatarDia(dt)].total);
 
 						totalExecutado += total;
-
-						console.log(totalExecutado);
 
 						// Divido para achar as horas
 						// ---------------------------------
@@ -129,16 +80,16 @@
 						}
 						// ---------------------------------
 
-						diaUrl = formatar(dt);
+						diaUrl = Tool.formatarDia(dt);
 						var re = new RegExp('/', 'g');
 						var diaUrl = diaUrl.replace(re, '-');
 
 						// Crio objeto com as informações
-						objsemana = { 	'dia'            : formatar(dt).substr(0,5),
+						objsemana = { 	'dia'            : Tool.formatarDia(dt).substr(0,5),
 						                'diaUrl'         : diaUrl,
 									 	'diaNumero'      : $rootScope.globalization.dias[dt.getDay()],
-									 	'diaKey'         : formatar(dt),
-										'totalTrabalhado': $rootScope.itensLocal[formatar(dt)].total,
+									 	'diaKey'         : Tool.formatarDia(dt),
+										'totalTrabalhado': $rootScope.itensLocal[Tool.formatarDia(dt)].total,
 										'saldo'          : saldo,
 										'saldoFmt'       : horas + ":" + minutos };
 
@@ -191,14 +142,14 @@
 			}
 
 			// Seta na view
-			$scope.totalExecutado = formatarHora(totalExecutado);
+			$scope.totalExecutado = Tool.formatarHora(totalExecutado);
 			$scope.saldoTotalFmt = totalHora + ":" + totalMinutos;
 		}
+
 		calcular();
 
 		this.abrirDia = function(dia){
 
-			$rootScope.nav_primary = false;
 			$rootScope.dia_inner = dia.replace(/-/g, '/');
 			$location.path('/horas/' + dia);
 		}
@@ -219,7 +170,7 @@
 
 		this.deletar = function(index, key){
 
-			$scope.objsemana = delete $scope.objsemana[index];
+			$scope.objsemana.splice(index, 1);
 			delete $rootScope.itensLocal[key];
 
 			calcular();
