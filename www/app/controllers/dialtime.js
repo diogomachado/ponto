@@ -81,7 +81,9 @@
 		}
 
 		function atualizarHoras(day){
-			console.log("Atualizando hora!");
+
+			var podeSalvar = true;
+
 			// Atualiza com os valores do scopo
 			if ($scope.index == undefined){
 				
@@ -89,7 +91,31 @@
 				$rootScope.itensLocal[day].horas.push($scope.horas + ":" + $scope.minutos + ":00");
 
 			}else{
-				$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
+
+				// Beleza, vamos ver a hora é menor que a key anterior
+				if ($rootScope.itensLocal[day].horas[$scope.index - 1] != undefined)
+				{
+					if (Tool.isHoraInicialMenorHoraFinal($scope.horas + ":" + $scope.minutos, $rootScope.itensLocal[day].horas[$scope.index - 1])){
+						console.log("Hora não pode ser MENOR que o checkin anterior");
+						podeSalvar = false;
+					}
+				}
+
+				// Beleza, vamos ver a hora é maior que a key superior
+				if ($rootScope.itensLocal[day].horas[$scope.index + 1] != undefined)
+				{
+					if (Tool.isHoraInicialMenorHoraFinal($rootScope.itensLocal[day].horas[$scope.index + 1], $scope.horas + ":" + $scope.minutos)){
+						console.log("Hora não pode ser MAIOR que o checkin superior");
+						podeSalvar = false;
+					}
+				}
+
+				// Podemos salvar Arnaldo César Coelho?
+				if (podeSalvar)
+				{
+					console.log("Pode salvar");
+					$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
+				}
 			}
 
 		}
@@ -109,51 +135,17 @@
 
 			}else{				
 
-				today = $rootScope.today;
 				time = $scope.horas + ":" + $scope.minutos;
 
 				// Verifica se existe essa data dentro do objeto
-				if (today in $rootScope.itensLocal){
-					
-					// Só deixa salvar se a hora for maior que a ultima
-					if ($rootScope.itensLocal[today].horas.length === 0){	
+				if ($rootScope.today in $rootScope.itensLocal){
 
-						// Puxa a hora para dentro do array
-						atualizarHoras(today);
-
-					}else{						
-						
-						// Se tiver mais que 3 registros
-						if ($rootScope.itensLocal[today].horas.length >= 2){
-
-							// Variavel de ajuda
-							inicio = time.substr(0,5);
-
-							// Se for edição de uma hora, então eu pego o penultimo item, e não o último para comparar
-							if ($scope.edit === true){
-								fim = $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 2)].substr(0,5);
-							}else{
-								fim = $rootScope.itensLocal[today].horas[($rootScope.itensLocal[today].horas.length - 1)].substr(0,5);
-							}
-
-							// Verifico se pode cadastrar a hora, se ela não é menor que o ultimo checkin
-							if (!(Tool.isHoraInicialMenorHoraFinal(inicio, fim)) && (inicio !== fim)){
-								// Puxa a hora para dentro do array
-								atualizarHoras(today);
-							}else{
-								console.error("Você tentou adicionar uma data menor que o último checkin");
-							}
-
-						}else{
-							
-							// Puxa a hora para dentro do array
-							atualizarHoras(today);
-						}
-					}
+						// Manda atualizar :D
+						atualizarHoras($rootScope.today);
 
 				}else{
 					// Se não tinha nenhum item, esse é o primeiro registro
-					$rootScope.itensLocal[today] = {'horas':[time], 'saldo':0, 'total':0, 'end':0, 'sms':0, 'dinner':0};
+					$rootScope.itensLocal[$rootScope.today] = {'horas':[time], 'saldo':0, 'total':0, 'end':0, 'sms':0, 'dinner':0};
 				}
 
 		    	// Re-salvo no local
@@ -161,7 +153,6 @@
 				
 				// Retiro a janela de exibir
 				angular.element(document.querySelector('#dialog')).removeClass('show');
-
 			}
 		}
 	});

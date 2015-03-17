@@ -46,6 +46,15 @@
 								{
 									diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.time.substr(0,5));
 								}else{
+
+									console.log("Não é o primeiro check, e não tem a frente");
+									console.log($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5));
+									console.log($rootScope.time.substr(0,5));
+
+									if(Tool.isHoraInicialMenorHoraFinal($rootScope.time.substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5))){
+										console.log("A hora comparada é maior que a hora de agora");
+									}
+
 									diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5));	
 								}
 							
@@ -74,14 +83,18 @@
 							$rootScope.itensLocal[$rootScope.today].total = $scope.horasTrabalhadas;
 						}
 					});
+
+				console.log("Atualizando horas");
 			}
 		}
 
 		function atualiza_saldo(){
 
+			// Se data de hoje está no array
         	if ($rootScope.today in $rootScope.itensLocal){
+
 				// Aqui eu vejo se o saldo foi positivo ou negativo
-	        	trabalhou = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
+	        	trabalhou      = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
 	        	tinhaTrabalhar = (parseInt($scope.saldoBase.substr(0,2)) * 60) + (parseInt($scope.saldoBase.substr(3,2)));
 
 	        	// Acho o saldo final
@@ -90,10 +103,16 @@
 	        	// Atualiza o que já trabalhou
 	    		$rootScope.itensLocal[$rootScope.today].total = trabalhou;
 
-		        // Atualiza o saldo
+		        // Atualiza o saldo na view e no localStorage
 	        	$scope.saldo = Tool.diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
 	        	$rootScope.itensLocal[$rootScope.today].saldo = $scope.saldoFinal;
+
+	        	// Salva local
+				localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
+
+				console.log("Atualizando saldo");
         	}
+
 		}
 
 		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados
@@ -276,7 +295,7 @@
 							$rootScope.itensLocal[$rootScope.today].horas.push($rootScope.time);
 
 						}else{
-							alert("Você tentou adicionar uma data menor que o último checkin");
+							console.log("Você tentou adicionar uma data menor que o último checkin");
 						}
 					}
 				}
