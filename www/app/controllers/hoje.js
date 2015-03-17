@@ -34,6 +34,8 @@
 						// verifica se é par
 						if (key % 2 == 0){
 							
+							console.log(key);
+
 							// verifica se existe o proximo elemento
 							if ($rootScope.itensLocal[$rootScope.today].horas[key + 1] !== undefined)
 							{
@@ -55,29 +57,24 @@
 										console.log("A hora comparada é maior que a hora de agora");
 									}
 
-									diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5));	
+									diferenca = Tool.diferencaHoras($rootScope.time.substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5));	
 								}
-							
+
+								console.log("Diferença encontrada no que não tem a frente é : " + diferenca);
+								
+								// Caso não exista
+								// $scope.horasTrabalhadas  = Tool.somaHora($scope.horasTrabalhadas, diferenca);
 							}
 
-							// Se as horas trabalhadas estão zeradas
-							if ($scope.horasTrabalhadas !== "00:00"){
+							if (key == 0){
 
-								if (key ===0){
-
-									$scope.horasTrabalhadas = diferenca;	
-
-								}else{
-
-									$scope.horasTrabalhadas = Tool.somaHora($scope.horasTrabalhadas, diferenca);
-									
-								}
+								$scope.horasTrabalhadas = diferenca;	
+								console.log("Primeira posição: " + $scope.horasTrabalhadas);
 
 							}else{
 
-								// Soma as horas com a diferença
 								$scope.horasTrabalhadas = Tool.somaHora($scope.horasTrabalhadas, diferenca);
-
+								
 							}
 
 							$rootScope.itensLocal[$rootScope.today].total = $scope.horasTrabalhadas;
@@ -196,13 +193,13 @@
 	        	atualiza_saldo();
 
 	        	// Calculo da hora de ir
-				if ($rootScope.itensLocal[$rootScope.today].horas.length === 3){
+				if ($rootScope.itensLocal[$rootScope.today].horas.length === 3 && $scope.saldoFinal < 0){
 					
 					// Passo a exibir a hora de ir
 					$scope.horaIr = true;
 
 					// Aqui eu calculo a hora de ir
-					$scope.horasHoraIr = Tool.somaHora($rootScope.itensLocal[$rootScope.today].horas[2].substr(0,5), $scope.saldo, true);
+					$scope.horasHoraIr = Tool.somaHora($rootScope.time.substr(0,5), $scope.saldo, true);
 
 					// Calculo quanto tempo de almoço
 					$scope.interval = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[1].substr(0,5),$rootScope.itensLocal[$rootScope.today].horas[2].substr(0,5));
