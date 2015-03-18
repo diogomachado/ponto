@@ -57,8 +57,9 @@
   })
   .run(function($rootScope, $location, $interval){ 
 
+    // Volta a página definida na session
     $rootScope.voltar = function(){
-      $location.path('/semana');
+      $location.path(sessionStorage.getItem("ponto-redirect"));
     }
 
     $rootScope.go = function(url){

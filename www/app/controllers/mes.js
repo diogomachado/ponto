@@ -4,6 +4,8 @@
 		$rootScope.page = $location.path();
 		$scope.objmes = [];
 
+		sessionStorage.setItem("ponto-redirect", '/mes');
+
 		function calcular(){
 
 			// Variaveis usadas para contar

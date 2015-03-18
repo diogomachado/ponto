@@ -4,6 +4,8 @@
 		$rootScope.page = $location.path();
 		$scope.objsemana = [];
 
+		sessionStorage.setItem("ponto-redirect", '/semana');
+
 		function calcular(){
 
 			// Variaveis usadas para contar
