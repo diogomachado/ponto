@@ -5,15 +5,15 @@
         
         <div class="time-wrapper">
             <div class="time-box">
-    			<button type="button" ng-click="dialtime.aumentarHora()"><span class="icon-plus"></span></button>
+    			<button increase horas="horas" quem="h" operacao="a" type="button" ng-click="dialtime.aumentarHora()"><span class="icon-plus"></span></button>
     			<input type="text" ng-model="horas">
-    			<button type="button" ng-click="dialtime.diminuirHora()"><span class="icon-minus"></span></button>
+    			<button increase horas="horas" quem="h" operacao="d" type="button" ng-click="dialtime.diminuirHora()"><span class="icon-minus"></span></button>
     		</div>
 
     		<div class="time-box">
-    			<button type="button" ng-click="dialtime.aumentarMinuto()"><span class="icon-plus"></span></button>
+    			<button increase minutos="minutos" quem="m" operacao="a" type="button" ng-click="dialtime.aumentarMinuto()"><span class="icon-plus"></span></button>
     			<input type="text" ng-model="minutos">
-    			<button type="button" ng-click="dialtime.diminuirMinuto()"><span class="icon-minus"></span></button>
+    			<button increase minutos="minutos" quem="m" operacao="d" type="button" ng-click="dialtime.diminuirMinuto()"><span class="icon-minus"></span></button>
     		</div>
         </div>
 
