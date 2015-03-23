@@ -260,14 +260,14 @@ body {
 
 #checkpoints-all li ul li.out:after,
 #checkpoints li.out:after{
-    content: "\e606";
-    color: #d90a01;
+    content: "\e600";
+    color: #F0C005;
 }
 
 #checkpoints-all li ul li.in:after, 
 #checkpoints li.in:after{
-    content: "\e600";
-    color: #19bd40;
+    content: "\e606";
+    color: #19BD40;   
 }
 
 .checkpoint-month{

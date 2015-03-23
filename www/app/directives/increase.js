@@ -11,8 +11,6 @@ angular.module('appponto').directive('increase', function ($interval) {
       link: function($scope, $elm, $attrs) {
 			
 		$elm.bind('touchstart', function(evt) {
-		
-			// console.log("Começou touch");
 
 			// Começa um interval
 			promise = $interval(function () { 
@@ -86,18 +84,15 @@ angular.module('appponto').directive('increase', function ($interval) {
 			});
 		});
 
-		$elm.bind('touchend', function(evt) {
-			
-			// console.log("Termina touch");
+		// Se faz o touch e move o dedo, então cancela tb
+		$elm.bind('touchcancel', function(evt) {
+			$interval.cancel(promise);
+		});
 
+		// Se tiro o dedo do elemento, então para
+		$elm.bind('touchend', function(evt) {
 			// Cancela o intervalo
 			$interval.cancel(promise);
-
-			if ($attrs.mouseUp) {
-				$scope.$apply(function() {
-					$scope.$eval($attrs.mouseUp)
-				});
-			}
 		});
 
     }
