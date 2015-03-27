@@ -120,7 +120,7 @@
 
 		}
 
-		this.salvar = function(){
+		this.salvar = function(data){
 
 			if ($scope.conf !== undefined){
 				
@@ -137,15 +137,17 @@
 
 				time = $scope.horas + ":" + $scope.minutos;
 
+				(data != "") ? dataSelecionada = data : dataSelecionada = $rootScope.today;
+
 				// Verifica se existe essa data dentro do objeto
-				if ($rootScope.today in $rootScope.itensLocal){
+				if (dataSelecionada in $rootScope.itensLocal){
 
 						// Manda atualizar :D
-						atualizarHoras($rootScope.today);
+						atualizarHoras(dataSelecionada);
 
 				}else{
 					// Se não tinha nenhum item, esse é o primeiro registro
-					$rootScope.itensLocal[$rootScope.today] = {'horas':[time], 'saldo':0, 'total':0, 'end':0, 'sms':0, 'dinner':0};
+					$rootScope.itensLocal[dataSelecionada] = {'horas':[time], 'saldo':0, 'total':0, 'end':0, 'sms':0, 'dinner':0};
 				}
 
 		    	// Re-salvo no local

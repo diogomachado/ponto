@@ -1,31 +1,37 @@
 <dialtime index="indexSelecionado" horas="horas" minutos="minutos" edit="editar"></dialtime>
 
 <ul id="checkpoints">
-    <li on-long-press="hoje.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="(key, checkpoint) in checkpoints">  
+    <li on-long-press="hora.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="(key, checkpoint) in checkpoints">  
         <span class="interval" ng-show="key === 2">{{interval}}</span>
         {{checkpoint.substr(0,5)}}
         <div class="menu-box" id="menu-box-{{$index}}">
-            <button type="button" class="edit" ng-click="hoje.editar($index)"><span class="icon-edit"></span></button>
-            <button type="button" class="remove" ng-click="hoje.deletar($index)"><span class="icon-remove"></span></button>
+            <button type="button" class="edit" ng-click="hora.editar($index)"><span class="icon-edit"></span></button>
+            <button type="button" class="remove" ng-click="hora.deletar($index)"><span class="icon-remove"></span></button>
         </div>
     </li>
 </ul>
 
-<!-- <footer id="footer"> 
+<footer id="footer"> 
+    
+    <div id="fx-button-wrapper">
+        <button class="fx-button cbutton--effect-novak" type="button" ng-click="hora.salvarData()" on-long-press="hora.novoCheckpoint($index)">
+            <span style="margin-top: 100%;">&#43</span>
+        </button>
+    </div>
 
     <div id="footer-wrapper">
         <div class="row">
             <div class="left">
-                Horas trabalhadas
+                {{globalization.rodape[0]}}
             </div>
             <div class="right">
                 {{horasTrabalhadas}}
             </div>
         </div>
 
-        <div class="row minus-margin-row">
+        <div class="row" ng-class="{'minus-margin-row': horaIr != true}">
             <div class="left">
-                Saldo &nbsp;&nbsp;&nbsp;
+                {{globalization.rodape[1]}} &nbsp;&nbsp;&nbsp;
                 <span ng-show="saldoFinal > 0" class="icon-saldo-plus icon-plus"></span>
                 <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
             </div>
@@ -33,6 +39,15 @@
                 {{saldo}}
             </div>
         </div>
+
+        <div class="row" ng-show="horaIr" style="margin: 0;">
+            <div class="left">
+                {{globalization.rodape[2]}}
+            </div>
+            <div class="right">
+                {{horasHoraIr}}
+            </div>
+        </div>
     </div>
-    
-</footer> -->
+
+</footer>
