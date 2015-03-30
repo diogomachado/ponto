@@ -22,30 +22,27 @@
 
 			formatarHora: function(h) {
 				
-				if (h <= 0){
-					
-					return "00:00";
+				if (h < 0){
+					h = h * (-1);
+				}				
 
-				}else{
+				horas = parseInt(h/60);
+				minutos = h%60;
 
-					horas = parseInt(h/60);
-					minutos = h%60;
-
-					if (minutos > 60){	
-						restoMinutos = minutos % 60;
-						minutos = minutos + restoMinutos;
-					}
-
-					if (horas <= 9){
-						horas = "0"+horas;
-					}
-
-					if (minutos <= 9){
-						minutos = "0"+minutos;
-					}
-
-					return horas + ":" + minutos;
+				if (minutos > 60){	
+					restoMinutos = minutos % 60;
+					minutos = minutos + restoMinutos;
 				}
+
+				if (horas <= 9){
+					horas = "0"+horas;
+				}
+
+				if (minutos <= 9){
+					minutos = "0"+minutos;
+				}
+
+				return horas + ":" + minutos;
 			},
 
 			diferencaHoras: function(horaInicial, horaFinal) {

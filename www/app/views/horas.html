@@ -1,4 +1,4 @@
-<dialtime index="indexSelecionado" horas="horas" minutos="minutos" edit="editar"></dialtime>
+<dialtime index="indexSelecionado" horas="horas" minutos="minutos" edit="editar" data="data"></dialtime>
 
 <ul id="checkpoints">
     <li on-long-press="hora.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="(key, checkpoint) in checkpoints">  
@@ -25,27 +25,18 @@
                 {{globalization.rodape[0]}}
             </div>
             <div class="right">
-                {{horasTrabalhadas}}
+                {{totalExecutado}}
             </div>
         </div>
 
         <div class="row" ng-class="{'minus-margin-row': horaIr != true}">
             <div class="left">
                 {{globalization.rodape[1]}} &nbsp;&nbsp;&nbsp;
-                <span ng-show="saldoFinal > 0" class="icon-saldo-plus icon-plus"></span>
-                <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
+                <span ng-show="saldoTotal > 0" class="icon-saldo-plus icon-plus"></span>
+                <span ng-show="saldoTotal < 0" class="icon-saldo-minus icon-minus"></span>
             </div>
             <div class="right">
-                {{saldo}}
-            </div>
-        </div>
-
-        <div class="row" ng-show="horaIr" style="margin: 0;">
-            <div class="left">
-                {{globalization.rodape[2]}}
-            </div>
-            <div class="right">
-                {{horasHoraIr}}
+                {{saldoTotalFmt}}
             </div>
         </div>
     </div>

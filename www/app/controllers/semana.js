@@ -38,8 +38,6 @@
 				var horas = 0;
 				var minutos = 0;
 
-				console.log(Tool.formatarDia(dt));
-
 				// Verifica se está nos objetos salvos
 				if (Tool.formatarDia(dt) in $rootScope.itensLocal){
 

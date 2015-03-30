@@ -120,7 +120,7 @@
 
 		}
 
-		this.salvar = function(data){
+		this.salvar = function(){
 
 			if ($scope.conf !== undefined){
 				
@@ -135,9 +135,9 @@
 
 			}else{				
 
-				time = $scope.horas + ":" + $scope.minutos;
+				time = $scope.horas + ":" + $scope.minutos + ':00' ;
 
-				(data != "") ? dataSelecionada = data : dataSelecionada = $rootScope.today;
+				($scope.data != undefined) ? dataSelecionada = $scope.data : dataSelecionada = $rootScope.today;
 
 				// Verifica se existe essa data dentro do objeto
 				if (dataSelecionada in $rootScope.itensLocal){

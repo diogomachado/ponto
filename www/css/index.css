@@ -512,7 +512,7 @@ input[type=checkbox] {
 
 /* Menu box - Abre ao pressionar*/
 .menu-box::before{
-    position: fixed;
+    position: absolute;
     margin-left: 6px;
     margin-top: -7.5px;
     content: "";
@@ -526,7 +526,7 @@ input[type=checkbox] {
 }
 
 .menu-box{
-    position: fixed;
+    position: absolute;
     display: none;
     width: 130px;
     z-index: 30;

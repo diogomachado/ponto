@@ -1,14 +1,14 @@
-<!-- <section>
-	<div class="conf-header">Notificações</div>
+<section>
+	<div class="conf-header">{{globalization.conf[0]}}</div>
 	<div class="conf-body">
 
 		<ul class="nav-system">
 			<li ng-click="conf.end()" ng-class="{'active': active_end == true}">
-				<h1>Notificação de saída</h1>
-				<p>Notificar quando completar as horas do dia</p>
+				<h1>{{globalization.conf[2]}}</h1>
+				<p>{{globalization.conf[3]}}</p>
 			</li>
 
-			<li ng-click="conf.dinner()" ng-class="{'active': active_dinner == true}">
+			<!-- <li ng-click="conf.dinner()" ng-class="{'active': active_dinner == true}">
 				<h1>Notificação intervalo almoço</h1>
 				<p>Defina aqui quantas horas de almoço você tem e vamos te alertar</p>
 			</li>
@@ -16,17 +16,17 @@
 			<li ng-click="conf.sms()" ng-class="{'active': active_sms == true}">
 				<h1>SMS automático</h1>
 				<p>Avise a sua esposa a hora que você pode sair</p>
-			</li>
+			</li> -->
 		</ul>
 
 	</div>
-</section> -->
+</section>
 
 <dialtime index="indexSelecionado" horas="horas" minutos="minutos" conf="true" edit="editar"></dialtime>
 <dinner></dinner>
 
 <section class="conf-dias">
-	<div class="conf-header">{{globalization.conf[0]}}</div>
+	<div class="conf-header">{{globalization.conf[1]}}</div>
 	
 	<div class="conf-body">
 		<div class="conf-dias-botoes">

@@ -19,6 +19,12 @@ angular.module('appponto').directive('onLongPress', function($timeout) {
 				}, 600);
 			});
 
+			// Se faz o touch e move o dedo, então cancela tb
+			$elm.bind('touchcancel', function(evt) {
+				// Prevent the onLongPress event from firing
+				$scope.longPress = false;
+			});
+
 			$elm.bind('touchend', function(evt) {
 				// Prevent the onLongPress event from firing
 				$scope.longPress = false;

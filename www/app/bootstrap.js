@@ -93,7 +93,7 @@
                   'meses'  : ['January', 'February', 'March', 'April', 'may', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                   'menu'   : ['Today', 'Week', 'Month', 'All'],
                   'rodape' : ['Hours worked', 'Balance', 'Time to go'],
-                  'conf'   : ['Hour'],
+                  'conf'   : ['Notifications','Hour', 'Output notification', 'Notify when complete hours of the day'],
                   'titulo_box' : 'Select a time',
                   'acoes'  : ['Close', 'Save']
                 }
@@ -103,7 +103,7 @@
                   'meses'  : ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                   'menu'   : ['Hoje', 'Semana', 'Mês', 'Todos'],
                   'rodape' : ['Horas trabalhadas', 'Saldo', 'Hora de ir'],
-                  'conf'   : ['Horas por dia'],
+                  'conf'   : ['Notificações','Horas por dia', 'Notificação de saída', 'Notificar quando completar as horas do dia'],
                   'titulo_box' : 'Selecione um horário',
                   'acoes'  : ['Fechar', 'Salvar']
                 }

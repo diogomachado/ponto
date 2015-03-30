@@ -77,7 +77,7 @@
 								
 							}
 
-							$rootScope.itensLocal[$rootScope.today].total = $scope.horasTrabalhadas;
+							$rootScope.itensLocal[$rootScope.today].total = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));;
 						}
 					});
 
@@ -114,6 +114,8 @@
 
 		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados
 		$rootScope.$watchCollection('itensLocal["'+ $rootScope.today + '"].horas', function(){
+
+			console.log("Watch de itens locais ativado");
 
 			// Verifica se existe essa data dentro do objeto
 	      	if ($rootScope.today in $rootScope.itensLocal){

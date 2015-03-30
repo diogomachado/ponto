@@ -7,6 +7,7 @@
 				index : '=',
 				horas : '=horas',
 				minutos : '=minutos',
+				data : '=data',
 				conf : '@conf',
 				edit : '=edit',
 			},
