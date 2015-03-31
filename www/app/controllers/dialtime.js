@@ -113,7 +113,7 @@
 				// Podemos salvar Arnaldo César Coelho?
 				if (podeSalvar)
 				{
-					console.log("Pode salvar");
+					console.log("Podemos salvar. Dia >> " + day);
 					$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
 				}
 			}

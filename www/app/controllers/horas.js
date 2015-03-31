@@ -26,9 +26,12 @@
 
 		// Fica vistoriando para ver se vai mudar as horas
 		$rootScope.$watchCollection('itensLocal["'+ dt +'"].horas', function(){
-			console.log("Atualizando:: Watch de horas");
+			console.log("Watch ::: Dia " + dt);
 
+			// Mando atualizar o saldo
 			atualiza_saldo();
+
+			// Mando recalcular
 			calcular();	
 		});
 
