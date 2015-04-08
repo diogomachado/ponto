@@ -46,6 +46,7 @@
 
 	        	// Acho o saldo final
 	        	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
+	        	console.log("Saldo final: "+$scope.saldoFinal);
 
 	        	// Atualiza o que já trabalhou
 	    		$rootScope.itensLocal[dt].total = trabalhou;
@@ -96,13 +97,14 @@
 							}else{
 								$scope.horasTrabalhadas = Tool.somaHora($scope.horasTrabalhadas, diferenca);
 							}
+							console.log((parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2))));
 
-							$rootScope.itensLocal[dt].total = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));;
+							$rootScope.itensLocal[dt].total = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
 						}
 					});
 
 					saldo = parseInt($rootScope.itensLocal[dt].saldo);
-
+					console.log('Saldo: '+saldo);
 					// Divido para achar as horas
 					// ---------------------------------
 					horas = parseInt(saldo/60);
