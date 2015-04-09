@@ -184,6 +184,7 @@
 					});					
 			}
 
+			// Retorno as horas trabalhadas para mostrar na view
 			return horasTrabalhadas;
 		}
 

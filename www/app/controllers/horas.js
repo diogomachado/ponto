@@ -1,5 +1,5 @@
 (function() {
-	angular.module('appponto').controller('HorasCtrl', function($location, $scope, $rootScope, $routeParams, Tool){
+	angular.module('appponto').controller('HorasCtrl', function($interval, $location, $scope, $rootScope, $routeParams, Tool){
 		$rootScope.page = '/horas';
 
 		// Transforma dia
@@ -13,8 +13,8 @@
 		$rootScope.dia_inner = dt;
 
 		// Variaveis comuns
-		$scope.saldoBase        = $rootScope.configs.week[Tool.dia0a6()];
-		$scope.saldoFinal       = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
+		$scope.saldoBase = $rootScope.configs.week[Tool.dia0a6()];
+		$scope.saldoFinal = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
 
 		// Itens para mostrar na view
 		$scope.checkpoints = $rootScope.itensLocal[dt].horas;
@@ -27,8 +27,8 @@
 		// Atualiza a cada 15 segundos
 		$interval(function(){
 
-			// Manda calcular com o dia de hoje
-			Tool.calcular(dt);
+			// Manda calcular com o dia
+			$scope.horasTrabalhadas = Tool.calcular(dt);
 
 			// Manda atualizar o saldo
 			atualiza_saldo();
@@ -62,101 +62,8 @@
 
 		}
 
-		function calcular(){
-
-			// Variaveis usadas para contar
-			var totalHora = 0;
-			var totalMinutos = 0;
-			var restoTotalHoras = 0;
-			var restoTotalMinutos = 0;
-			var saldo = 0;
-
-			// Verifica se está nos objetos salvos
-			if (dt in $rootScope.itensLocal){
-
-				if ($rootScope.itensLocal[dt].horas.length != 0){
-
-					// Faço um loop pelos checkpoints
-					angular.forEach($rootScope.itensLocal[dt].horas, function(value, key){
-						// verifica se é par
-						if (key % 2 == 0){
-							// verifica se existe o proximo elemento
-							if ($rootScope.itensLocal[dt].horas[key + 1] !== undefined){
-								// Calcula a diferença de horas
-								diferenca = Tool.diferencaHoras($rootScope.itensLocal[dt].horas[key].substr(0,5), $rootScope.itensLocal[dt].horas[key + 1].substr(0,5));
-							}else{
-								if (key == 0){
-									diferenca = Tool.diferencaHoras($rootScope.itensLocal[dt].horas[key].substr(0,5), $rootScope.time.substr(0,5));
-								}else{
-									diferenca = Tool.diferencaHoras($rootScope.time.substr(0,5), $rootScope.itensLocal[dt].horas[key].substr(0,5));	
-								}
-							}
-
-							if (key == 0){
-								$scope.horasTrabalhadas = diferenca;	
-							}else{
-								$scope.horasTrabalhadas = Tool.somaHora($scope.horasTrabalhadas, diferenca);
-							}
-							console.log((parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2))));
-
-							$rootScope.itensLocal[dt].total = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
-						}
-					});
-
-					saldo = parseInt($rootScope.itensLocal[dt].saldo);
-					console.log('Saldo: '+saldo);
-					// Divido para achar as horas
-					// ---------------------------------
-					horas = parseInt(saldo/60);
-					minutos = saldo%60;
-
-					// Calcula o total
-					totalHora = totalHora + horas;
-					totalMinutos = totalMinutos + minutos;
-
-					// Muda sinal caso seja positivo
-					if (horas < 0){
-						horas = horas * -1;
-					}
-
-					if (minutos < 0){
-						minutos = minutos * -1;
-					}
-
-					if (minutos > 60){	
-						restoMinutos = minutos % 60;
-						minutos = minutos + restoMinutos;
-					}
-
-					if (horas <= 9){
-						horas = "0"+horas;
-					}
-
-					if (minutos <= 9){
-						minutos = "0"+minutos;
-					}
-				}
-			}
-			// ----------------------------------------------------------------
-			
-			// Horas que ficaram nos minutos totais
-			if (totalMinutos > 60){	
-				restoTotalHoras = parseInt(totalMinutos/60);
-				totalMinutos = totalMinutos % 60;
-			}
-
-			// Soma o total com o resto das horas
-			totalHora = totalHora + restoTotalHoras;
-
-			// Saldo total em int
-			$scope.saldoTotal = (totalHora * 60) + totalMinutos;
-
-			// Seta na view
-			$scope.totalExecutado = Tool.formatarHora(parseInt($rootScope.itensLocal[dt].total));
-			$scope.saldoTotalFmt  = Tool.formatarHora(parseInt($rootScope.itensLocal[dt].saldo));
-		}
-
-		calcular();
+		// Manda calcular com o dia
+		$scope.horasTrabalhadas = Tool.calcular(dt);
 
 		// Definindo métodos globais para serem acessados pelos controllers
 	    this.salvarData = function(){

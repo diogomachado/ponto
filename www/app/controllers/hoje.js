@@ -17,7 +17,7 @@
 		// Atualiza a cada 15 segundos
 		$interval(function(){
 
-			// Manda calcular com o dia de hoje
+			// Manda calcular com o dia
 			$scope.horasTrabalhadas = Tool.calcular($rootScope.today);
 
 			// Manda atualizar o saldo
