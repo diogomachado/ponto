@@ -24,16 +24,16 @@
 			$scope.interval = Tool.diferencaHoras($rootScope.itensLocal[dt].horas[1].substr(0,5),$rootScope.itensLocal[dt].horas[2].substr(0,5));
 		}
 
-		// Fica vistoriando para ver se vai mudar as horas
-		$rootScope.$watchCollection('itensLocal["'+ dt +'"].horas', function(){
-			console.log("Watch ::: Dia " + dt);
+		// Atualiza a cada 15 segundos
+		$interval(function(){
 
-			// Mando atualizar o saldo
+			// Manda calcular com o dia de hoje
+			Tool.calcular(dt);
+
+			// Manda atualizar o saldo
 			atualiza_saldo();
 
-			// Mando recalcular
-			calcular();	
-		});
+		}, 15000);
 
 		function atualiza_saldo(){
 

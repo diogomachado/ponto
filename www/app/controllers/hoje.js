@@ -16,74 +16,14 @@
 
 		// Atualiza a cada 15 segundos
 		$interval(function(){
-			calcular();
+
+			// Manda calcular com o dia de hoje
+			$scope.horasTrabalhadas = Tool.calcular($rootScope.today);
+
+			// Manda atualizar o saldo
 			atualiza_saldo();
+
 		}, 15000);
-
-		function calcular(){
-
-			// Se tem aquela data no array
-			if ($rootScope.today in $rootScope.itensLocal){
-
-				// Se tem horas naquela data
-				if ($rootScope.itensLocal[$rootScope.today].horas.length != 0)
-
-					// Faço um loop pelos checkpoints
-					angular.forEach($rootScope.itensLocal[$rootScope.today].horas, function(value, key){
-						
-						// verifica se é par
-						if (key % 2 == 0){
-							
-							console.log(key);
-
-							// verifica se existe o proximo elemento
-							if ($rootScope.itensLocal[$rootScope.today].horas[key + 1] !== undefined)
-							{
-								// Calcula a diferença de horas
-								diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key + 1].substr(0,5));
-
-							}else{
-
-								if (key == 0)
-								{
-									diferenca = Tool.diferencaHoras($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5), $rootScope.time.substr(0,5));
-								}else{
-
-									console.log("Não é o primeiro check, e não tem a frente");
-									console.log($rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5));
-									console.log($rootScope.time.substr(0,5));
-
-									if(Tool.isHoraInicialMenorHoraFinal($rootScope.time.substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5))){
-										console.log("A hora comparada é maior que a hora de agora");
-									}
-
-									diferenca = Tool.diferencaHoras($rootScope.time.substr(0,5), $rootScope.itensLocal[$rootScope.today].horas[key].substr(0,5));	
-								}
-
-								console.log("Diferença encontrada no que não tem a frente é : " + diferenca);
-								
-								// Caso não exista
-								// $scope.horasTrabalhadas  = Tool.somaHora($scope.horasTrabalhadas, diferenca);
-							}
-
-							if (key == 0){
-
-								$scope.horasTrabalhadas = diferenca;	
-								console.log("Primeira posição: " + $scope.horasTrabalhadas);
-
-							}else{
-
-								$scope.horasTrabalhadas = Tool.somaHora($scope.horasTrabalhadas, diferenca);
-								
-							}
-
-							$rootScope.itensLocal[$rootScope.today].total = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));;
-						}
-					});
-
-				console.log("Atualizando horas");
-			}
-		}
 
 		function atualiza_saldo(){
 
@@ -106,16 +46,11 @@
 
 	        	// Salva local
 				localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
-
-				console.log("Atualizando saldo");
         	}
-
 		}
 
 		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados
 		$rootScope.$watchCollection('itensLocal["'+ $rootScope.today + '"].horas', function(){
-
-			console.log("Watch de itens locais ativado");
 
 			// Verifica se existe essa data dentro do objeto
 	      	if ($rootScope.today in $rootScope.itensLocal){
@@ -175,7 +110,7 @@
 
 					}
 
-					calcular();
+					Tool.calcular($rootScope.today);
 
 				}else{
 
@@ -210,7 +145,7 @@
 					var horas = $scope.horasHoraIr.split(':');
 
 					// Verifico se posso criar uma schedule para avisar saida
-					// -------------------------------------------------
+					// -------------------–≠------------------------------
 					if ($rootScope.itensLocal[$rootScope.today].end == 0 && $rootScope.configs.end == 1){
 
 						// Crio um objeto date com as horas de sair
@@ -244,9 +179,9 @@
 
 						// Envio um SMS para mozão
 						sms.sendMessage(messageInfo, function(message) {
-						    console.log("success: " + message);
+						    console.log("SMS enviado");
 						}, function(error) {
-						    console.log("code: " + error.code + ", message: " + error.message);
+						    console.log("SMS não foi enviado");
 						});
 						// -------------------------------------------------
 
@@ -293,8 +228,6 @@
 							// Puxa a hora para dentro do array
 							$rootScope.itensLocal[$rootScope.today].horas.push($rootScope.time);
 
-						}else{
-							console.log("Você tentou adicionar uma data menor que o último checkin");
 						}
 					}
 				}
