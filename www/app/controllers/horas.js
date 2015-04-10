@@ -24,16 +24,13 @@
 			$scope.interval = Tool.diferencaHoras($rootScope.itensLocal[dt].horas[1].substr(0,5),$rootScope.itensLocal[dt].horas[2].substr(0,5));
 		}
 
-		// Atualiza a cada 15 segundos
+		// Atualiza a cada 1s
+		// :::::::::::::::::::::::::::::::::::::::::::::
 		$interval(function(){
-
-			// Manda calcular com o dia
 			$scope.horasTrabalhadas = Tool.calcular(dt);
-
-			// Manda atualizar o saldo
 			atualiza_saldo();
-
-		}, 15000);
+		}, 1000);
+		// :::::::::::::::::::::::::::::::::::::::::::::
 
 		function atualiza_saldo(){
 
@@ -46,15 +43,15 @@
 
 	        	// Acho o saldo final
 	        	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
+	        	$scope.saldo = Tool.formatarHora($scope.saldoFinal);
 	        	console.log("Saldo final: "+$scope.saldoFinal);
 
 	        	// Atualiza o que já trabalhou
-	    		$rootScope.itensLocal[dt].total = trabalhou;
+	    		// $rootScope.itensLocal[dt].total = trabalhou;
 
 		        // Atualiza o saldo na view e no localStorage
-	        	$scope.saldo = Tool.diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
-
-	        	$rootScope.itensLocal[dt].saldo = $scope.saldoFinal;
+	        	// $scope.saldo = Tool.diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
+	        	// $rootScope.itensLocal[dt].saldo = $scope.saldoFinal;
 
 	        	// Salva local
 				localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 

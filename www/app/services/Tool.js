@@ -135,6 +135,8 @@
 		// Calcula as horas trabalhas
 		Tool.calcular = function(dia){
 
+			var horasTrabalhadas = "00:00";
+
 			// Se tem aquela data no array
 			if (dia in $rootScope.itensLocal){
 
@@ -147,6 +149,7 @@
 						// verifica se é par
 						if (key % 2 == 0){
 							
+
 							// verifica se existe o proximo elemento
 							if ($rootScope.itensLocal[dia].horas[key + 1] !== undefined)
 							{
@@ -158,20 +161,18 @@
 								if (key == 0)
 								{
 									diferenca = Tool.diferencaHoras($rootScope.itensLocal[dia].horas[key].substr(0,5), $rootScope.time.substr(0,5));
-								}else{
-
-									if(Tool.isHoraInicialMenorHoraFinal($rootScope.time.substr(0,5), $rootScope.itensLocal[dia].horas[key].substr(0,5))){
-										
-									}
-
-									diferenca = Tool.diferencaHoras($rootScope.time.substr(0,5), $rootScope.itensLocal[dia].horas[key].substr(0,5));	
+								}else if(key != 2){
+									console.log("Key: " + key + " é dif. de 2");
+									diferenca = Tool.diferencaHoras($rootScope.time.substr(0,5), $rootScope.itensLocal[dia].horas[key].substr(0,5));
 								}
 							}
+
+							console.log(key + " É par, e a diferença é "+diferenca);
 
 							// Calcula as horas trabalhadas
 							if (key == 0){
 								horasTrabalhadas = diferenca;	
-							}else{
+							}else if(key != 2 || $rootScope.itensLocal[dia].horas[key + 1] !== undefined){
 								horasTrabalhadas = Tool.somaHora(horasTrabalhadas, diferenca);
 							}
 
