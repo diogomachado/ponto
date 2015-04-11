@@ -929,7 +929,20 @@ dialtime{
 .box-balance{
   position: relative;
   float: right;
+  text-align: center;
+  margin-top: -8.5px;
 }
+.box-balance .work{
+  float: right;
+  margin-bottom: 2px;
+  color: #A0A0A0;
+}
+
+.box-balance .balance{
+  font-size: 0.7em;
+  margin-top: 0px;
+}
+
 .box-balance .icon-plus{color: #00DF00;}
 .box-balance .icon-minus{color: red;}
 

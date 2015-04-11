@@ -17,7 +17,6 @@
 		$scope.saldo            = $rootScope.configs.week[Tool.dia0a6(dt)]; // Será decrementado
 		$scope.saldoFinal       = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
 
-
 		// Itens para mostrar na view
 		$scope.checkpoints = $rootScope.itensLocal[dt].horas;
 

@@ -89,6 +89,7 @@
 									 	'diaNumero'      : $rootScope.globalization.dias[dt.getDay()],
 									 	'diaKey'         : Tool.formatarDia(dt),
 										'totalTrabalhado': $rootScope.itensLocal[Tool.formatarDia(dt)].total,
+										'totalTrabalhadoFmt': Tool.formatarHora($rootScope.itensLocal[Tool.formatarDia(dt)].total),
 										'saldo'          : saldo,
 										'saldoFmt'       : horas + ":" + minutos };
 
