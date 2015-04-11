@@ -124,6 +124,9 @@
 
 			if ($scope.conf !== undefined){
 				
+				// Agora define que configurou
+				$rootScope.configs.default = 1;
+
 				// Seta
 	    		$rootScope.configs.week[$scope.index] = $scope.horas + ":" + $scope.minutos;
 
