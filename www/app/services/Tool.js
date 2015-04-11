@@ -127,8 +127,16 @@
 		},
 
 		// Retorna o dia (0 a 6)
-		Tool.dia0a6 = function(){	
-			var today = new Date();
+		Tool.dia0a6 = function(day){
+
+			// Se passou uma data de parametro, retorno o dia referente a data
+			if (day){
+				var dt = day.split('/');
+				var today = new Date(dt[2] + '-' + parseInt(dt[1]) + '-' + dt[0]);
+			}else{
+				var today = new Date();
+			}
+
 			return today.getDay();
 		},
 

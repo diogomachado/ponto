@@ -1,7 +1,9 @@
 <ul id="checkpoints" style="padding-bottom: 82px;">
     <li on-long-press="mes.abrirMenu($index)" ng-repeat="obj in objmes"> <span class="checkpoint-day">{{obj.dia}}</span> {{obj.diaNumero}}
-        <span style="float:right;" ng-show="obj.saldo > 0"><span style="color: #00DF00;" class="icon-plus"></span>&nbsp;&nbsp;{{obj.saldoFmt}}</span>
-        <span style="float:right;" ng-show="obj.saldo < 0"><span style="color: red;" class="icon-minus"></span>&nbsp;&nbsp;{{obj.saldoFmt}}</span>
+        <span class="box-balance">
+            <span ng-class="{'icon-plus': obj.saldo > 0, 'icon-minus': obj.saldo < 0}"></span>
+            {{obj.saldoFmt}}
+        </span>
 
         <div class="menu-box" id="menu-box-{{$index}}">
             <button type="button" class="open" ng-click="mes.abrirDia(obj.diaUrl)"><span class="icon-folder-open"></span></button>

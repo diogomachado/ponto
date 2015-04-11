@@ -13,8 +13,10 @@
 		$rootScope.dia_inner = dt;
 
 		// Variaveis comuns
-		$scope.saldoBase = $rootScope.configs.week[Tool.dia0a6()];
-		$scope.saldoFinal = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
+		$scope.saldoBase        = $rootScope.configs.week[Tool.dia0a6(dt)];
+		$scope.saldo            = $rootScope.configs.week[Tool.dia0a6(dt)]; // Será decrementado
+		$scope.saldoFinal       = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
+
 
 		// Itens para mostrar na view
 		$scope.checkpoints = $rootScope.itensLocal[dt].horas;
@@ -44,13 +46,15 @@
 	        	// Acho o saldo final
 	        	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
 	        	$scope.saldo = Tool.formatarHora($scope.saldoFinal);
+	        	
+	        	console.log("Tinha trabalhar: " + tinhaTrabalhar);
 	        	console.log("Saldo final: "+$scope.saldoFinal);
 
 	        	// Atualiza o que já trabalhou
 	    		// $rootScope.itensLocal[dt].total = trabalhou;
 
 		        // Atualiza o saldo na view e no localStorage
-	        	// $scope.saldo = Tool.diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
+	        	$scope.saldo = Tool.diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
 	        	// $rootScope.itensLocal[dt].saldo = $scope.saldoFinal;
 
 	        	// Salva local
