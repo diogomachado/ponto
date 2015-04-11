@@ -34,6 +34,9 @@
 		}, 1000);
 		// :::::::::::::::::::::::::::::::::::::::::::::
 
+		// Manda calcular com o dia
+		$scope.horasTrabalhadas = Tool.calcular(dt);
+
 		function atualiza_saldo(){
 
 			// Se data de hoje está no array
@@ -60,11 +63,7 @@
 	        	// Salva local
 				localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
         	}
-
 		}
-
-		// Manda calcular com o dia
-		$scope.horasTrabalhadas = Tool.calcular(dt);
 
 		// Definindo métodos globais para serem acessados pelos controllers
 	    this.salvarData = function(){

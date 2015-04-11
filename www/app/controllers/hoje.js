@@ -23,6 +23,9 @@
 		}, 1000);
 		// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+		// Manda calcular com o dia
+		$scope.horasTrabalhadas = Tool.calcular($rootScope.today);
+
 		function atualiza_saldo(){
 
 			// Se data de hoje está no array
