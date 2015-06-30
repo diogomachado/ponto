@@ -1,29 +1,29 @@
 (function() {
 	angular.module('appponto').controller('DialtimeCtrl', function($scope, $rootScope, Tool){
-			
+
 		$scope.globalization = $rootScope.globalization;
 
-		$scope.$watch('horas', function(){
+		// $scope.$watch('horas', function(){
 
-			// A hora chega aqui como string, então transformo ela em int antes de trabalhar
-			$scope.horas = parseInt($scope.horas);
+		// 	// A hora chega aqui como string, então transformo ela em int antes de trabalhar
+		// 	$scope.horas = parseInt($scope.horas);
 
-			if(parseInt($scope.horas) < 10) {
-			  $scope.horas = '0' + $scope.horas;
-			}			
+		// 	if(parseInt($scope.horas) < 10) {
+		// 	  $scope.horas = '0' + $scope.horas;
+		// 	}
 
-		});
+		// });
 
-		$scope.$watch('minutos', function(){
+		// $scope.$watch('minutos', function(){
 
-			// A hora chega aqui como string, então transformo ela em int antes de trabalhar
-			$scope.minutos = parseInt($scope.minutos);
+		// 	// A hora chega aqui como string, então transformo ela em int antes de trabalhar
+		// 	$scope.minutos = parseInt($scope.minutos);
 
-			if(parseInt($scope.minutos) < 10) {
-			  $scope.minutos = '0' + $scope.minutos;
-			}			
+		// 	if(parseInt($scope.minutos) < 10) {
+		// 	  $scope.minutos = '0' + $scope.minutos;
+		// 	}
 
-		});
+		// });
 
 		this.aumentarHora = function(){
 
@@ -73,7 +73,7 @@
 
 			// Remove todos show
 	    	angular.element(document.querySelectorAll('.menu-box')).removeClass('show');
-			
+
 			// Retiro a janela de exibir
 			angular.element(document.querySelector('#dialog')).removeClass('show');
 
@@ -82,53 +82,25 @@
 
 		function atualizarHoras(day){
 
-			var podeSalvar = true;
+			// Puxa a hora para dentro do array
+			$rootScope.itensLocal[day].horas.push((parseInt($scope.horas) * 60) + parseInt($scope.minutos));
 
-			// Atualiza com os valores do scopo
-			if ($scope.index == undefined){
-				
-				// Puxa a hora para dentro do array
-				$rootScope.itensLocal[day].horas.push($scope.horas + ":" + $scope.minutos + ":00");
-
-			}else{
-
-				// Beleza, vamos ver a hora é menor que a key anterior
-				if ($rootScope.itensLocal[day].horas[$scope.index - 1] != undefined)
-				{
-					if (Tool.isHoraInicialMenorHoraFinal($scope.horas + ":" + $scope.minutos, $rootScope.itensLocal[day].horas[$scope.index - 1])){
-						console.log("Hora não pode ser MENOR que o checkin anterior");
-						podeSalvar = false;
-					}
-				}
-
-				// Beleza, vamos ver a hora é maior que a key superior
-				if ($rootScope.itensLocal[day].horas[$scope.index + 1] != undefined)
-				{
-					if (Tool.isHoraInicialMenorHoraFinal($rootScope.itensLocal[day].horas[$scope.index + 1], $scope.horas + ":" + $scope.minutos)){
-						console.log("Hora não pode ser MAIOR que o checkin superior");
-						podeSalvar = false;
-					}
-				}
-
-				// Podemos salvar Arnaldo César Coelho?
-				if (podeSalvar)
-				{
-					console.log("Podemos salvar. Dia >> " + day);
-					$rootScope.itensLocal[day].horas[$scope.index] = $scope.horas + ":" + $scope.minutos + ":00"; // Segundos não importam
-				}
-			}
+			// Reordenar as horas
+			$rootScope.itensLocal[day].horas = $rootScope.itensLocal[day].horas.sort(function(a, b){return a-b});
 
 		}
 
 		this.salvar = function(){
 
 			if ($scope.conf !== undefined){
-				
+
 				// Agora define que configurou
 				$rootScope.configs.default = 1;
 
 				// Seta
-	    		$rootScope.configs.week[$scope.index] = $scope.horas + ":" + $scope.minutos;
+	    		$rootScope.configs.week[$scope.index] = (parseInt($scope.horas) * 60) + parseInt($scope.minutos);
+
+	    		console.log("Atualizar");
 
 	    		// Grava
 	    		localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));
@@ -136,9 +108,9 @@
 		    	// Retiro a janela de exibir
 				angular.element(document.querySelector('#dialog')).removeClass('show');
 
-			}else{				
+			}else{
 
-				time = $scope.horas + ":" + $scope.minutos + ':00' ;
+				time = (parseInt($scope.horas) * 60) + parseInt($scope.minutos);
 
 				($scope.data != undefined) ? dataSelecionada = $scope.data : dataSelecionada = $rootScope.today;
 
@@ -150,12 +122,12 @@
 
 				}else{
 					// Se não tinha nenhum item, esse é o primeiro registro
-					$rootScope.itensLocal[dataSelecionada] = {'horas':[time], 'saldo':0, 'total':0, 'end':0, 'sms':0, 'dinner':0};
+					$rootScope.itensLocal[dataSelecionada] = {'horas':[time], 'end':0, 'sms':0, 'dinner':0};
 				}
 
 		    	// Re-salvo no local
 		    	localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
-				
+
 				// Retiro a janela de exibir
 				angular.element(document.querySelector('#dialog')).removeClass('show');
 			}

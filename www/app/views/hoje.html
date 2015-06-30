@@ -3,16 +3,16 @@
 <ul id="checkpoints">
     <li on-long-press="hoje.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="(key, checkpoint) in checkpoints">
         <span class="interval" ng-show="key === 2">{{interval}}</span>
-        {{checkpoint.substr(0,5)}}
+        {{checkpoint.v}}
         <div class="menu-box" id="menu-box-{{$index}}">
-            <button type="button" class="edit" ng-click="hoje.editar($index)"><span class="icon-edit"></span></button>
-            <button type="button" class="remove" ng-click="hoje.deletar($index)"><span class="icon-remove"></span></button>
+            <button type="button" class="edit" ng-click="hoje.editar(checkpoint.p)"><span class="icon-edit"></span></button>
+            <button type="button" class="remove" ng-click="hoje.deletar(checkpoint.p)"><span class="icon-remove"></span></button>
         </div>
     </li>
 </ul>
 
-<footer id="footer"> 
-    
+<footer id="footer">
+
     <div id="fx-button-wrapper">
         <button class="fx-button cbutton--effect-novak" type="button" ng-click="hoje.salvarData()" on-long-press="hoje.novoCheckpoint($index)">
             <span style="margin-top: 100%;">&#43</span>
@@ -25,7 +25,7 @@
                 {{globalization.rodape[0]}}
             </div>
             <div class="right">
-                {{horasTrabalhadas}}
+                {{horasTrabalhadasF}}
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                 <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
             </div>
             <div class="right">
-                {{saldo}}
+                {{saldoF}}
             </div>
         </div>
 
@@ -45,7 +45,7 @@
                 {{globalization.rodape[2]}}
             </div>
             <div class="right">
-                {{horasHoraIr}}
+                {{horasHoraIrF}}
             </div>
         </div>
     </div>

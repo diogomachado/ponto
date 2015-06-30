@@ -1,9 +1,9 @@
 (function() {
 	angular.module('appponto').controller('DinnerCtrl', function($scope, $rootScope, Tool){
-		
+
 		// Configurações salvas
-		$scope.horas = $rootScope.configs.dinner.hour;
-		$scope.minutos = $rootScope.configs.dinner.minutes;
+		$scope.horas   = parseInt($rootScope.configs.dinner.hour / 60);
+		$scope.minutos = parseInt($rootScope.configs.dinner.hour % 60);
 		$scope.minutosAlerta = $rootScope.configs.dinner.minutesbefore;
 
 		$scope.$watch('horas', function(){
@@ -13,7 +13,7 @@
 
 			if(parseInt($scope.horas) < 10) {
 			  $scope.horas = '0' + $scope.horas;
-			}			
+			}
 
 		});
 
@@ -24,7 +24,7 @@
 
 			if(parseInt($scope.minutos) < 10) {
 			  $scope.minutos = '0' + $scope.minutos;
-			}			
+			}
 
 		});
 
@@ -97,8 +97,7 @@
 		this.save = function(){
 
 			// Configura
-			$rootScope.configs.dinner.hour = parseInt($scope.horas);
-			$rootScope.configs.dinner.minutes = parseInt($scope.minutos);
+			$rootScope.configs.dinner.hour = (parseInt($scope.horas) * 60) + parseInt($scope.minutos);
 			$rootScope.configs.dinner.minutesbefore = parseInt($scope.minutosAlerta);
 			$rootScope.configs.dinner.active = 1;
 
@@ -120,7 +119,7 @@
 			$rootScope.configs.dinner.active = 0;
 
 			// Salva local
-			localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));			
+			localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));
 
 			// Retiro a janela de exibir
 			angular.element(document.querySelector('#dialog-dinner')).removeClass('show');

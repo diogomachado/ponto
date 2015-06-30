@@ -1,5 +1,5 @@
 (function() {
-  
+
   // Inicializa phonegap.js
   var conf = {
 
@@ -9,7 +9,7 @@
       bindEvents: function() {
           document.addEventListener('deviceready', this.onDeviceReady, false);
       },
-      
+
       onDeviceReady: function() {
         console.log('Phonegap inicializado!');
         navigator.notification.beep(2);
@@ -55,7 +55,7 @@
     })
     .otherwise ({ redirectTo: '/' });
   })
-  .run(function($rootScope, $location, $interval){ 
+  .run(function($rootScope, $location, $interval){
 
     // Volta a página definida na session
     $rootScope.voltar = function(){
@@ -74,16 +74,16 @@
 
       'default'     : 0,
       'end'         : 0,
-      'dinner'      : { 'active':0, 'hour':0, 'minutes':0, 'minutesbefore':0 },
+      'dinner'      : { 'active':0, 'hour':0, 'minutesbefore':0 },
       'sms'         : { 'active':0, 'number':null },
       'week'        : {
-                        0:'00:00',
-                        1:'00:00',
-                        2:'00:00',
-                        3:'00:00',
-                        4:'00:00',
-                        5:'00:00',
-                        6:'00:00',
+                        0: 0,
+                        1: 0,
+                        2: 0,
+                        3: 0,
+                        4: 0,
+                        5: 0,
+                        6: 0,
                       },
     }
 
@@ -132,7 +132,7 @@
     }
 
     $rootScope.checkLocal(); // inicializa localStorage
-    
+
     // Configurações
     // ------------------------------------------------------
     if (localStorage.getItem("ponto-conf") !== null){
@@ -141,10 +141,10 @@
     }else{
         // Se não recebe um array vazio
         var conf_local = conf;
-    }  
+    }
 
     localStorage.setItem("ponto-conf", JSON.stringify(conf_local));
-    
+
     $rootScope.configs = conf_local;
 
     if (conf_local.default === 0){
@@ -152,27 +152,15 @@
     }
     // ------------------------------------------------------
 
+    // A cada segundo, verifica
     $interval(function(){
-      // Retorna a hora de agora      
-      var today = new Date();
 
+      var today = new Date();
       var H = today.getHours();
       var i = today.getMinutes();
-      var s = today.getSeconds();
 
-      if(H<10) {
-        H='0'+H
-      }
-
-      if(i<10) {
-        i='0'+i
-      }
-
-      if(s<10) {
-        s='0'+s
-      }
-
-      $rootScope.time = H + ':' + i + ':' + s;
+      // Define hora de agora em minutos
+      $rootScope.time = H * 60 + i;
 
       // Retorna o dia de hoje
       var dd = today.getDate();
@@ -181,7 +169,7 @@
 
       if(dd<10) {
         dd='0'+dd
-      } 
+      }
 
       if(mm<10) {
         mm='0'+mm
@@ -190,6 +178,7 @@
       $rootScope.today = dd+'/'+mm+'/'+yyyy;
     }, 1);
 
+    // Define a linguagem do app. Suporte é pt-BR ou en-US
     if (navigator.language == "pt-BR"){
       $rootScope.globalization = pt_BR;
     }else{

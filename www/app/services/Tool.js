@@ -1,17 +1,17 @@
 (function() {
 	angular.module('appponto').factory('Tool', function($rootScope){
-		
+
 		var Tool = {};
 
 		Tool.formatarDia = function(d) {
-		
+
 			var dd = d.getDate();
 			var mm = d.getMonth()+1; //January is 0!
 			var yyyy = d.getFullYear();
 
 			if(dd<10) {
 			  dd='0'+dd
-			} 
+			}
 
 			if(mm<10) {
 			  mm='0'+mm
@@ -21,15 +21,15 @@
 		},
 
 		Tool.formatarHora = function(h) {
-			
+
 			if (h < 0){
 				h = h * (-1);
-			}				
+			}
 
 			horas = parseInt(h/60);
 			minutos = h%60;
 
-			if (minutos > 60){	
+			if (minutos > 60){
 				restoMinutos = minutos % 60;
 				minutos = minutos + restoMinutos;
 			}
@@ -47,7 +47,7 @@
 
 		Tool.diferencaHoras = function(horaInicial, horaFinal) {
 
-			// Tratamento se a hora inicial é menor que a final	
+			// Tratamento se a hora inicial é menor que a final
 			if( ! Tool.isHoraInicialMenorHoraFinal(horaInicial, horaFinal) ){
 			 	aux = horaFinal;
 				horaFinal = horaInicial;
@@ -59,12 +59,12 @@
 
 			horasTotal = parseInt(hFim[0], 10) - parseInt(hIni[0], 10);
 			minutosTotal = parseInt(hFim[1], 10) - parseInt(hIni[1], 10);
-			
+
 		    if(minutosTotal < 0){
 		        minutosTotal += 60;
 		        horasTotal -= 1;
 		    }
-			
+
 		    horaFinal = Tool.completaZeroEsquerda(horasTotal) + ":" + Tool.completaZeroEsquerda(minutosTotal);
 		    return horaFinal;
 		},
@@ -74,13 +74,13 @@
 		* Exemplo:  12:35 + 07:20 = 19:55.
 		*/
 		Tool.somaHora = function(horaInicio, horaSomada, virarHoras) {
-			
+
 		    horaIni = horaInicio.split(':');
 		    horaSom = horaSomada.split(':');
 
 		    horasTotal = parseInt(horaIni[0], 10) + parseInt(horaSom[0], 10);
 			minutosTotal = parseInt(horaIni[1], 10) + parseInt(horaSom[1], 10);
-			
+
 		    if(minutosTotal >= 60){
 		        minutosTotal -= 60;
 		        horasTotal += 1;
@@ -92,7 +92,7 @@
 					horasTotal = horasTotal - 24;
 				}
 			}
-			
+
 		    horaFinal = Tool.completaZeroEsquerda(horasTotal) + ":" + Tool.completaZeroEsquerda(minutosTotal);
 		    return horaFinal;
 		},
@@ -104,13 +104,13 @@
 			horaIni = horaInicial.split(':');
 		    horaFim = horaFinal.split(':');
 
-			// Verifica as horas. Se forem diferentes, é só ver se a inicial 
+			// Verifica as horas. Se forem diferentes, é só ver se a inicial
 			// é menor que a final.
 			hIni = parseInt(horaIni[0], 10);
 			hFim = parseInt(horaFim[0], 10);
 			if(hIni != hFim)
 				return hIni < hFim;
-			
+
 			// Se as horas são iguais, verifica os minutos então.
 		    mIni = parseInt(horaIni[1], 10);
 			mFim = parseInt(horaFim[1], 10);
@@ -143,7 +143,7 @@
 		// Calcula as horas trabalhas
 		Tool.calcular = function(dia){
 
-			var horasTrabalhadas = "00:00";
+			var horasTrabalhadas = 0;
 
 			// Se tem aquela data no array
 			if (dia in $rootScope.itensLocal){
@@ -153,48 +153,57 @@
 
 					// Faço um loop pelos checkpoints
 					angular.forEach($rootScope.itensLocal[dia].horas, function(value, key){
-						
+
 						// verifica se é par
 						if (key % 2 == 0){
-							
 
 							// verifica se existe o proximo elemento
 							if ($rootScope.itensLocal[dia].horas[key + 1] !== undefined)
 							{
 								// Calcula a diferença de horas
-								diferenca = Tool.diferencaHoras($rootScope.itensLocal[dia].horas[key].substr(0,5), $rootScope.itensLocal[dia].horas[key + 1].substr(0,5));
+								diferenca = $rootScope.itensLocal[dia].horas[key + 1] - $rootScope.itensLocal[dia].horas[key];
 
 							}else{
 
 								if (key == 0)
 								{
-									diferenca = Tool.diferencaHoras($rootScope.itensLocal[dia].horas[key].substr(0,5), $rootScope.time.substr(0,5));
+									diferenca = $rootScope.time - $rootScope.itensLocal[dia].horas[key];
 								}else if(key != 2){
-									console.log("Key: " + key + " é dif. de 2");
-									diferenca = Tool.diferencaHoras($rootScope.time.substr(0,5), $rootScope.itensLocal[dia].horas[key].substr(0,5));
+									diferenca = $rootScope.time - $rootScope.itensLocal[dia].horas[key];
 								}
 							}
 
-							console.log(key + " É par, e a diferença é "+diferenca);
-
 							// Calcula as horas trabalhadas
 							if (key == 0){
-								horasTrabalhadas = diferenca;	
+								horasTrabalhadas = diferenca;
 							}else if(key != 2 || $rootScope.itensLocal[dia].horas[key + 1] !== undefined){
-								horasTrabalhadas = Tool.somaHora(horasTrabalhadas, diferenca);
+								horasTrabalhadas = horasTrabalhadas + diferenca;
 							}
 
-							// Seta total
-							$rootScope.itensLocal[dia].total = (parseInt(horasTrabalhadas.substr(0,2)) * 60) + (parseInt(horasTrabalhadas.substr(3,2)));;
-
 							// Salva
-							localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
+							localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
 						}
-					});					
+					});
 			}
 
 			// Retorno as horas trabalhadas para mostrar na view
 			return horasTrabalhadas;
+		}
+
+		Tool.converter = function(minutos){
+
+			var horas        = parseInt(minutos/60);
+			var restoMinutos = minutos%60;
+
+			return this.completaZeroEsquerda(horas) + ":" + this.completaZeroEsquerda(restoMinutos);
+		}
+
+		Tool.getHours = function(minutos){
+			return parseInt(minutos/60);
+		}
+
+		Tool.getMinutes = function(minutos){
+			return parseInt(minutos%60);
 		}
 
 		return Tool;
