@@ -149,7 +149,7 @@
 			if (dia in $rootScope.itensLocal){
 
 				// Se tem horas naquela data
-				if ($rootScope.itensLocal[dia].horas.length != 0)
+				if ($rootScope.itensLocal[dia].horas.length != 0){
 
 					// Faço um loop pelos checkpoints
 					angular.forEach($rootScope.itensLocal[dia].horas, function(value, key){
@@ -162,13 +162,11 @@
 							{
 								// Calcula a diferença de horas
 								diferenca = $rootScope.itensLocal[dia].horas[key + 1] - $rootScope.itensLocal[dia].horas[key];
-
 							}else{
 
-								if (key == 0)
-								{
+								if (key == 0){
 									diferenca = $rootScope.time - $rootScope.itensLocal[dia].horas[key];
-								}else if(key != 2){
+								}else if($rootScope.itensLocal[dia].horas[key + 1] !== undefined){
 									diferenca = $rootScope.time - $rootScope.itensLocal[dia].horas[key];
 								}
 							}
@@ -176,15 +174,18 @@
 							// Calcula as horas trabalhadas
 							if (key == 0){
 								horasTrabalhadas = diferenca;
-							}else if(key != 2 || $rootScope.itensLocal[dia].horas[key + 1] !== undefined){
+							}else if($rootScope.itensLocal[dia].horas[key + 1] !== undefined){
 								horasTrabalhadas = horasTrabalhadas + diferenca;
 							}
 
 							// Salva
 							localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
 						}
+
 					});
+				}
 			}
+			console.log("Horas trabalhadas: " + horasTrabalhadas);
 
 			// Retorno as horas trabalhadas para mostrar na view
 			return horasTrabalhadas;

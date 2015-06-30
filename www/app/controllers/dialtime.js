@@ -3,27 +3,27 @@
 
 		$scope.globalization = $rootScope.globalization;
 
-		// $scope.$watch('horas', function(){
+		$scope.$watch('horas', function(){
 
-		// 	// A hora chega aqui como string, então transformo ela em int antes de trabalhar
-		// 	$scope.horas = parseInt($scope.horas);
+			// A hora chega aqui como string, então transformo ela em int antes de trabalhar
+			$scope.horas = parseInt($scope.horas);
 
-		// 	if(parseInt($scope.horas) < 10) {
-		// 	  $scope.horas = '0' + $scope.horas;
-		// 	}
+			if(parseInt($scope.horas) < 10) {
+			  $scope.horas = '0' + $scope.horas;
+			}
 
-		// });
+		});
 
-		// $scope.$watch('minutos', function(){
+		$scope.$watch('minutos', function(){
 
-		// 	// A hora chega aqui como string, então transformo ela em int antes de trabalhar
-		// 	$scope.minutos = parseInt($scope.minutos);
+			// A hora chega aqui como string, então transformo ela em int antes de trabalhar
+			$scope.minutos = parseInt($scope.minutos);
 
-		// 	if(parseInt($scope.minutos) < 10) {
-		// 	  $scope.minutos = '0' + $scope.minutos;
-		// 	}
+			if(parseInt($scope.minutos) < 10) {
+			  $scope.minutos = '0' + $scope.minutos;
+			}
 
-		// });
+		});
 
 		this.aumentarHora = function(){
 

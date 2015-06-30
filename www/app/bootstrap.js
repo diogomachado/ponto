@@ -74,7 +74,7 @@
 
       'default'     : 0,
       'end'         : 0,
-      'dinner'      : { 'active':0, 'hour':0, 'minutesbefore':0 },
+      'dinner'      : { 'active':0, 'hour':60, 'minutesbefore':0 },
       'sms'         : { 'active':0, 'number':null },
       'week'        : {
                         0: 0,
@@ -93,7 +93,7 @@
                   'meses'  : ['January', 'February', 'March', 'April', 'may', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                   'menu'   : ['Today', 'Week', 'Month', 'All'],
                   'rodape' : ['Hours worked', 'Balance', 'Time to go'],
-                  'conf'   : ['Notifications','Hour', 'Output notification', 'Notify when complete hours of the day', 'Configure how many hours work a day'],
+                  'conf'   : ['Notifications','Hour', 'Output notification', 'Notify when complete hours of the day', 'Configure how many hours work a day', 'Lunch break', 'Set here how many hours you have lunch and we will alert you', 'automatic SMS', 'Tell your wife the time you can get out'],
                   'titulo_box' : 'Select a time',
                   'acoes'  : ['Close', 'Save']
                 }
@@ -103,7 +103,7 @@
                   'meses'  : ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                   'menu'   : ['Hoje', 'Semana', 'Mês', 'Todos'],
                   'rodape' : ['Horas trabalhadas', 'Saldo', 'Hora de ir'],
-                  'conf'   : ['Notificações','Horas por dia', 'Notificação de saída', 'Notificar quando completar as horas do dia', 'Configure quantas horas trabalha por dia'],
+                  'conf'   : ['Notificações','Horas por dia', 'Notificação de saída', 'Notificar quando completar as horas do dia', 'Configure quantas horas trabalha por dia', 'Intervalo almoço', 'Defina aqui quantas horas de almoço você tem e vamos te alertar', 'SMS automático', 'Avise a sua esposa a hora que você pode sair'],
                   'titulo_box' : 'Selecione um horário',
                   'acoes'  : ['Fechar', 'Salvar']
                 }

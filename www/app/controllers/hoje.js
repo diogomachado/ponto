@@ -14,15 +14,15 @@
 
 		// Atualiza a cada 1s
 		// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-		$interval(function(){
-			$scope.horasTrabalhadas = Tool.calcular($rootScope.today);
+		// $interval(function(){
+		// 	$scope.horasTrabalhadas = Tool.calcular($rootScope.today);
 
-			// Horas trabalhadas formatado
-			$scope.horasTrabalhadasF = Tool.converter($scope.horasTrabalhadas);
+		// 	// Horas trabalhadas formatado
+		// 	$scope.horasTrabalhadasF = Tool.converter($scope.horasTrabalhadas);
 
-			atualiza_saldo();
+		// 	atualiza_saldo();
 
-		}, 1000);
+		// }, 1000);
 		// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 		// Manda calcular com o dia
@@ -32,6 +32,9 @@
 
 			// Se data de hoje está no array
         	if ($rootScope.today in $rootScope.itensLocal){
+
+        		console.log($scope.horasTrabalhadas);
+        		console.log($scope.saldoBase);
 
 	        	// Acho o saldo final
 	        	$scope.saldoFinal = $scope.horasTrabalhadas - $scope.saldoBase;
@@ -111,7 +114,8 @@
 		}
 
 		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados
-		$rootScope.$watchCollection('itensLocal["'+ $rootScope.today + '"].horas', function(){
+		// $rootScope.$watchCollection('itensLocal["'+ $rootScope.today + '"].horas', function(){
+		$rootScope.$watch('time', function(){
 
 			var checks = [];
 
@@ -190,6 +194,10 @@
 				// Salvo tudo que eu fiz dentro de itensLocal no storage
 				localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
 	        }
+
+	        // Horas trabalhadas
+	        $scope.horasTrabalhadas  = Tool.calcular($rootScope.today);
+			$scope.horasTrabalhadasF = Tool.converter($scope.horasTrabalhadas);
 
 		});
 
