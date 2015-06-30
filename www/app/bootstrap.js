@@ -95,7 +95,8 @@
                   'rodape' : ['Hours worked', 'Balance', 'Time to go'],
                   'conf'   : ['Notifications','Hour', 'Output notification', 'Notify when complete hours of the day', 'Configure how many hours work a day', 'Lunch break', 'Set here how many hours you have lunch and we will alert you', 'automatic SMS', 'Tell your wife the time you can get out'],
                   'titulo_box' : 'Select a time',
-                  'acoes'  : ['Close', 'Save']
+                  'acoes'  : ['Close', 'Save'],
+                  'dinner' : ['Lunch hours', 'Alert before']
                 }
 
     var pt_BR = {
@@ -105,9 +106,9 @@
                   'rodape' : ['Horas trabalhadas', 'Saldo', 'Hora de ir'],
                   'conf'   : ['Notificações','Horas por dia', 'Notificação de saída', 'Notificar quando completar as horas do dia', 'Configure quantas horas trabalha por dia', 'Intervalo almoço', 'Defina aqui quantas horas de almoço você tem e vamos te alertar', 'SMS automático', 'Avise a sua esposa a hora que você pode sair'],
                   'titulo_box' : 'Selecione um horário',
-                  'acoes'  : ['Fechar', 'Salvar']
+                  'acoes'  : ['Fechar', 'Salvar'],
+                  'dinner' : ['Horas de almoço', 'Alertar antes']
                 }
-
 
     // Menu bar
     function menu(){

@@ -185,13 +185,16 @@
 					});
 				}
 			}
-			console.log("Horas trabalhadas: " + horasTrabalhadas);
 
 			// Retorno as horas trabalhadas para mostrar na view
 			return horasTrabalhadas;
 		}
 
 		Tool.converter = function(minutos){
+
+			if (minutos < 0){
+				minutos = minutos * (-1);
+			}
 
 			var horas        = parseInt(minutos/60);
 			var restoMinutos = minutos%60;

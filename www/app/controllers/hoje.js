@@ -12,37 +12,14 @@
 
 		var inicio, fim, diferenca, horas, horaVoltar, horasVoltar, minutosVoltar;
 
-		// Atualiza a cada 1s
-		// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-		// $interval(function(){
-		// 	$scope.horasTrabalhadas = Tool.calcular($rootScope.today);
-
-		// 	// Horas trabalhadas formatado
-		// 	$scope.horasTrabalhadasF = Tool.converter($scope.horasTrabalhadas);
-
-		// 	atualiza_saldo();
-
-		// }, 1000);
-		// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 		// Manda calcular com o dia
 		$scope.horasTrabalhadas = Tool.calcular($rootScope.today);
+		$scope.horasTrabalhadasF = Tool.converter($scope.horasTrabalhadas);
 
 		function atualiza_saldo(){
 
 			// Se data de hoje está no array
         	if ($rootScope.today in $rootScope.itensLocal){
-
-        		console.log($scope.horasTrabalhadas);
-        		console.log($scope.saldoBase);
-
-	        	// Acho o saldo final
-	        	$scope.saldoFinal = $scope.horasTrabalhadas - $scope.saldoBase;
-
-		        // Atualiza o saldo na view e no localStorage
-		        ($scope.saldoBase != 0) ? $scope.saldo = $scope.saldoBase - $scope.horasTrabalhadas : $scope.saldo = $scope.horasTrabalhadas;
-
-				$scope.saldoF = Tool.converter($scope.saldo);
 
 	        	// Calculo da hora de ir
 				if ($rootScope.itensLocal[$rootScope.today].horas.length === 3 && $scope.saldoFinal < 0){
@@ -53,9 +30,6 @@
 					// Aqui eu calculo a hora de ir
 					$scope.horasHoraIrF = Tool.converter($rootScope.itensLocal[$rootScope.today].horas[2] + $scope.saldo);
 					$scope.horasHoraIr  = $rootScope.itensLocal[$rootScope.today].horas[2] + $scope.saldo;
-
-					// Calculo quanto tempo de almoço
-					// $scope.interval = $rootScope.itensLocal[$rootScope.today].horas[1] + $rootScope.itensLocal[$rootScope.today].horas[2].substr(0,5);
 
 					// Verifico se posso criar uma schedule para avisar saida
 					// -------------------–≠------------------------------
@@ -113,9 +87,7 @@
         	}
 		}
 
-		// "Escuto" toda mudança em itensLocal e faça uma atualização nos dados
-		// $rootScope.$watchCollection('itensLocal["'+ $rootScope.today + '"].horas', function(){
-		$rootScope.$watch('time', function(){
+		$rootScope.$watchCollection('itensLocal["'+ $rootScope.today + '"].horas', function(){
 
 			var checks = [];
 
@@ -198,6 +170,15 @@
 	        // Horas trabalhadas
 	        $scope.horasTrabalhadas  = Tool.calcular($rootScope.today);
 			$scope.horasTrabalhadasF = Tool.converter($scope.horasTrabalhadas);
+
+			// Acho o saldo final
+        	$scope.saldoFinal = $scope.horasTrabalhadas - $scope.saldoBase;
+
+	        // Atualiza o saldo na view e no localStorage
+	        ($scope.saldoBase != 0) ? $scope.saldo = $scope.saldoBase - $scope.horasTrabalhadas : $scope.saldo = $scope.horasTrabalhadas;
+
+	        // Saldo formatado para a view
+			$scope.saldoF = Tool.converter($scope.saldo);
 
 		});
 

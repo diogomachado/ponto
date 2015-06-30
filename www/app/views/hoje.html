@@ -1,7 +1,7 @@
 <dialtime index="indexSelecionado" horas="horas" minutos="minutos" edit="editar"></dialtime>
 
 <ul id="checkpoints">
-    <li on-long-press="hoje.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="(key, checkpoint) in checkpoints">
+    <li ng-click="hoje.editar(checkpoint.p)" on-long-press="hoje.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="(key, checkpoint) in checkpoints">
         <span class="interval" ng-show="key === 2">{{interval}}</span>
         {{checkpoint.v}}
         <div class="menu-box" id="menu-box-{{$index}}">

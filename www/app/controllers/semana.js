@@ -1,19 +1,15 @@
 (function() {
 	angular.module('appponto').controller('SemanaCtrl', function($location, $scope, $rootScope, Tool){
-		
+
 		$rootScope.page = $location.path();
 		$scope.objsemana = [];
+		var totalExecutado = 0, saldoTotal = 0;
 
 		sessionStorage.setItem("ponto-redirect", '/semana');
 
 		function calcular(){
 
 			// Variaveis usadas para contar
-			var totalHora = 0;
-			var totalMinutos = 0;
-			var restoTotalHoras = 0;
-			var restoTotalMinutos = 0;
-			var totalExecutado = 0;
 			$scope.objsemana = [];
 
 			// ----------------------------------------------------------------
@@ -43,42 +39,38 @@
 
 					if ($rootScope.itensLocal[Tool.formatarDia(dt)].horas.length != 0){
 
-						var saldo = parseInt($rootScope.itensLocal[Tool.formatarDia(dt)].saldo);
-						var total = parseInt($rootScope.itensLocal[Tool.formatarDia(dt)].total);
+						// Percorro calculando o total
+						angular.forEach($rootScope.itensLocal[Tool.formatarDia(dt)].horas, function(value, key){
 
-						totalExecutado += total;
+							// verifica se é par
+							if (key % 2 == 0){
 
-						// Divido para achar as horas
-						// ---------------------------------
-						horas = parseInt(saldo/60);
-						minutos = saldo%60;
+								// verifica se existe o proximo elemento
+								if ($rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] !== undefined)
+								{
+									// Calcula a diferença de horas
+									diferenca = $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] - $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key];
+								}else{
 
-						// Calcula o total
-						totalHora = totalHora + horas;
-						totalMinutos = totalMinutos + minutos;
+									if (key == 0){
+										diferenca = $rootScope.time - $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key];
+									}else if($rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] !== undefined){
+										diferenca = $rootScope.time - $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key];
+									}
+								}
 
-						// Muda sinal caso seja positivo
-						if (horas < 0){
-							horas = horas * -1;
-						}
+								// Calcula as horas trabalhadas
+								if (key == 0){
+									horasTrabalhadas = diferenca;
+								}else if($rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] !== undefined){
+									horasTrabalhadas = horasTrabalhadas + diferenca;
+								}
+							}
+						});
 
-						if (minutos < 0){
-							minutos = minutos * -1;
-						}
-
-						if (minutos > 60){	
-							restoMinutos = minutos % 60;
-							minutos = minutos + restoMinutos;
-						}
-
-						if (horas <= 9){
-							horas = "0"+horas;
-						}
-
-						if (minutos <= 9){
-							minutos = "0"+minutos;
-						}
-						// ---------------------------------
+						totalExecutado += horasTrabalhadas;
+						saldo = horasTrabalhadas - $rootScope.configs.week[Tool.dia0a6()];
+						saldoTotal += saldo;
 
 						diaUrl = Tool.formatarDia(dt);
 						var re = new RegExp('/', 'g');
@@ -89,10 +81,10 @@
 						                'diaUrl'         : diaUrl,
 									 	'diaNumero'      : $rootScope.globalization.dias[dt.getDay()],
 									 	'diaKey'         : Tool.formatarDia(dt),
-										'totalTrabalhado': $rootScope.itensLocal[Tool.formatarDia(dt)].total,
-										'totalTrabalhadoFmt': Tool.formatarHora($rootScope.itensLocal[Tool.formatarDia(dt)].total),
+										'totalTrabalhado': horasTrabalhadas,
+										'totalTrabalhadoFmt': Tool.converter(horasTrabalhadas),
 										'saldo'          : saldo,
-										'saldoFmt'       : horas + ":" + minutos };
+										'saldoFmt'       : Tool.converter(saldo)};
 
 						// Adiciono no array
 						$scope.objsemana.push(objsemana);
@@ -103,48 +95,10 @@
 				n++; // Incrementa
 			}
 
-			// ----------------------------------------------------------------
-			
-			// Horas que ficaram nos minutos totais
-			if (totalMinutos > 60){	
-				restoTotalHoras = parseInt(totalMinutos/60);
-				totalMinutos = totalMinutos % 60;
-			}
-
-			// Soma o total com o resto das horas
-			totalHora = totalHora + restoTotalHoras;
-
-			// Saldo total em int
-			$scope.saldoTotal = (totalHora * 60) + totalMinutos;
-
-			// Muda sinal caso seja positivo
-			if (totalHora < 0){
-				totalHora = totalHora * -1;
-			}
-
-			if (totalMinutos < 0){
-				totalMinutos = totalMinutos * -1;
-			}
-
-			// Se o total de minutos for maior que 60, extraimos as horas
-			if (totalMinutos >= 60)
-			{
-				totalHora = totalHora + parseInt(totalMinutos/60);
-				totalMinutos = totalMinutos % 60;
-			}
-
-			// Aqui é apenas para formatação
-			if (totalHora <= 9){
-				totalHora = "0"+totalHora;
-			}
-
-			if (totalMinutos <= 9){
-				totalMinutos = "0"+totalMinutos;
-			}
-
 			// Seta na view
-			$scope.totalExecutado = Tool.formatarHora(totalExecutado);
-			$scope.saldoTotalFmt = totalHora + ":" + totalMinutos;
+			$scope.totalExecutado = Tool.converter(totalExecutado);
+			$scope.saldoTotal     = saldoTotal;
+			$scope.saldoTotalFmt  = Tool.converter(saldoTotal);
 		}
 
 		calcular();
@@ -164,7 +118,7 @@
 
 	    	// Adiciona classe para aparecer
 	    	angular.element(document.querySelector('#menu-box-' + index)).addClass('show');
-	    	
+
 	    	// Vibra rapidão
 	    	navigator.vibrate(50);
 	    }
@@ -177,7 +131,7 @@
 			calcular();
 
 			// Salva local
-			localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
+			localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
 		}
 
 	});

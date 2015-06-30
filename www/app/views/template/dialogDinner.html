@@ -1,8 +1,8 @@
 <div class="dialog-view-container">
     <div id="dialog-dinner" class="dialog view">
       <div class="dialog-view-details">
-        
-        <h3>Tempo almoço</h3>
+
+        <h3>{{globalization.dinner[0]}}</h3>
         <div class="time-wrapper">
             <div class="time-box">
     			<button type="button" ng-click="dinner.aumentarHora()"><span class="icon-plus"></span></button>
@@ -16,7 +16,7 @@
     		</div>
         </div>
 
-        <h3>Alertar minutos antes acabar</h3>
+        <h3>{{globalization.dinner[1]}}</h3>
         <div class="time-wrapper">
             <div class="time-box horizontal">
     			<button type="button" ng-click="dinner.aumentarMinutoAlerta()"><span class="icon-plus"></span></button>

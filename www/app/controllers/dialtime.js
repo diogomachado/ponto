@@ -82,8 +82,15 @@
 
 		function atualizarHoras(day){
 
-			// Puxa a hora para dentro do array
-			$rootScope.itensLocal[day].horas.push((parseInt($scope.horas) * 60) + parseInt($scope.minutos));
+			// Atualiza com os valores do scopo
+			if ($scope.index == undefined){
+
+				// Puxa a hora para dentro do array
+				$rootScope.itensLocal[day].horas.push((parseInt($scope.horas) * 60) + parseInt($scope.minutos));
+
+			}else{
+				$rootScope.itensLocal[day].horas[$scope.index] = (parseInt($scope.horas) * 60) + parseInt($scope.minutos); // Segundos não importam
+			}
 
 			// Reordenar as horas
 			$rootScope.itensLocal[day].horas = $rootScope.itensLocal[day].horas.sort(function(a, b){return a-b});
