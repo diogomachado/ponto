@@ -1,5 +1,5 @@
 (function() {
-	angular.module('appponto').controller('TodosCtrl', function($scope, $location, $rootScope){
+	angular.module('appponto').controller('TodosCtrl', function($scope, $location, $rootScope, Tool){
 		$rootScope.page = $location.path();
 		$scope.checkpoints = {};
 
@@ -21,5 +21,9 @@
 			}
 
 		});
+
+		this.converter = function(v){
+			return Tool.converter(v);
+		}
 	});
 })();

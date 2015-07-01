@@ -80,7 +80,7 @@ body {
 
 .icon-saldo-minus,
 .icon-saldo-plus{
-  float: right; 
+  float: right;
   margin-right: 11px;
 }
 
@@ -242,7 +242,7 @@ body {
   margin-left: 8px;
 }
 
-#checkpoints-all li ul li:after, 
+#checkpoints-all li ul li:after,
   #checkpoints li:after{
     font-family: 'icomoon';
     speak: none;
@@ -264,10 +264,10 @@ body {
     color: #F0C005;
 }
 
-#checkpoints-all li ul li.in:after, 
+#checkpoints-all li ul li.in:after,
 #checkpoints li.in:after{
     content: "\e606";
-    color: #19BD40;   
+    color: #19BD40;
 }
 
 .checkpoint-month{
@@ -275,7 +275,7 @@ body {
   margin-bottom: 5px;
   border-bottom: 1px #414141 solid;
   color: #5E5E5E;
-  padding: 5px 15px;
+  padding: 20px;
 }
 
 
@@ -306,7 +306,7 @@ body {
 }
 
 #footer .row .right{
-  position:relative; width: 20%; float: left; 
+  position:relative; width: 20%; float: left;
   text-align: right;
 }
 
@@ -518,7 +518,7 @@ input[type=checkbox] {
     content: "";
     display: inline-block;
     vertical-align: middle;
-    width: 0; 
+    width: 0;
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
@@ -786,7 +786,7 @@ dialtime{
 }
 .time-box button{
   width: 100%;
-  padding: 20px; 
+  padding: 20px;
   border: 0;
   margin: 0;
   line-height: 0;
@@ -822,7 +822,7 @@ dialtime{
   position: relative;
   float: left;
   width: 33.333333333%;
-  padding: 20px 0; 
+  padding: 20px 0;
   border: 0;
   margin: 0;
   line-height: 0;
@@ -881,7 +881,7 @@ dialtime{
 }
 
 .nav-system li.active{
- border-left: 5px #00BD00 solid; 
+ border-left: 5px #00BD00 solid;
  transition-duration: 0.75s;
 }
 
