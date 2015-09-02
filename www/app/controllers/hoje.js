@@ -131,7 +131,7 @@
 					if ($rootScope.itensLocal[$rootScope.today].horas.length === 2){
 
 						// Calculo a hora que tem que voltar do almoço baseado no tempo configurado
-						horaVoltar = $rootScope.configs.dinner.hour + $rootScope.itensLocal[$rootScope.today].horas[1];
+						horaVoltar = ($rootScope.configs.dinner.hour + $rootScope.itensLocal[$rootScope.today].horas[1]) - $rootScope.itensLocal[$rootScope.today].dinner.minutesbefore;
 
 						// Verifico se posso criar uma schedule para avisar saida
 						// -------------------------------------------------
@@ -142,7 +142,7 @@
 
 							// Pego hora e minutos
 							horasVoltar   = parseInt(horaVoltar / 60);
-							minutosVoltar = (parseInt(horaVoltar % 60)) - $rootScope.itensLocal[$rootScope.today].dinner.minutesbefore;
+							minutosVoltar = (parseInt(horaVoltar % 60));
 
 							// Atualizo o objeto
 							d.setHours(horasVoltar,minutosVoltar);
@@ -153,7 +153,8 @@
 							    title:   'Intervalo acabando',
 							    message: 'Horário de almoço termina em ' + $rootScope.configs.dinner.minutesbefore + ' minutos',
 							    date:    d,
-							    sound: 'TYPE_ALARM'
+							    // sound: 'TYPE_ALARM'
+							    sound: '/android_asset/www/sound/siren.mp3'
 							});
 
 							$rootScope.itensLocal[$rootScope.today].dinner = 1; // Pronto, já marcou, agora chega

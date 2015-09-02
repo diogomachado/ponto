@@ -1,6 +1,6 @@
-<ul id="checkpoints" style="padding-bottom: 82px;">
+<ul id="checkpoints">
     <li on-long-press="mes.abrirMenu($index)" ng-repeat="obj in objmes"> <span class="checkpoint-day">{{obj.dia}}</span> {{obj.diaNumero}}
-        <span class="box-balance">            
+        <span class="box-balance">
             <div class="work">
                 {{obj.totalTrabalhadoFmt}}
             </div>
@@ -30,7 +30,7 @@
         </div>
         <div class="row minus-margin-row">
             <div class="left">
-             	{{globalization.rodape[1]}}
+                {{globalization.rodape[1]}}
 
                 <span ng-show="saldoTotal > 0" class="icon-saldo-plus icon-plus"></span>
                 <span ng-show="saldoTotal < 0" class="icon-saldo-minus icon-minus"></span>
