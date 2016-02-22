@@ -98,27 +98,40 @@
 			}
 		}
 
+
 		this.export = function(){
 
-			var saveData = (function () {
-			    var a = document.createElement("a");
-			    document.body.appendChild(a);
-			    a.style = "display: none";
-			    return function (data, fileName) {
-			        var json = JSON.stringify(data),
-			            blob = new Blob([json], {type: "octet/stream"}),
-			            url = window.URL.createObjectURL(blob);
-			        a.href = url;
-			        a.download = fileName;
-			        a.click();
-			        window.URL.revokeObjectURL(url);
-			    };
-			}());
+            var local = JSON.parse(localStorage.getItem("ponto-horarios")); //csv as a string
 
-			var data = localStorage.getItem('ponto-horarios'),
-			    fileName = "ponto-horarios.json";
+            var conteudo = '';
+            var string = '';
 
-			saveData(data, fileName);
-		}
+            // Percorre as datas
+            angular.forEach(local, function(item, i){
+
+                var string = '';
+
+                // Percorre os horarios
+                angular.forEach(item.horas, function(hora, j){
+                    string += Tool.formatarHora(hora) + ";";
+                });
+
+                conteudo += i + ';' + string + '\r\n';
+            });
+
+            var blob = new Blob([conteudo], {type: "text/csv"});
+            var url = URL.createObjectURL(blob);
+
+            var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.style = "display: none";
+
+            a.href = url;
+            a.download = "file.csv";
+            a.click();
+            window.URL.revokeObjectURL(url);
+
+        }
+
 	});
 })();

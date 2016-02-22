@@ -23,6 +23,8 @@
 	<div class="conf-header">{{globalization.conf[0]}}</div>
 	<div class="conf-body">
 
+        <button class="btn" ng-click="conf.export()">Download CSV</button><br>
+
 		<ul class="nav-system">
 			<li ng-click="conf.end()" ng-class="{'active': active_end == true}">
 				<h1>{{globalization.conf[2]}}</h1>

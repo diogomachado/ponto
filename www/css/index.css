@@ -274,7 +274,7 @@ body {
   background: #171717;
   border-bottom: 1px #414141 solid;
   color: #5E5E5E;
-  padding: 20px;
+  padding: 3px;
 }
 
 
@@ -962,3 +962,12 @@ dialtime{
   }
 }
 @media (min-width: 1200px) and (max-width : 1325px){}
+
+.btn{
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    margin-bottom: 10px;
+    background: #CECECE;
+    border-radius: 2px;
+}
