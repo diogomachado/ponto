@@ -8,6 +8,7 @@
 
 	<div class="conf-body">
 		<div class="conf-dias-botoes">
+            <button type="button" ng-click="conf.configurar()">Padrão <span></span></button>
 			<button ng-class="{'day-disable': semana.1 == '00:00'}" type="button" ng-click="conf.configurar(1)">{{globalization.dias[1]}} <span>{{semana.1}}</span></button>
 			<button ng-class="{'day-disable': semana.2 == '00:00'}" type="button" ng-click="conf.configurar(2)">{{globalization.dias[2]}} <span>{{semana.2}}</span></button>
 			<button ng-class="{'day-disable': semana.3 == '00:00'}" type="button" ng-click="conf.configurar(3)">{{globalization.dias[3]}} <span>{{semana.3}}</span></button>
@@ -23,7 +24,7 @@
 	<div class="conf-header">{{globalization.conf[0]}}</div>
 	<div class="conf-body">
 
-        <button class="btn" ng-click="conf.export()">Download CSV</button><br>
+        <button class="btn" ng-click="conf.export()">Exportar CSV</button><br>
 
 		<ul class="nav-system">
 			<li ng-click="conf.end()" ng-class="{'active': active_end == true}">

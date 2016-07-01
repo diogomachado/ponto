@@ -117,9 +117,12 @@
 
     // Verifica se tem uma lista armazenada offline
     $rootScope.checkLocal = function(){
-        if (localStorage.getItem("ponto-horarios") !== null){
+
+        var data = localStorage.getItem("ponto-horarios");
+
+        if (data){
             // Retorna a lista em formato array
-            var itens = JSON.parse(localStorage["ponto-horarios"]);
+            var itens = JSON.parse(data);
         }else{
             // Se não recebe um array vazio
             var itens = {};

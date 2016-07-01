@@ -82,14 +82,24 @@
 
 		function atualizarHoras(day){
 
+            var minutos = (parseInt($scope.horas) * 60) + parseInt($scope.minutos);
+
 			// Atualiza com os valores do scopo
 			if ($scope.index == undefined){
 
-				// Puxa a hora para dentro do array
-				$rootScope.itensLocal[day].horas.push((parseInt($scope.horas) * 60) + parseInt($scope.minutos));
+                if ($rootScope.itensLocal[day].horas.indexOf($rootScope.time) == -1){
+
+				    // Puxa a hora para dentro do array
+				    $rootScope.itensLocal[day].horas.push(minutos);
+                }
+                else{
+
+                    // TODO: Exibir um alerta ao usuário
+                    console.log("Já existe este registro desta hora");
+                }
 
 			}else{
-				$rootScope.itensLocal[day].horas[$scope.index] = (parseInt($scope.horas) * 60) + parseInt($scope.minutos); // Segundos não importam
+				$rootScope.itensLocal[day].horas[$scope.index] = minutos; // Segundos não importam
 			}
 
 			// Reordenar as horas
@@ -101,13 +111,21 @@
 
 			if ($scope.conf !== undefined){
 
+                console.info("Conf: Atualizando configurações");
+
 				// Agora define que configurou
 				$rootScope.configs.default = 1;
 
-				// Seta
-	    		$rootScope.configs.week[$scope.index] = (parseInt($scope.horas) * 60) + parseInt($scope.minutos);
+                // Se não tiver o index do dia da semana, seta padrão para todos
+                if (!$scope.index){
 
-	    		console.log("Atualizar");
+                    for (var i = 0; i < 7; i++) {
+                        $rootScope.configs.week[i] = (parseInt($scope.horas) * 60) + parseInt($scope.minutos);
+                    }
+                }
+                else{
+                    $rootScope.configs.week[$scope.index] = (parseInt($scope.horas) * 60) + parseInt($scope.minutos);
+                }
 
 	    		// Grava
 	    		localStorage.setItem("ponto-conf", JSON.stringify($rootScope.configs));
@@ -124,10 +142,10 @@
 				// Verifica se existe essa data dentro do objeto
 				if (dataSelecionada in $rootScope.itensLocal){
 
-						// Manda atualizar :D
-						atualizarHoras(dataSelecionada);
-
-				}else{
+					// Manda atualizar :D
+					atualizarHoras(dataSelecionada);
+				}
+                else{
 					// Se não tinha nenhum item, esse é o primeiro registro
 					$rootScope.itensLocal[dataSelecionada] = {'horas':[time], 'end':0, 'sms':0, 'dinner':0};
 				}

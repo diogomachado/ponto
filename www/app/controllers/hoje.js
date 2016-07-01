@@ -191,24 +191,28 @@
 				// Beleza, adiciona a hora (antes verifico se existe)
 				if ($rootScope.itensLocal[$rootScope.today].horas.indexOf($rootScope.time) == -1){
 
-					if ($rootScope.itensLocal[$rootScope.today].horas.length === 0){
+                    if ($rootScope.itensLocal[$rootScope.today].horas.length === 0){
 
-						// Puxa a hora para dentro do array
-						$rootScope.itensLocal[$rootScope.today].horas.push($rootScope.time);
+                        // Puxa a hora para dentro do array
+                        $rootScope.itensLocal[$rootScope.today].horas.push($rootScope.time);
 
-					}else{
+                    }else{
 
-						// Puxa a hora para dentro do array
-						$rootScope.itensLocal[$rootScope.today].horas.push($rootScope.time);
-					}
-				}
+                        // Puxa a hora para dentro do array
+                        $rootScope.itensLocal[$rootScope.today].horas.push($rootScope.time);
+                    }
 
-				// Reordenar as horas
-				$rootScope.itensLocal[$rootScope.today].horas = $rootScope.itensLocal[$rootScope.today].horas.sort(function(a, b){return a-b});
+                    // Reordenar as horas
+                    $rootScope.itensLocal[$rootScope.today].horas = $rootScope.itensLocal[$rootScope.today].horas.sort(function(a, b){return a-b});
 
-				// Itens para mostrar na view
-				$scope.checkpoints = $rootScope.itensLocal[$rootScope.today].horas;
+                    // Itens para mostrar na view
+                    $scope.checkpoints = $rootScope.itensLocal[$rootScope.today].horas;
+                }
+                else{
 
+                    // TODO: Exibir um alerta ao usuário
+                    console.log("Já existia essa hora registrada");
+                }
 			}else{
 				// Se não tinha nenhum item, esse é o primeiro registro
 				$rootScope.itensLocal[$rootScope.today] = {'horas':[$rootScope.time], 'total':0, 'end':0, 'sms':0, 'dinner':0};

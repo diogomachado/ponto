@@ -277,6 +277,9 @@ body {
   padding: 3px;
 }
 
+#checkpoints li.ng-click-active{
+  background: #1a1a1a;
+}
 
 #footer-wrapper{
   background: #414141;
@@ -470,7 +473,7 @@ input[type=checkbox] {
     background: #2196F3;
     font-size: 30px;
     line-height: 0.7em;
-    border-radius: 20%;
+    border-radius: 50%;
     color: #FFF;
     padding: 15px 16px;
     outline: none;
