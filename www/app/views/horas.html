@@ -1,9 +1,9 @@
 <dialtime index="indexSelecionado" horas="horas" minutos="minutos" edit="editar" data="data"></dialtime>
 
 <ul id="checkpoints">
-    <li on-long-press="hora.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="(key, checkpoint) in checkpoints">  
+    <li on-long-press="hora.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="(key, checkpoint) in checkpoints">
         <span class="interval" ng-show="key === 2">{{interval}}</span>
-        {{checkpoint.substr(0,5)}}
+        {{ checkpoint | horaPt }}
         <div class="menu-box" id="menu-box-{{$index}}">
             <button type="button" class="edit" ng-click="hora.editar($index)"><span class="icon-edit"></span></button>
             <button type="button" class="remove" ng-click="hora.deletar($index)"><span class="icon-remove"></span></button>
@@ -11,10 +11,10 @@
     </li>
 </ul>
 
-<footer id="footer"> 
-    
+<footer id="footer">
+
     <div id="fx-button-wrapper">
-        <button class="fx-button cbutton--effect-novak" type="button" ng-click="hora.salvarData()" on-long-press="hora.novoCheckpoint($index)">
+        <button class="fx-button cbutton--effect-novak" type="button" ng-click="horas.salvarData()" on-long-press="hora.novoCheckpoint($index)">
             <span style="margin-top: 100%;">&#43</span>
         </button>
     </div>
@@ -25,7 +25,7 @@
                 {{globalization.rodape[0]}}
             </div>
             <div class="right">
-                {{horasTrabalhadas}}
+                {{horasTrabalhadas | horaPt }}
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                 <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
             </div>
             <div class="right">
-                {{saldo}}
+                {{ saldo | horaPt }}
             </div>
         </div>
     </div>

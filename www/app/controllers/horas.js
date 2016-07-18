@@ -15,15 +15,10 @@
 		// Variaveis comuns
 		$scope.saldoBase        = $rootScope.configs.week[Tool.dia0a6(dt)];
 		$scope.saldo            = $rootScope.configs.week[Tool.dia0a6(dt)]; // Será decrementado
-		$scope.saldoFinal       = -(parseInt($scope.saldoBase.substr(0,2)) * 60) + parseInt($scope.saldoBase.substr(3,2));
+		$scope.saldoFinal       = $scope.saldoBase;
 
 		// Itens para mostrar na view
 		$scope.checkpoints = $rootScope.itensLocal[dt].horas;
-
-		// Calculo quanto tempo de almoço
-		if ($rootScope.itensLocal[dt].horas.length >= 3){
-			$scope.interval = Tool.diferencaHoras($rootScope.itensLocal[dt].horas[1].substr(0,5),$rootScope.itensLocal[dt].horas[2].substr(0,5));
-		}
 
 		// Atualiza a cada 1s
 		// :::::::::::::::::::::::::::::::::::::::::::::
@@ -42,31 +37,24 @@
         	if (dt in $rootScope.itensLocal){
 
 				// Aqui eu vejo se o saldo foi positivo ou negativo
-	        	trabalhou      = (parseInt($scope.horasTrabalhadas.substr(0,2)) * 60) + (parseInt($scope.horasTrabalhadas.substr(3,2)));
-	        	tinhaTrabalhar = (parseInt($scope.saldoBase.substr(0,2)) * 60) + (parseInt($scope.saldoBase.substr(3,2)));
+	        	trabalhou      = $scope.horasTrabalhadas;
+	        	tinhaTrabalhar = $scope.saldoBase;
 
 	        	// Acho o saldo final
 	        	$scope.saldoFinal = trabalhou - tinhaTrabalhar;
 	        	$scope.saldo = Tool.formatarHora($scope.saldoFinal);
-	        	
-	        	console.log("Tinha trabalhar: " + tinhaTrabalhar);
-	        	console.log("Saldo final: "+$scope.saldoFinal);
-
-	        	// Atualiza o que já trabalhou
-	    		// $rootScope.itensLocal[dt].total = trabalhou;
 
 		        // Atualiza o saldo na view e no localStorage
-	        	$scope.saldo = Tool.diferencaHoras($scope.horasTrabalhadas, $scope.saldoBase);
-	        	// $rootScope.itensLocal[dt].saldo = $scope.saldoFinal;
+	        	$scope.saldo = $scope.saldoBase - $scope.horasTrabalhadas;
 
 	        	// Salva local
-				localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal)); 
+				localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
         	}
 		}
 
 		// Definindo métodos globais para serem acessados pelos controllers
 	    this.salvarData = function(){
-	    				
+
 			$rootScope.checkLocal();
 
 			// Verifica se existe essa data dentro do objeto
@@ -74,26 +62,20 @@
 
 				// Beleza, adiciona a hora (antes verifico se existe)
 				if ($rootScope.itensLocal[dt].horas.indexOf($rootScope.time) == -1){
-					
-					if ($rootScope.itensLocal[dt].horas.length === 0){	
+
+					if ($rootScope.itensLocal[dt].horas.length === 0){
 
 						// Puxa a hora para dentro do array
 						$rootScope.itensLocal[dt].horas.push($rootScope.time);
 
-					}else{						
+					}else{
 
 						// Variavel de ajuda
-						inicio = $rootScope.time.substr(0,5);
-						fim = $rootScope.itensLocal[dt].horas[($rootScope.itensLocal[dt].horas.length - 1)].substr(0,5);
+						inicio = $rootScope.time;
+						fim = $rootScope.itensLocal[dt].horas[($rootScope.itensLocal[dt].horas.length - 1)];
 
-						if (!(Tool.isHoraInicialMenorHoraFinal(inicio, fim)) && (inicio !== fim)){
-							
-							// Puxa a hora para dentro do array
-							$rootScope.itensLocal[dt].horas.push($rootScope.time);
-
-						}else{
-							console.log("Você tentou adicionar uma data menor que o último checkin");
-						}
+						// Puxa a hora para dentro do array
+						$rootScope.itensLocal[dt].horas.push($rootScope.time);
 					}
 				}
 
@@ -121,7 +103,7 @@
 	    }
 
 	    this.novoCheckpoint = function(index){
-	    	
+
 	    	var dt = new Date();
 
 	    	// Recolho a hora pegando do index do array do dia de hoje
@@ -130,7 +112,7 @@
 
 	    	// Scope é passado como modelo para a directiva de tempo (index é a ID do array de horas registradas)
 	    	$scope.indexSelecionado = index;
-			
+
 			// Exibe o dialog
 	    	angular.element(document.querySelector('#dialog')).addClass('show');
 
@@ -160,7 +142,7 @@
 
 	    	// Adiciona classe para aparecer
 	    	angular.element(document.querySelector('#menu-box-' + index)).addClass('show');
-	    	
+
 	    	// Vibra rapidão
 	    	navigator.vibrate(50);
 	    }

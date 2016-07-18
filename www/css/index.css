@@ -144,7 +144,6 @@ body {
 #header{
     overflow: hidden;
     background: #3D3D3D;
-    box-shadow: 0 2px 8px #1D1D1D;
 }
 
 #header > nav > ul{
@@ -157,7 +156,7 @@ body {
 #header > nav > ul > li{
     float: left;
     text-align: center;
-    width: 22%;
+    width: 29.333333333%;
 }
 #header > nav > ul > li.conf{
     width: 12%;
@@ -174,13 +173,11 @@ body {
 }
 #header > nav > ul > li > a.active{
     border-bottom: 2px #03A9F4 solid;
-    background: #111;
     color: #FFF;
 }
 
 #header > nav > ul > li > a:active{
     border-bottom: 2px #03A9F4 solid;
-    background: #111;
 }
 
 /* Navegação interna */

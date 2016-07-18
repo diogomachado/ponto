@@ -17,7 +17,7 @@
   };
 
   // Inicializa o Angular.js
-  angular.module('appponto',['ngRoute', 'ngTouch'])
+  angular.module('appponto',['ngRoute'])
   .config(function($routeProvider)
   {
 
