@@ -55,7 +55,7 @@
     })
     .otherwise ({ redirectTo: '/' });
   })
-  .run(function($rootScope, $location, $interval){
+  .run(function($rootScope, $location, $interval, Tool){
 
     // Volta a página definida na session
     $rootScope.voltar = function(){
@@ -156,31 +156,13 @@
     }
     // ------------------------------------------------------
 
-    // A cada segundo, verifica
+    // Define a data de hoje
+    $rootScope.time  = Tool.getNow();
+    $rootScope.today = Tool.getToday();
+
     $interval(function(){
-
-      var today = new Date();
-      var H = today.getHours();
-      var i = today.getMinutes();
-
-      // Define hora de agora em minutos
-      $rootScope.time = H * 60 + i;
-
-      // Retorna o dia de hoje
-      var dd = today.getDate();
-      var mm = today.getMonth()+1; //January is 0!
-      var yyyy = today.getFullYear();
-
-      if(dd<10) {
-        dd='0'+dd
-      }
-
-      if(mm<10) {
-        mm='0'+mm
-      }
-
-      $rootScope.today = dd+'/'+mm+'/'+yyyy;
-    }, 1);
+        $rootScope.time  = Tool.getNow();
+    }, 1000);
 
     // Define a linguagem do app. Suporte é pt-BR ou en-US
     if (navigator.language == "pt-BR"){

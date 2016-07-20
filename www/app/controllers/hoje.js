@@ -14,7 +14,6 @@
 
 		// Manda calcular com o dia
 		$scope.horasTrabalhadas = Tool.calcular($rootScope.today);
-		$scope.horasTrabalhadasF = Tool.converter($scope.horasTrabalhadas);
 
 		function atualiza_saldo(){
 
@@ -26,10 +25,6 @@
 
 					// Passo a exibir a hora de ir
 					$scope.horaIr = true;
-
-					// Aqui eu calculo a hora de ir
-					$scope.horasHoraIrF = Tool.converter($rootScope.itensLocal[$rootScope.today].horas[2] + $scope.saldo);
-					$scope.horasHoraIr  = $rootScope.itensLocal[$rootScope.today].horas[2] + $scope.saldo;
 
 					// Verifico se posso criar uma schedule para avisar saida
 					// -------------------–≠------------------------------
@@ -77,14 +72,12 @@
 						// Salva local
 						localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
 					}
-
 				}else{
 					$scope.horaIr = false;
 				}
 
 				// Horas trabalhadas
 		        $scope.horasTrabalhadas  = Tool.calcular($rootScope.today);
-				$scope.horasTrabalhadasF = Tool.converter($scope.horasTrabalhadas);
 
 				// Acho o saldo final
 	        	$scope.saldoFinal = $scope.horasTrabalhadas - $scope.saldoBase;
@@ -92,8 +85,11 @@
 		        // Atualiza o saldo na view e no localStorage
 		        ($scope.saldoBase != 0) ? $scope.saldo = $scope.saldoBase - $scope.horasTrabalhadas : $scope.saldo = $scope.horasTrabalhadas;
 
-		        // Saldo formatado para a view
-				$scope.saldoF = Tool.converter($scope.saldo);
+                // Aqui eu calculo a hora de ir
+                if ($rootScope.itensLocal[$rootScope.today].horas[2] != undefined){
+                    $scope.horasHoraIr = {};
+                    $scope.horasHoraIr = $rootScope.time + ($scope.saldoFinal * -1);
+                }
 
 	        	// Salva local
 				localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
@@ -110,8 +106,8 @@
 
 			var checks = [];
 
-			// Verifica se existe essa data dentro do objeto
-	      	if ($rootScope.today in $rootScope.itensLocal){
+            // Verifica se existe essa data dentro do objeto
+            if ($rootScope.today in $rootScope.itensLocal){
 
 	      		// Faz for para formatar as datas
 	      		angular.forEach($rootScope.itensLocal[$rootScope.today].horas, function(value, key) {
@@ -169,15 +165,16 @@
 					if ($rootScope.itensLocal[$rootScope.today].horas.length >= 3){
 
 						// Calculo quanto tempo de almoço
-						$scope.interval = Tool.converter($rootScope.itensLocal[$rootScope.today].horas[2] - $rootScope.itensLocal[$rootScope.today].horas[1]);
+						$scope.interval = $rootScope.itensLocal[$rootScope.today].horas[2] - $rootScope.itensLocal[$rootScope.today].horas[1];
 					}
 
 					Tool.calcular($rootScope.today);
 
 				}
 
-	        	atualiza_saldo();
-	        }
+                atualiza_saldo();
+            }
+
 		});
 
 		// Definindo métodos globais para serem acessados pelos controllers

@@ -2,7 +2,7 @@
 
 <ul id="checkpoints">
     <li ng-click="hoje.editar(checkpoint.p)" on-long-press="hoje.abrirMenu($index)" ng-class="{'in': $index % 2 == 0, 'out': $index % 2 != 0}" ng-repeat="(key, checkpoint) in checkpoints">
-        <span class="interval" ng-show="key === 2">{{interval}}</span>
+        <span class="interval" ng-show="key === 2">{{ interval | horaPt }}</span>
         {{checkpoint.v}}
         <div class="menu-box" id="menu-box-{{$index}}">
             <button type="button" class="edit" ng-click="hoje.editar(checkpoint.p)"><span class="icon-edit"></span></button>
@@ -25,7 +25,7 @@
                 {{globalization.rodape[0]}}
             </div>
             <div class="right">
-                {{horasTrabalhadasF}}
+                {{ horasTrabalhadas | horaPt}}
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                 <span ng-show="saldoFinal < 0" class="icon-saldo-minus icon-minus"></span>
             </div>
             <div class="right">
-                {{saldoF}}
+                {{ saldo | horaPt}}
             </div>
         </div>
 
@@ -45,7 +45,7 @@
                 {{globalization.rodape[2]}}
             </div>
             <div class="right">
-                {{horasHoraIrF}}
+                {{ horasHoraIr | horaPt }}
             </div>
         </div>
     </div>

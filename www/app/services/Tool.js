@@ -20,6 +20,37 @@
 			return dd+'/'+mm+'/'+yyyy;
 		},
 
+        Tool.getNow = function(){
+
+            var today = new Date();
+            var H = today.getHours();
+            var i = today.getMinutes();
+
+            return H * 60 + i;
+        },
+
+        Tool.getToday = function(){
+
+            var today = new Date();
+            var H = today.getHours();
+            var i = today.getMinutes();
+
+            // Retorna o dia de hoje
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd='0'+dd;
+            }
+
+            if(mm<10) {
+                mm='0'+mm;
+            }
+
+            return dd+'/'+mm+'/'+yyyy;
+        },
+
 		Tool.formatarHora = function(h) {
 
 			if (h < 0){
@@ -163,20 +194,10 @@
 								// Calcula a diferença de horas
 								diferenca = $rootScope.itensLocal[dia].horas[key + 1] - $rootScope.itensLocal[dia].horas[key];
 							}else{
-
-								if (key == 0){
-									diferenca = $rootScope.time - $rootScope.itensLocal[dia].horas[key];
-								}else if($rootScope.itensLocal[dia].horas[key + 1] !== undefined){
-									diferenca = $rootScope.time - $rootScope.itensLocal[dia].horas[key];
-								}
+                                diferenca = $rootScope.time - $rootScope.itensLocal[dia].horas[key];
 							}
 
-							// Calcula as horas trabalhadas
-							if (key == 0){
-								horasTrabalhadas = diferenca;
-							}else if($rootScope.itensLocal[dia].horas[key + 1] !== undefined){
-								horasTrabalhadas = horasTrabalhadas + diferenca;
-							}
+							horasTrabalhadas = horasTrabalhadas + diferenca;
 
 							// Salva
 							localStorage.setItem("ponto-horarios", JSON.stringify($rootScope.itensLocal));
@@ -186,7 +207,6 @@
 				}
 			}
 
-			// Retorno as horas trabalhadas para mostrar na view
 			return horasTrabalhadas;
 		}
 
