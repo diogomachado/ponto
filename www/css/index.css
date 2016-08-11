@@ -217,6 +217,7 @@ body {
     list-style: none;
     font-size: 17px;
     font-family: "RobotoCondensed-Light";
+    margin-bottom: 80px;
 }
 
 #checkpoints-all li ul li.checkpoint-month{

@@ -23,78 +23,91 @@
 			// Variavel de apoio while
 			n = 1;
 
+			// Captura os checkpoints marcados
+			var horarios_db = JSON.parse(localStorage.getItem('ponto-horarios'));
+
 			// Agora eu vou percorrer a semana
 			while(n <= lastDay)
 			{
 				var day = dt.getDate(); // Atualiza day
 				var horas = 0;
-				var minutos = 0;
+				var minutos = 0, horasTrabalhadas = 0;
 
 				// Verifica se está nos objetos salvos
 				if (Tool.formatarDia(dt) in $rootScope.itensLocal){
 
-					if ($rootScope.itensLocal[Tool.formatarDia(dt)].horas.length != 0){
+					// Percorro calculando o total
+					angular.forEach($rootScope.itensLocal[Tool.formatarDia(dt)].horas, function(value, key){
 
-						// Percorro calculando o total
-						angular.forEach($rootScope.itensLocal[Tool.formatarDia(dt)].horas, function(value, key){
+						// verifica se é par
+						if (key % 2 == 0){
 
-							// verifica se é par
-							if (key % 2 == 0){
+							// verifica se existe o proximo elemento
+							if ($rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] !== undefined)
+							{
+								// Calcula a diferença de horas
+								diferenca = $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] - $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key];
+							}else{
 
-								// verifica se existe o proximo elemento
-								if ($rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] !== undefined)
-								{
-									// Calcula a diferença de horas
-									diferenca = $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] - $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key];
-								}else{
-
-									if (key == 0){
-										diferenca = $rootScope.time - $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key];
-									}else if($rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] !== undefined){
-										diferenca = $rootScope.time - $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key];
-									}
-								}
-
-								// Calcula as horas trabalhadas
 								if (key == 0){
-									horasTrabalhadas = diferenca;
+									diferenca = $rootScope.time - $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key];
 								}else if($rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] !== undefined){
-									horasTrabalhadas = horasTrabalhadas + diferenca;
+									diferenca = $rootScope.time - $rootScope.itensLocal[Tool.formatarDia(dt)].horas[key];
 								}
 							}
-						});
 
-						totalExecutado += horasTrabalhadas;
-						saldo = horasTrabalhadas - $rootScope.configs.week[Tool.dia0a6()];
-						saldoTotal += saldo;
+							// Calcula as horas trabalhadas
+							if (key == 0){
+								horasTrabalhadas = diferenca;
+							}else if($rootScope.itensLocal[Tool.formatarDia(dt)].horas[key + 1] !== undefined){
+								horasTrabalhadas = horasTrabalhadas + diferenca;
+							}
+						}
+					});
 
-						diaUrl = Tool.formatarDia(dt);
-						var re = new RegExp('/', 'g');
-						var diaUrl = diaUrl.replace(re, '-');
+					totalExecutado += horasTrabalhadas;
+					saldo = horasTrabalhadas - $rootScope.configs.week[Tool.dia0a6()];
+					saldoTotal += saldo;
 
-						// Crio objeto com as informações
-						objmes = { 	'dia'            : Tool.formatarDia(dt).substr(0,5),
-						                'diaUrl'         : diaUrl,
-									 	'diaNumero'      : $rootScope.globalization.dias[dt.getDay()],
-									 	'diaKey'         : Tool.formatarDia(dt),
-										'totalTrabalhado': horasTrabalhadas,
-										'totalTrabalhadoFmt': Tool.converter(horasTrabalhadas),
-										'saldo'          : saldo,
-										'saldoFmt'       : Tool.converter(saldo)};
+					diaUrl = Tool.formatarDia(dt);
+					var re = new RegExp('/', 'g');
+					var diaUrl = diaUrl.replace(re, '-');
 
-						// Adiciono no array
-						$scope.objmes.push(objmes);
+					// Crio objeto com as informações
+					objmes = 	{ 	'dia'            : Tool.formatarDia(dt).substr(0,5),
+					                'diaUrl'         : diaUrl,
+								 	'diaNumero'      : $rootScope.globalization.dias[dt.getDay()],
+								 	'diaKey'         : Tool.formatarDia(dt),
+									'totalTrabalhado': horasTrabalhadas,
+									'saldo'          : saldo};
+
+					// Adiciono no array
+					$scope.objmes.push(objmes);
+				}else{
+
+					console.log(day + " não está na lista");
+					var novo_dia_semana = {};
+
+					novo_dia_semana = {
+						horas: [],
+						total: 0,
+						end: 0,
+						sms: 0,
+						dinner: 0
 					}
+
+					horarios_db[Tool.formatarDia(day)] = novo_dia_semana;
 				}
 
 				dt.setDate(day + 1); // Seta próxima data
 				n++; // Incrementa
 			}
 
+			localStorage.setItem('ponto-horarios', JSON.stringify(horarios_db));
+
 			// Seta na view
-			$scope.totalExecutado = Tool.converter(totalExecutado);
+			$scope.totalExecutado = totalExecutado;
 			$scope.saldoTotal     = saldoTotal;
-			$scope.saldoTotalFmt  = Tool.converter(saldoTotal);
 		}
 
 		calcular();

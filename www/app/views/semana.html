@@ -1,13 +1,15 @@
+<dialtime index="indexSelecionado" horas="horas" minutos="minutos" edit="editar"></dialtime>
+
 <ul id="checkpoints">
     <li on-long-press="semana.abrirMenu($index)" ng-click="semana.abrirDia(obj.diaUrl)" ng-repeat="obj in objsemana"> <span class="checkpoint-day">{{obj.dia}}</span> {{obj.diaNumero}}
     	<span class="box-balance">
             <div class="work">
-                {{obj.totalTrabalhadoFmt}}
+                {{obj.totalTrabalhado | horaPt }}
             </div>
 
             <div class="balance">
                 <span ng-class="{'icon-plus': obj.saldo > 0, 'icon-minus': obj.saldo < 0}"></span>
-                {{obj.saldoFmt}}
+                {{obj.saldo | horaPt }}
             </div>
         </span>
 
@@ -25,7 +27,7 @@
                 {{globalization.rodape[0]}}
             </div>
             <div class="right">
-                {{totalExecutado}}
+                {{ totalExecutado | horaPt }}
             </div>
         </div>
         <div class="row minus-margin-row">
@@ -36,7 +38,7 @@
                 <span ng-show="saldoTotal < 0" class="icon-saldo-minus icon-minus"></span>
             </div>
             <div class="right">
-                {{saldoTotalFmt}}
+                {{ saldoTotal | horaPt }}
             </div>
         </div>
     </div>
