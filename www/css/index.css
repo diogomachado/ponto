@@ -176,10 +176,6 @@ body {
     color: #FFF;
 }
 
-#header > nav > ul > li > a:active{
-    border-bottom: 2px #03A9F4 solid;
-}
-
 /* Navegação interna */
 .nav-inner button.back{
   border: 0;
@@ -228,6 +224,10 @@ body {
     padding: 15px;
     border-bottom: 1px #4d4d4d solid;
     color: #F2F2F2;
+}
+
+#checkpoints li.not-work{
+    opacity: 0.5;
 }
 
 #checkpoints li .interval{
@@ -325,9 +325,9 @@ body {
 }
 
 .conf-dias-botoes button{
-    width: 100%;
+    width: 49.2%;
     background: #444;
-    font-size: 1.01em;
+    font-size: .9em;
     color: #757575;
     text-transform: uppercase;
     margin-right: 0;

@@ -57,6 +57,8 @@
 
 			$rootScope.checkLocal();
 
+            console.info("Clique funciona");
+
 			// Verifica se existe essa data dentro do objeto
 			if (dt in $rootScope.itensLocal){
 

@@ -96,7 +96,7 @@
 						dinner: 0
 					}
 
-					horarios_db[Tool.formatarDia(day)] = novo_dia_semana;
+					horarios_db[Tool.formatarDia(dt)] = novo_dia_semana;
 				}
 
 				dt.setDate(day + 1); // Seta próxima data

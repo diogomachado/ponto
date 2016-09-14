@@ -89,6 +89,7 @@
 
     // Linguagens
     var en_US = {
+                  'dias_default' : 'Default',
                   'dias'   : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                   'meses'  : ['January', 'February', 'March', 'April', 'may', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                   'menu'   : ['Today', 'Week', 'Month', 'All'],
@@ -100,6 +101,7 @@
                 }
 
     var pt_BR = {
+                  'dias_default' : 'Padrão',
                   'dias'   : ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
                   'meses'  : ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                   'menu'   : ['Hoje', 'Semana', 'Mês', 'Todos'],

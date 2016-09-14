@@ -1,7 +1,7 @@
 <dialtime index="indexSelecionado" horas="horas" minutos="minutos" edit="editar"></dialtime>
 
 <ul id="checkpoints">
-    <li on-long-press="semana.abrirMenu($index)" ng-click="semana.abrirDia(obj.diaUrl)" ng-repeat="obj in objsemana"> <span class="checkpoint-day">{{obj.dia}}</span> {{obj.diaNumero}}
+    <li ng-class="{'not-work' : obj.totalTrabalhado == 0 }" on-long-press="semana.abrirMenu($index)" ng-click="semana.abrirDia(obj.diaUrl)" ng-repeat="obj in objsemana"> <span class="checkpoint-day">{{obj.dia}}</span> {{obj.diaNumero}}
     	<span class="box-balance">
             <div class="work">
                 {{obj.totalTrabalhado | horaPt }}
