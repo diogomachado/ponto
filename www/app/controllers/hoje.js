@@ -34,13 +34,12 @@
 						var d = new Date();
 						d.setHours(parseInt($scope.horasHoraIr / 60), parseInt($scope.horasHoraIr % 60));
 
-						// Agora vamos notificar o cara na hora de ir
-						window.plugin.notification.local.add({
-						    id:      1,
-						    title:   'Hora de ir',
-						    message: 'Seu dia de trabalho se encerrou, você já pode ir!',
-						    date:    d
-						});
+                        // cordova.plugins.notification.local.schedule({
+                        //     id: 1,
+                        //     title: "Hora de ir",
+                        //     text: "Seu dia de trabalho se encerrou, você já pode ir!",
+                        //     at: d
+                        // });
 
 						$rootScope.itensLocal[$rootScope.today].end = 1; // Pronto, já agendou, agora chega
 
@@ -144,14 +143,14 @@
 							d.setHours(horasVoltar,minutosVoltar);
 
 							// Defino um alarme programado para 10 minutos antes de dar aquela hora
-							window.plugin.notification.local.add({
-							    id:      2,
-							    title:   'Intervalo acabando',
-							    message: 'Horário de almoço termina em ' + $rootScope.configs.dinner.minutesbefore + ' minutos',
-							    date:    d,
-							    // sound: 'TYPE_ALARM'
-							    sound: '/android_asset/www/sound/siren.mp3'
-							});
+							// window.plugin.notification.local.add({
+							//     id:      2,
+							//     title:   'Intervalo acabando',
+							//     message: 'Horário de almoço termina em ' + $rootScope.configs.dinner.minutesbefore + ' minutos',
+							//     date:    d,
+							//     // sound: 'TYPE_ALARM'
+							//     sound: '/android_asset/www/sound/siren.mp3'
+							// });
 
 							$rootScope.itensLocal[$rootScope.today].dinner = 1; // Pronto, já marcou, agora chega
 

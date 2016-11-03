@@ -7,7 +7,11 @@
 
 		sessionStorage.setItem("ponto-redirect", '/mes');
 
+        calcular();
+
 		function calcular(){
+
+            var adicionar_novos_dias = false;
 
 			// ----------------------------------------------------------------
 			// Instancio um obj data atual
@@ -74,21 +78,21 @@
 					var diaUrl = diaUrl.replace(re, '-');
 
 					// Crio objeto com as informações
-					objmes = 	{ 	'dia'            : Tool.formatarDia(dt).substr(0,5),
-					                'diaUrl'         : diaUrl,
-								 	'diaNumero'      : $rootScope.globalization.dias[dt.getDay()],
-								 	'diaKey'         : Tool.formatarDia(dt),
+					objmes = 	{
+                                    'dia' : Tool.formatarDia(dt).substr(0,5),
+					                'diaUrl' : diaUrl,
+								 	'diaNumero' : $rootScope.globalization.dias[dt.getDay()],
+								 	'diaKey' : Tool.formatarDia(dt),
 									'totalTrabalhado': horasTrabalhadas,
-									'saldo'          : saldo};
+									'saldo' : saldo
+                                };
 
 					// Adiciono no array
 					$scope.objmes.push(objmes);
-				}else{
 
-					console.log(day + " não está na lista");
-					var novo_dia_semana = {};
+                }else{
 
-					novo_dia_semana = {
+					var novo_dia_semana = {
 						horas: [],
 						total: 0,
 						end: 0,
@@ -97,20 +101,30 @@
 					}
 
 					horarios_db[Tool.formatarDia(dt)] = novo_dia_semana;
+
+                    adicionar_novos_dias = true;
 				}
 
 				dt.setDate(day + 1); // Seta próxima data
 				n++; // Incrementa
 			}
 
-			localStorage.setItem('ponto-horarios', JSON.stringify(horarios_db));
+            // Atualiza base
+            localStorage.setItem('ponto-horarios', JSON.stringify(horarios_db));
+
+            // Atualiza itens view
+            $rootScope.itensLocal = horarios_db;
 
 			// Seta na view
 			$scope.totalExecutado = totalExecutado;
 			$scope.saldoTotal     = saldoTotal;
-		}
 
-		calcular();
+            // Faz de forma recursiva o calculo dos dias
+            if (adicionar_novos_dias){
+                adicionar_novos_dias = false;
+                calcular();
+            }
+		}
 
 		this.abrirDia = function(dia){
 

@@ -317,11 +317,11 @@ body {
 }
 
 .conf-header{
-    padding: 5px;
-    background: #171717;
+    padding: 11px;
     margin-bottom: 5px;
-    border-bottom: 1px #414141 solid;
-    color: #5E5E5E;
+    color: #888888;
+    font-weight: bold;
+    font-size: 1.15em;
 }
 
 .conf-dias-botoes button{
@@ -336,7 +336,7 @@ body {
     padding: 12px;
     border: 0;
     border-radius: 2px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
 }
 
 .conf-dias-botoes button.ng-click-active{
@@ -969,4 +969,14 @@ dialtime{
     margin-bottom: 10px;
     background: #CECECE;
     border-radius: 2px;
+}
+
+.svg-box{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.svg-box p{
+    color: #6b6b6b;
 }
